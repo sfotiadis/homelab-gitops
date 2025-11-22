@@ -1,0 +1,90 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: prometheus-community
+  namespace: monitoring
+spec:
+  interval: 12h
+  url: https://prometheus-community.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 77.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: monitoring
+  valuesFrom:
+  - kind: ConfigMap
+    name: flux-kube-state-metrics-config
+    valuesKey: kube-state-metrics-config.yaml
+  values:
+    crds:
+      enabled: true
+
+    grafana:
+      enabled: true
+      admin:
+        existingSecret: grafana-admin-secret
+        userKey: admin-user
+        passwordKey: admin-password
+      defaultDashboardsEnabled: true
+      # ingress:
+      #   enabled: true
+      #   ingressClassName: nginx
+      #   hosts:
+      #     - grafana.crulabs.internal
+      #   tls:
+      #     - secretName: ca-crulabs
+      #       hosts:
+      #         - grafana.crulabs.internal
+      service:
+        type: LoadBalancer
+      sidecar:
+        dashboards:
+          enabled: true
+          label: grafana_dashboard
+          folder: /var/lib/grafana/dashboards/custom
+        datasources:
+          enabled: true
+
+    prometheus:
+      prometheusSpec:
+        additionalScrapeConfigs:
+          - job_name: 'node-exporter'
+            honor_labels: true
+            kubernetes_sd_configs:
+              - role: pod
+            relabel_configs:
+              - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+                action: keep
+                regex: prometheus-node-exporter
+              - source_labels: [__meta_kubernetes_pod_node_name]
+                target_label: node
+              - source_labels: [__address__]
+                target_label: instance
+        podMonitorSelector: {}
+        podMonitorNamespaceSelector: {}
+        podMonitorSelectorNilUsesHelmValues: false
+        ruleNamespaceSelector: {}
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorRelabelings:
+          - sourceLabels: [__meta_kubernetes_node_name]
+            targetLabel: node
+
+    kubeScheduler:
+      enabled: false
+    kubeControllerManager:
+      enabled: false
+    kubeProxy:
+      enabled: false
