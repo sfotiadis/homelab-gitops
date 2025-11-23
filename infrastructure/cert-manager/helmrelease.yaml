@@ -5,8 +5,10 @@ metadata:
   namespace: cert-manager
 spec:
   interval: 5m
-  dependsOn:
-    - name: cert-manager-crds
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
   chart:
     spec:
       chart: cert-manager
@@ -16,7 +18,7 @@ spec:
         name: jetstack
         namespace: flux-system
   values:
-    installCRDs: false
+    installCRDs: true
     resources:
       requests:
         cpu: 100m

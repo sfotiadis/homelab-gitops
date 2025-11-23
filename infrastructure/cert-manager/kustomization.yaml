@@ -3,7 +3,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - helmrepository.yaml
-  - crds.yaml
   - helmrelease.yaml
-  - crulabs-tls.enc.yaml
-  - clusterissuer.yaml
