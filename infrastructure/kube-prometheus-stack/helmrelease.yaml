@@ -46,8 +46,8 @@ spec:
       #     - secretName: ca-crulabs
       #       hosts:
       #         - grafana.crulabs.internal
-      service:
-        type: LoadBalancer
+      # service:
+      #   type: LoadBalancer
       sidecar:
         dashboards:
           enabled: true
