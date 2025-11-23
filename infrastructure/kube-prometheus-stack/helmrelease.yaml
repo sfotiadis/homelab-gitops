@@ -1,12 +1,3 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: prometheus-community
-  namespace: monitoring
-spec:
-  interval: 12h
-  url: https://prometheus-community.github.io/helm-charts
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -21,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
-        namespace: monitoring
+        namespace: flux-system
   valuesFrom:
   - kind: ConfigMap
     name: flux-kube-state-metrics-config
@@ -37,17 +28,17 @@ spec:
         userKey: admin-user
         passwordKey: admin-password
       defaultDashboardsEnabled: true
-      # ingress:
-      #   enabled: true
-      #   ingressClassName: nginx
-      #   hosts:
-      #     - grafana.crulabs.internal
-      #   tls:
-      #     - secretName: ca-crulabs
-      #       hosts:
-      #         - grafana.crulabs.internal
-      # service:
-      #   type: LoadBalancer
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "k8s-lb-01.crulabs.intern"
+        hosts:
+          - grafana.crulabs.intern
+        # tls:
+        #   - secretName: ca-crulabs
+        #     hosts:
+        #       - grafana.crulabs.intern
       sidecar:
         dashboards:
           enabled: true
