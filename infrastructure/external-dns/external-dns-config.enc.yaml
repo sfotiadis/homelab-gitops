@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: external-dns-config
+    namespace: external-dns
+data:
+    rfc2136-host: ENC[AES256_GCM,data:IIzAbc4VZ+N4kjXz,iv:a9cvugV12/0o+BIJb4QbEWm+XUHleS42EwyT0pvr2YE=,tag:itKmdFGEUmTUtuVKM2ym6Q==,type:str]
+    rfc2136-port: ENC[AES256_GCM,data:uDs=,iv:r4jJfWO2YL4DAa45tpb4jmVdjMuCaF46RP6Ul3Blz8I=,tag:o9bzbM0kWsiSjj6W/GqEcA==,type:str]
+    rfc2136-zone: ENC[AES256_GCM,data:uO4/pPfUbhtDMeSPOzs=,iv:3aEogv6zX6QrJTaDOtZTJv8JibX3bjAOTkVKGzaZ0Ug=,tag:EBq49t5INn9vz5C/N8yCVg==,type:str]
+sops:
+    lastmodified: "2025-11-23T16:11:40Z"
+    mac: ENC[AES256_GCM,data:djRAcGYZ/x3gY9GMAr9RyQyweSRa3RheRWUDpAmZohvCkfWxe3yEXovZiD6CYunFLLXOAnEKtpnW97k7Jqc7ITB2uxdoPZX6VBHxYWDJlSOhJj0iGmRQz/2aQzEQM93RMQPj1ULAKpHP0sZyF+yiovmBsld6UU/9aEI3xqK2cK4=,iv:SCnQyZ8EiQwuz8Nv1yjbInDqq9PPfyn3qqwzBaSFWPk=,tag:t1qUL2r4zYBWjFoWWDBukA==,type:str]
+    pgp:
+        - created_at: "2025-11-23T16:11:40Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA0FBPlwYR03bAQ//dUPz5WiMQXdMmfbjO7tdhJ7sIi9ufaHj+wiNy1m/m75j
+            mqX31Q/yBvQVig2ric4bSDGcSHytq1VYUuh/JbSJ8yX/IldzMoKpxMOEkxWKMwMU
+            h4/Yz+fsvWIwNol2P/j6Uv63d6YoQh181jUrOGV2atm21O/RrVZikVr6i/aunojv
+            3NoeUGNL2Kjdq2mN6zhDlUaqZe14VcnNuL8AKmzbTPrTOJM0I9bt6mbv1kOEuOX4
+            ecRkFAt5EjYaKLoD1LqVA0XkNg/KGlHqHNZZMP2gDDkgucadE1UyfzuosinCdO2t
+            OrqKX/3cxSAxz/Igse5M2934TV6cNyQhYiIZ5M6dpiQVJx5B79AM6hTTb3BEuqGA
+            VzLz7rYNuNR2Y6xJFxi6j3pyKXQGI7baQFJ/G7aGQNsnOZWKJ7Kvk4r5cpWQa7bK
+            yorzHZVLAo5NttTlq4kLkRBVIPtRRaRHxiLbEayuFuPMC3OI9h+4VQokUGs+PmOf
+            MINvRqusXG2KnUcaBPrRlg5LCpBM4lPm4akl25cC3a+jZCMPTOr29EdY9MBYRoK2
+            D5gi9MEy1qp10XkewtHf+FU57HiGSsEsN+EFLv/oXlJT5E/rwJkO23ocKdH/fD0D
+            a+Y3euE/fwBS/f2vasUzJMNPLXiWuPJlKo7LQ1Ig4GFDUJ+PU1diOVNWV+QECqzU
+            aAEJAhA2VaBe3Fcw9h8KzonIKVfvjbNv5UPiiKOIWpuRCXObxZH5FZs8yvlpY1Xh
+            qQjVHRgpqh3BP2sDf4RkdPFJaVS2JzALSIuGiHQQzCWFG7s+5fVHlKUu4jRlF9uS
+            cRWtebo5CgKh
+            =khKC
+            -----END PGP MESSAGE-----
+          fp: 2F45BC42327907C5B833A93041413E5C18474DDB
+    encrypted_regex: ^(data|stringData|addresses)$
+    version: 3.11.0
