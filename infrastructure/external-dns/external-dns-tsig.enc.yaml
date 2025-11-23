@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: external-dns-tsig
+    namespace: external-dns
+type: Opaque
+stringData:
+    rfc2136_tsig_secret: ENC[AES256_GCM,data:B0VMIL0PgoW6du0/HyScwnZl3s9hs/Z8F3uBs5aLzOf564tsUYZ1lxsMjFU=,iv:Y3JdfPQsrJjvP6WcimecTOw/xyVrbaSOxduOLoNvDoc=,tag:b824wrVRrNnHw6Fc1k48vw==,type:str]
+    rfc2136_tsig_keyname: ENC[AES256_GCM,data:AJ916RQG1K+FddELl1o6,iv:TczGZXRnAVI628mW6vCjRl9WzhiwQUITPwfyq5U8HyY=,tag:Gl+9gyJA2gMWc5ilcY72tA==,type:str]
+    rfc2136_tsig_algorithm: ENC[AES256_GCM,data:gyhFDXK6PAvdkSg=,iv:RlJrRT1WQ07NWh2Ad3OX1rBeN1ujomDB2KVaRaKpw38=,tag:IwunWGvcvmh8iHY+Hm59QA==,type:str]
+sops:
+    lastmodified: "2025-11-23T15:33:44Z"
+    mac: ENC[AES256_GCM,data:6Bxv1pp40jCCBKOrLnr4jY8wM966FI7hH+lrXh4oZXjvikMC9KfdviwLAuBSqEkCexYAfrD0ZP6LRPmp+/VsTDjfNJjWk/O1kmNNLCrwGfmvQUBb9lHZkn39igExyFuNcJmQh0GWewAIG3oVrn6QeaWT644XlT2EDH/b/P5TRtQ=,iv:+tAKsc9vGGJ0Km9h48wO3n0bLuewLLJPXt+zcIhTXzA=,tag:skKlP6zt1O8K4B/kNik4KQ==,type:str]
+    pgp:
+        - created_at: "2025-11-23T15:33:44Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA0FBPlwYR03bAQ/9GZ+jJax2P8ffbvgvM4STKSm+lW5qpFmL2tXBrEzINPax
+            OlV2qSmPPUuM4rIAAOAnQqhYoPkYcdDIhfTCBsdKGTH9jhQ5NXh4tfexvTSFRraV
+            deKsLofCb8q6deXH1N8cl5zKEnG+XrIo5qzk4jOUirPAa4NvDraPY/JcZrobuhMA
+            C0/YLSvte1eXwXeZMQI6TkE9UakgiWb1ehl28a1KycE9PfINZfFe6R/Jj1hMqbLV
+            jkC8o8W51aTbGBhaYzKRXjBTPZ4DnmYUdtdRrbiixRdUBG4nTLaW6/3tGGDvJSUO
+            qJDjK3ykFLaMArpiAUy8KiZReCp07/WdkML4RTvD5s9aJ9FQe8f09+ydbdyUzzWl
+            5CXa+9/sfUSoF0wv1c5LzJvOCPVKgjuVadBnYLcnYjWZuMzdQdrMXABVIPBfC6Ye
+            nieg/fwMM55HGJEns/PRFOipS4fNeMjw+658zRtWUSvJxN2RZZwQSJw7R1XNOTOa
+            v1eggeBQA8oT58F66I/s3z+uXmP3kfGPpvtDj1zo7icpH9DmAh28jTmlOw5wNWVk
+            q+bBokGt/jTJqNONG06INXG/zDzje2i2ekY72czSC75hMjAmVrY8WifwohqBfeBx
+            z33QTEsOQroAo/O7Yc3kckzQYAs2hO2fj6GqVprXegXfRr9OzyqWTtBneG5Yta3U
+            ZgEJAhCCypB1v2Ppi9XG9HQzrVFie3B1eNLeBu4Dopby7GvUsXiTy57PjdeNnO+f
+            yeSfJgd+FXz2JE3b/jDJ/Z+6uY+KTVaobsupCYxttp1MY7HRbxI5Y20yPfVF++ql
+            H5sZtcEaEg==
+            =bAER
+            -----END PGP MESSAGE-----
+          fp: 2F45BC42327907C5B833A93041413E5C18474DDB
+    encrypted_regex: ^(data|stringData|addresses)$
+    version: 3.11.0
