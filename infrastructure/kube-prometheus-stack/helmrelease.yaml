@@ -33,12 +33,13 @@ spec:
         ingressClassName: nginx
         annotations:
           external-dns.alpha.kubernetes.io/target: "k8s-lb-01.crulabs.intern"
+          cert-manager.io/cluster-issuer: "crulabs-ca-issuer"
         hosts:
           - grafana.crulabs.intern
-        # tls:
-        #   - secretName: ca-crulabs
-        #     hosts:
-        #       - grafana.crulabs.intern
+        tls:
+          - secretName: grafana-tls
+            hosts:
+              - grafana.crulabs.intern
       sidecar:
         dashboards:
           enabled: true
