@@ -19,6 +19,13 @@ configMapGenerator:
         app.kubernetes.io/part-of: flux
         app.kubernetes.io/component: monitoring
         kustomize.toolkit.fluxcd.io/substitute: disabled
+  - name: shelly-dashboards
+    namespace: monitoring
+    files:
+      - shelly-plug.json=dashboards/shelly-plug.json
+    options:
+      labels:
+        grafana_dashboard: "1"
   - name: flux-kube-state-metrics-config
     namespace: monitoring
     files:
