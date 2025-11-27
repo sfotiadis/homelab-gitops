@@ -1,0 +1,35 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kubernetes-dashboard
+      version: 7.10.0
+      sourceRef:
+        kind: HelmRepository
+        name: kubernetes-dashboard
+        namespace: flux-system
+  values:
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "k8s-lb-01.crulabs.intern"
+        cert-manager.io/cluster-issuer: "crulabs-ca-issuer"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      hosts:
+        - dashboard.crulabs.intern
+      tls:
+        - secretName: kubernetes-dashboard-tls
+          hosts:
+            - dashboard.crulabs.intern
+    
+    metricsScraper:
+      enabled: true
+    
+    metrics-server:
+      enabled: false
