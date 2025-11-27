@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: telegraf
+  namespace: shelly-monitoring
+  labels:
+    app: telegraf
+spec:
+  selector:
+    app: telegraf
+  ports:
+  - name: metrics
+    port: 9273
+    targetPort: 9273

@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telegraf-config
+  namespace: shelly-monitoring
+data:
+  telegraf.conf: |
+    [agent]
+      interval = "30s"
+      round_interval = true
+      metric_batch_size = 1000
+      metric_buffer_limit = 10000
+      collection_jitter = "0s"
+      flush_interval = "10s"
+      flush_jitter = "0s"
+      precision = ""
+      hostname = ""
+      omit_hostname = false
+
+    [[outputs.prometheus_client]]
+      listen = ":9273"
+      metric_version = 2
+      path = "/metrics"
+      expiration_interval = "60s"
+      collectors_exclude = ["gocollector", "process"]
+
+    [[inputs.http]]
+      urls = ["${SHELLY_URL}"]
+      interval = "30s"
+      timeout = "10s"
+      method = "GET"
+      data_format = "json_v2"
+
+      [[inputs.http.json_v2]]
+        measurement_name = "shelly"
+
+        [[inputs.http.json_v2.field]]
+          path = "switch:0.apower"
+          rename = "power_watts"
+          type = "float"
+
+        [[inputs.http.json_v2.field]]
+          path = "switch:0.voltage"
+          rename = "voltage_volts"
+          type = "float"
+
+        [[inputs.http.json_v2.field]]
+          path = "switch:0.current"
+          rename = "current_amps"
+          type = "float"
+
+        [[inputs.http.json_v2.field]]
+          path = "switch:0.aenergy.total"
+          rename = "energy_wh"
+          type = "float"
+
+        [inputs.http.json_v2.tags]
+          device = "proxmox-server"
+          location = "homelab"

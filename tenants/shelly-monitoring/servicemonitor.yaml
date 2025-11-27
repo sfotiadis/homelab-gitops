@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: telegraf
+  namespace: shelly-monitoring
+  labels:
+    app: telegraf
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: telegraf
+  endpoints:
+  - port: metrics
+    interval: 30s
+    path: /metrics

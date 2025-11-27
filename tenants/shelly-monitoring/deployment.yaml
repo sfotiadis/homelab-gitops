@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegraf
+  namespace: shelly-monitoring
+  labels:
+    app: telegraf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telegraf
+  template:
+    metadata:
+      labels:
+        app: telegraf
+    spec:
+      containers:
+      - name: telegraf
+        image: telegraf:1.31-alpine
+        ports:
+        - containerPort: 9273
+          name: metrics
+        env:
+        - name: SHELLY_URL
+          valueFrom:
+            configMapKeyRef:
+              name: shelly-config
+              key: shelly-url
+        volumeMounts:
+        - name: config
+          mountPath: /etc/telegraf
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+      volumes:
+      - name: config
+        configMap:
+          name: telegraf-config

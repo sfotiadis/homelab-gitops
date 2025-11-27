@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: shelly-config
+    namespace: shelly-monitoring
+data:
+    shelly-url: ENC[AES256_GCM,data:P/Y/K5MamAA7BZby9X7RiJDQsRcn6EQhj5A8lmI53SMXgTpOFraB2fA=,iv:swHk6GXeTe0xIcjjNzPqMup4Jl4ccTG0S2A8IP3XQl8=,tag:gKtN+N7eUSW60va4xqn7LQ==,type:str]
+sops:
+    lastmodified: "2025-11-27T17:10:07Z"
+    mac: ENC[AES256_GCM,data:ixwFmoIDZG7W69Brx7B+nARJyP5B/uhXIF/rSrFPrXXZD6YjM/6PKe6l9KKqo+o06Y4K3Yt06Oh2oPAwH1WUznrbhK02wGaNrdGWIR+0QYiFP2nEIqlniRIzY6GV2GQIN6lXFoeOzPK+0HeHTxPW4B8zZiCnOdtiJ9d7DRK6YMM=,iv:j20zreF7ddGQnBkjI8I2I9Edf7axRZSNR4co2TaNvz0=,tag:z98TUMH9Qz+UaC8qmGMfXw==,type:str]
+    pgp:
+        - created_at: "2025-11-27T17:10:07Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA0FBPlwYR03bAQ//UnuklC/e7KWY82RU+aQO6foBbRH4Cv6W3QJuYEZZaOfB
+            lY1/KGDz+6/EDvY/H2WEEcmk5bQC1RuqIQyZjzU7z1Z614nwTHZyMF1tsrBZ3lN0
+            Cl7rHhdQhJ0kiP0ezyA/zMYd8wK6lJzCV4a6nu2r8oG3oRestxs40n+fVZGh0A9v
+            xNUmn8LivJIgP6DArhxEiDrqyQFQ+Mdi2kAqViJQR+1b77zSHcfw7YI4LyTU8vhE
+            Rvp790cYfXC0t6JV5Hfcc6ogmYP8Dd/pJ/BnURNdajx21E5XDmlYtHlPC+joZ5XF
+            rBy+JYcUPb1mPJFazRvcWZN6b6lJCL88M41Vz9ply0/3fh4XE9zKkZGkPzRiDpbf
+            7Rv/OMgI8voKaReL5yN4/XrXUmnTAcoKNG2/VwG/3EpfZfB+k/83VHPL4ZUlgYAf
+            kplqFpcut9vo9GHEpebgaGxbRM8kofRVOideQayq+TH2Egr0qOc+7uOGeW3rac7S
+            K2JeK045E9TJJctoVquqUWw9SlafOugQda34rQLtWSIHgrt91MKqd3ee61ibllJ5
+            8mWWIUV/rwvheEKZ7hmdkPYQBU3BzWX8j6ipfSlO5PHS0SAN7CJchqh30zNNYnUN
+            eGFbP19Rs2LSyec2gpMPjWApmj/tkcNWoHwYp5PGSfmzZz1OSQ0vxt2bBImjzb3U
+            aAEJAhBnK1nx6FhqqoG2yvWIfXwvjXqJOAiMNjYXbN5C6YNz/u/RWiLLSepjSCBF
+            m9F6r2ETARQmvWYR/VyFuZ51tx9hMch/aeKNqDe1sGOti2mf6VKZus5dYD5s8elP
+            f0Ku5INdRbr2
+            =jYxz
+            -----END PGP MESSAGE-----
+          fp: 2F45BC42327907C5B833A93041413E5C18474DDB
+    encrypted_regex: ^(data|stringData|addresses)$
+    version: 3.11.0

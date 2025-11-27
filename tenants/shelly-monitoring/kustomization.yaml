@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: shelly-monitoring
+resources:
+  - namespace.yaml
+  - configmap_shelly-config.enc.yaml
+  - configmap_telegraf-config.yaml
+  - deployment.yaml
+  - service.yaml
+  - servicemonitor.yaml
