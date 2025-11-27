@@ -6,3 +6,4 @@ resources:
   - kube-prometheus-stack
   - external-dns
   - ingress-nginx
+  - local-path-provisioner

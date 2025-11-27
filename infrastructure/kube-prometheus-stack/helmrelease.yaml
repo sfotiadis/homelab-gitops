@@ -50,6 +50,15 @@ spec:
 
     prometheus:
       prometheusSpec:
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: local-path
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 50Gi
+        retention: 90d
         additionalScrapeConfigs:
           - job_name: 'node-exporter'
             honor_labels: true
