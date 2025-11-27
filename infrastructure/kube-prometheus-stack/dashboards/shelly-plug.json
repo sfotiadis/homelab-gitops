@@ -181,7 +181,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 8,
+        "w": 6,
         "x": 0,
         "y": 8
       },
@@ -218,74 +218,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "text": "AUS"
-                },
-                "1": {
-                  "text": "AN"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 4,
-        "x": 8,
-        "y": 8
-      },
-      "id": 5,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "values": false,
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": ""
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "expr": "shelly_relay_state",
-          "refId": "A"
-        }
-      ],
-      "title": "Status",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -310,8 +242,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 4,
-        "x": 12,
+        "w": 6,
+        "x": 6,
         "y": 8
       },
       "id": 6,
@@ -357,17 +289,17 @@
               }
             ]
           },
-          "unit": "celsius"
+          "unit": "amp"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 6,
-        "w": 4,
-        "x": 16,
+        "w": 6,
+        "x": 12,
         "y": 8
       },
-      "id": 7,
+      "id": 10,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -386,11 +318,11 @@
       "pluginVersion": "10.0.0",
       "targets": [
         {
-          "expr": "shelly_temperature_celsius",
+          "expr": "shelly_current_amps",
           "refId": "A"
         }
       ],
-      "title": "Temperatur",
+      "title": "Stromstärke",
       "type": "stat"
     },
     {
