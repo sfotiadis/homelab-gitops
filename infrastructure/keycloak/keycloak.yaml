@@ -1,0 +1,46 @@
+---
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  instances: 1
+
+  db:
+    vendor: postgres
+    host: keycloak-postgres-rw
+    port: 5432
+    database: keycloak
+    usernameSecret:
+      name: keycloak-db-credentials
+      key: username
+    passwordSecret:
+      name: keycloak-db-credentials
+      key: password
+
+  http:
+    httpEnabled: true
+    tlsSecret: keycloak-tls
+
+  hostname:
+    hostname: keycloak.crulabs.intern
+    strict: false
+
+  proxy:
+    headers: xforwarded
+
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      external-dns.alpha.kubernetes.io/target: "k8s-lb-01.crulabs.intern"
+      cert-manager.io/cluster-issuer: "crulabs-ca-issuer"
+
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: 2000m
+      memory: 1024Mi
