@@ -48,6 +48,15 @@ spec:
         datasources:
           enabled: true
           label: grafana_datasource
+      additionalDataSources:
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki-gateway.loki.svc.cluster.local
+          jsonData:
+            maxLines: 1000
+          isDefault: false
+          editable: true
 
     prometheus:
       prometheusSpec:

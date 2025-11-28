@@ -5,4 +5,3 @@ resources:
   - helmrepository.yaml
   - helmrelease.yaml
   - helmrelease_promtail.yaml
-  - configmap_grafana-datasource.yaml
