@@ -11,3 +11,4 @@ resources:
   - nfs-csi-driver
   - minio
   - loki
+  - cloudnative-pg

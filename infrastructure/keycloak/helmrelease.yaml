@@ -1,0 +1,87 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: keycloak
+      version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: codecentric
+        namespace: flux-system
+  values:
+    replicas: 1
+    
+    image:
+      repository: quay.io/keycloak/keycloak
+      tag: "26.0.5"
+    
+    extraEnv: |
+      - name: KC_PROXY
+        value: "edge"
+      - name: KC_HOSTNAME_STRICT
+        value: "false"
+      - name: KC_HTTP_ENABLED
+        value: "true"
+      - name: KEYCLOAK_ADMIN
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-credentials
+            key: admin-username
+      - name: KEYCLOAK_ADMIN_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-credentials
+            key: admin-password
+      - name: KC_DB
+        value: postgres
+      - name: KC_DB_URL_HOST
+        value: keycloak-postgresql
+      - name: KC_DB_URL_DATABASE
+        value: keycloak
+      - name: KC_DB_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-credentials
+            key: db-username
+      - name: KC_DB_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-credentials
+            key: db-password
+    
+    command:
+      - "/opt/keycloak/bin/kc.sh"
+      - "start"
+    
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "k8s-lb-01.crulabs.intern"
+        cert-manager.io/cluster-issuer: "crulabs-ca-issuer"
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+      rules:
+        - host: keycloak.crulabs.intern
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: keycloak-tls
+          hosts:
+            - keycloak.crulabs.intern
+    
+    resources:
+      limits:
+        memory: 1024Mi
+      requests:
+        cpu: 500m
+        memory: 512Mi
+    
+    postgresql:
+      enabled: false
