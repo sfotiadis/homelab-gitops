@@ -47,6 +47,7 @@ spec:
           folder: /var/lib/grafana/dashboards/custom
         datasources:
           enabled: true
+          label: grafana_datasource
 
     prometheus:
       prometheusSpec:
