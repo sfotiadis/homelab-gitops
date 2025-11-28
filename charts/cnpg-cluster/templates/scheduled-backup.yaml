@@ -1,0 +1,15 @@
+{{ if .Values.backup.enabled }}
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  # if true, a backup will be triggered
+  # at every reconciliation of the operator
+  immediate: false
+  schedule: {{ .Values.backup.schedule }}
+  cluster:
+    name: {{ .Release.Name }}
+{{ end }}

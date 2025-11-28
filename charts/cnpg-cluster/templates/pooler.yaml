@@ -1,0 +1,20 @@
+{{- if .Values.pooler.enabled }}
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Pooler
+metadata:
+  name: {{ .Values.cluster.name }}-pooler
+  labels:
+    {{- include "cnpg-cluster.labels" . | nindent 4 }}
+spec:
+  cluster:
+    name: {{ .Values.cluster.name }}
+  
+  instances: {{ .Values.pooler.instances }}
+  type: {{ .Values.pooler.type }}
+  
+  pgbouncer:
+    poolMode: {{ .Values.pooler.poolMode }}
+    parameters:
+      {{- toYaml .Values.pooler.parameters | nindent 6 }}
+{{- end }}

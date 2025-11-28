@@ -1,0 +1,50 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  imageName: {{ .Values.imageName }}
+  instances: {{ .Values.instances }}
+
+  bootstrap:
+    initdb:
+      database: {{ .Values.initdb.database | default .Release.Name }}
+      owner: {{ .Values.initdb.owner }}
+      secret:
+        name: {{ .Values.initdb.secret.name }}
+
+  enableSuperuserAccess: {{ .Values.enableSuperuserAccess }}
+  superuserSecret:
+    name: {{ .Values.superuserSecret.name }}
+
+  storage:
+    storageClass: {{ .Values.storageClass }}
+    size: {{ .Values.storage.size }}
+
+{{- if .Values.backup.enabled }}
+  backup:
+    barmanObjectStore:
+      destinationPath: {{ .Values.backup.destinationPath | default (printf "s3://%s/" .Release.Name) }}
+      endpointURL: {{ .Values.backup.endpointURL }}
+      s3Credentials:
+        accessKeyId:
+          name: {{ .Values.backup.secret.name }}
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: {{ .Values.backup.secret.name }}
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+      data:
+        compression: gzip
+        jobs: 2
+    retentionPolicy: {{ .Values.backup.retentionPolicy }}
+{{- end }}
+
+  affinity:
+    enablePodAntiAffinity: {{ .Values.affinity.enablePodAntiAffinity }}
+    topologyKey: {{ .Values.affinity.topologyKey }}
+
+  monitoring:
+    enablePodMonitor: {{ .Values.monitoring.enablePodMonitor }}
