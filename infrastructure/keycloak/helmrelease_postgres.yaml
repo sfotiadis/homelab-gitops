@@ -25,9 +25,9 @@ spec:
 
     enableSuperuserAccess: false
 
-    storageClass: nfs-csi
+    storageClass: local-path
     storage:
-      size: 20Gi
+      size: 10Gi
 
     backup:
       enabled: true
