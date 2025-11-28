@@ -10,3 +10,4 @@ resources:
   - kubernetes-dashboard
   - nfs-csi-driver
   - minio
+  - loki
