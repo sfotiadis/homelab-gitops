@@ -6,6 +6,9 @@ metadata:
   namespace: keycloak
 spec:
   interval: 5m
+  dependsOn:
+    - name: keycloak-postgres
+      namespace: keycloak
   chart:
     spec:
       chart: keycloak
@@ -16,11 +19,11 @@ spec:
         namespace: flux-system
   values:
     replicas: 1
-    
+
     image:
       repository: quay.io/keycloak/keycloak
       tag: "26.0.5"
-    
+
     extraEnv: |
       - name: KC_PROXY
         value: "edge"
@@ -41,24 +44,24 @@ spec:
       - name: KC_DB
         value: postgres
       - name: KC_DB_URL_HOST
-        value: keycloak-postgresql
+        value: keycloak-postgres-rw
       - name: KC_DB_URL_DATABASE
         value: keycloak
       - name: KC_DB_USERNAME
         valueFrom:
           secretKeyRef:
-            name: keycloak-credentials
-            key: db-username
+            name: keycloak-db-credentials
+            key: username
       - name: KC_DB_PASSWORD
         valueFrom:
           secretKeyRef:
-            name: keycloak-credentials
-            key: db-password
-    
+            name: keycloak-db-credentials
+            key: password
+
     command:
       - "/opt/keycloak/bin/kc.sh"
       - "start"
-    
+
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -75,13 +78,13 @@ spec:
         - secretName: keycloak-tls
           hosts:
             - keycloak.crulabs.intern
-    
+
     resources:
       limits:
         memory: 1024Mi
       requests:
         cpu: 500m
         memory: 512Mi
-    
+
     postgresql:
       enabled: false
