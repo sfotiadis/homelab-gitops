@@ -1,0 +1,55 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: minio
+      version: 5.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: minio
+        namespace: flux-system
+  values:
+    mode: standalone
+    replicas: 1
+    persistence:
+      enabled: true
+      storageClass: nfs-csi
+      accessMode: ReadWriteOnce
+      size: 500Gi
+    resources:
+      requests:
+        memory: 2Gi
+        cpu: 500m
+      limits:
+        memory: 4Gi
+        cpu: 2000m
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "k8s-lb-01.crulabs.intern"
+        cert-manager.io/cluster-issuer: "crulabs-ca-issuer"
+      hosts:
+        - minio.crulabs.intern
+      tls:
+        - secretName: minio-tls
+          hosts:
+            - minio.crulabs.intern
+    consoleIngress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "k8s-lb-01.crulabs.intern"
+        cert-manager.io/cluster-issuer: "crulabs-ca-issuer"
+      hosts:
+        - minio-console.crulabs.intern
+      tls:
+        - secretName: minio-console-tls
+          hosts:
+            - minio-console.crulabs.intern
+    existingSecret: minio-credentials
