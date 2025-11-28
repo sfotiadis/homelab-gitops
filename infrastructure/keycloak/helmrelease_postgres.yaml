@@ -19,7 +19,7 @@ spec:
 
     initdb:
       database: keycloak
-      owner: keycloak
+      owner: app
       secret:
         name: keycloak-db-credentials
 
