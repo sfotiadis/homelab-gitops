@@ -9,3 +9,4 @@ resources:
   - local-path-provisioner
   - kubernetes-dashboard
   - nfs-csi-driver
+  - minio
