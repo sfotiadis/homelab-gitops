@@ -27,9 +27,8 @@ spec:
       - "--hostname-strict=false"
       - "--proxy=edge"
 
-    extraEnv: |
-      - name: JAVA_OPTS_APPEND
-        value: -Djgroups.dns.query=keycloak-keycloakx-headless
+    cache:
+      stack: default
 
     database:
       vendor: postgres
