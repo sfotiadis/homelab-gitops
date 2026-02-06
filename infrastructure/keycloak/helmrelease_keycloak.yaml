@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: keycloakx
-      version: 2.x  # Adjust to specific version if needed
+      version: 2.x
       sourceRef:
         kind: HelmRepository
         name: codecentric
@@ -19,22 +19,9 @@ spec:
   values:
     replicas: 1
 
-    # Database configuration
-    database:
-      vendor: postgres
-      hostname: keycloak-postgres-rw
-      port: 5432
-      database: keycloak
-      username: app
-      existingSecret: keycloak-db-credentials
-      existingSecretPasswordKey: password
-      existingSecretUsernameKey: username
-
-    # Admin credentials
     command:
       - "/opt/keycloak/bin/kc.sh"
       - "start"
-      - "--http-enabled=true"
       - "--http-port=8080"
       - "--hostname=keycloak.crulabs.intern"
       - "--hostname-strict=false"
@@ -52,7 +39,19 @@ spec:
             name: keycloak-credentials
             key: password
       - name: JAVA_OPTS_APPEND
-        value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=50.0 -Djava.awt.headless=true -Djgroups.dns.query=keycloak-headless"
+        value: >-
+          -XX:MaxRAMPercentage=50.0
+          -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
+
+    database:
+      vendor: postgres
+      hostname: keycloak-postgres-rw
+      port: 5432
+      database: keycloak
+      username: app
+      existingSecret: keycloak-db-credentials
+      existingSecretPasswordKey: password
+      existingSecretUsernameKey: username
 
     # Ingress configuration
     ingress:
@@ -79,31 +78,3 @@ spec:
       limits:
         cpu: 2000m
         memory: 1024Mi
-
-    # Health checks
-    livenessProbe:
-      httpGet:
-        path: /health/live
-        port: http
-      initialDelaySeconds: 60
-      timeoutSeconds: 5
-
-    readinessProbe:
-      httpGet:
-        path: /health/ready
-        port: http
-      initialDelaySeconds: 30
-      timeoutSeconds: 1
-
-    # Service configuration
-    service:
-      type: ClusterIP
-      port: 80
-
-    # Pod security context
-    podSecurityContext:
-      fsGroup: 1000
-
-    securityContext:
-      runAsUser: 1000
-      runAsNonRoot: true
