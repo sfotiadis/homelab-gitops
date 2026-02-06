@@ -7,7 +7,6 @@ resources:
   - external-dns
   - ingress-nginx
   - local-path-provisioner
-  - kubernetes-dashboard
   - nfs-csi-driver
   - minio
   - loki
