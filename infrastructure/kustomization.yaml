@@ -12,4 +12,4 @@ resources:
   - minio
   - loki
   - cloudnative-pg
-  # - keycloak  # Disabled for now
+  - keycloak
