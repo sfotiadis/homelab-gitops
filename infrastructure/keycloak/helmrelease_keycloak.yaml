@@ -28,20 +28,8 @@ spec:
       - "--proxy=edge"
 
     extraEnv: |
-      - name: KEYCLOAK_ADMIN
-        valueFrom:
-          secretKeyRef:
-            name: keycloak-credentials
-            key: admin-username
-      - name: KEYCLOAK_ADMIN_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: keycloak-credentials
-            key: admin-password
       - name: JAVA_OPTS_APPEND
-        value: >-
-          -XX:MaxRAMPercentage=50.0
-          -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
+        value: "-XX:MaxRAMPercentage=50.0 -Djgroups.dns.query={{ include \"keycloak.fullname\" . }}-headless"
 
     database:
       vendor: postgres
