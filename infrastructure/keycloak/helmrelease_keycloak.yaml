@@ -32,12 +32,12 @@ spec:
         valueFrom:
           secretKeyRef:
             name: keycloak-credentials
-            key: username
+            key: admin-username
       - name: KEYCLOAK_ADMIN_PASSWORD
         valueFrom:
           secretKeyRef:
             name: keycloak-credentials
-            key: password
+            key: admin-password
       - name: JAVA_OPTS_APPEND
         value: >-
           -XX:MaxRAMPercentage=50.0
