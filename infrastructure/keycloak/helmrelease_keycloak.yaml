@@ -25,6 +25,8 @@ spec:
       - "--http-port=8080"
       - "--hostname=keycloak.crulabs.intern"
       - "--hostname-strict=false"
+      - "--hostname-strict-backchannel=false"
+      - "--http-relative-path=/auth"
       - "--proxy=edge"
 
     cache:
