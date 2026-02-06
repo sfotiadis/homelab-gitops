@@ -25,8 +25,7 @@ spec:
       - "--http-port=8080"
       - "--hostname=keycloak.crulabs.intern"
       - "--hostname-strict=false"
-      - "--http-relative-path=/auth"
-      - "--proxy=edge"
+      - "--proxy-headers=xforwarded"
 
     cache:
       stack: jdbc-ping
