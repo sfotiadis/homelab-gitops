@@ -27,10 +27,6 @@ spec:
       - "--hostname-strict=false"
       - "--proxy=edge"
 
-    extraEnv: |
-      - name: JAVA_OPTS_APPEND
-        value: "-XX:MaxRAMPercentage=50.0 -Djgroups.dns.query={{ include \"keycloak.fullname\" . }}-headless"
-
     database:
       vendor: postgres
       hostname: keycloak-postgres-rw
