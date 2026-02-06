@@ -30,6 +30,10 @@ spec:
     cache:
       stack: default
 
+    extraEnv: |
+      - name: KC_CACHE_STACK
+        value: default
+
     database:
       vendor: postgres
       hostname: keycloak-postgres-rw
