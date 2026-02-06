@@ -40,7 +40,7 @@ spec:
       - "--hostname-strict=false"
       - "--proxy=edge"
 
-    extraEnv:
+    extraEnv: |
       - name: KEYCLOAK_ADMIN
         valueFrom:
           secretKeyRef:
