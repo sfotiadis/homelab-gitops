@@ -28,11 +28,7 @@ spec:
       - "--proxy=edge"
 
     cache:
-      stack: default
-
-    extraEnv: |
-      - name: KC_CACHE_STACK
-        value: default
+      stack: jdbc-ping
 
     database:
       vendor: postgres
