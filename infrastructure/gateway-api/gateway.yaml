@@ -3,6 +3,8 @@ kind: Gateway
 metadata:
   name: crulabs-gateway
   namespace: gateway-system
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: grafana.crulabs.intern,keycloak.crulabs.intern,minio.crulabs.intern,minio-console.crulabs.intern,ca.crulabs.intern
 spec:
   gatewayClassName: traefik
   addresses:
