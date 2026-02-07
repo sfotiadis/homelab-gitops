@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gateway-tls
+  namespace: gateway-system
+spec:
+  secretName: gateway-tls
+  issuerRef:
+    name: crulabs-ca-issuer
+    kind: ClusterIssuer
+  commonName: "*.crulabs.intern"
+  dnsNames:
+  - "*.crulabs.intern"
+  - "crulabs.intern"
