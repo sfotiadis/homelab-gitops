@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gateway-system
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: gateway-api
+  namespace: flux-system
+spec:
+  interval: 24h
+  url: https://kubernetes-sigs.github.io/gateway-api
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: gateway-api-crds
+  namespace: gateway-system
+spec:
+  interval: 5m
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  chart:
+    spec:
+      chart: gateway-api
+      version: v1.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: gateway-api
+        namespace: flux-system
+  values:
+    # Install CRDs only
+    crds:
+      gatewayClass: true
+      gateway: true
+      httpRoute: true
+      grpcRoute: true
+      tcpRoute: true
+      tlsRoute: true
+      udpRoute: true
