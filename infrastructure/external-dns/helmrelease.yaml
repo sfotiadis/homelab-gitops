@@ -23,6 +23,7 @@ spec:
       - "crulabs.intern"
     policy: sync
     txtOwnerId: "crulabs-k8s"
+    logLevel: debug
 
     extraArgs:
       - --rfc2136-host=$(RFC2136_HOST)
@@ -32,7 +33,6 @@ spec:
       - --rfc2136-tsig-keyname=externaldns-key
       - --rfc2136-tsig-secret=$(RFC2136_TSIG_SECRET)
       - --rfc2136-tsig-axfr
-      - --log-level=debug
 
     env:
       - name: RFC2136_HOST
