@@ -1,44 +1,53 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: nginx-gateway-fabric
+  name: traefik
   namespace: gateway-system
 spec:
   interval: 5m
   chart:
     spec:
-      chart: nginx-gateway-fabric
-      version: 1.5.0
+      chart: traefik
+      version: 32.1.0
       sourceRef:
-        kind: OCIRepository
-        name: nginx-gateway-fabric
+        kind: HelmRepository
+        name: traefik
         namespace: flux-system
   values:
+    # Gateway API Provider aktivieren
+    providers:
+      kubernetesGateway:
+        enabled: true
+    
+    # Service Konfiguration
     service:
       type: NodePort
-      httpPort:
+      nodePorts:
+        web: 30180
+        websecure: 30543
+    
+    ports:
+      web:
+        port: 8000
         nodePort: 30180
-      httpsPort:
+      websecure:
+        port: 8443
         nodePort: 30543
-
+      metrics:
+        port: 9100
+    
+    # Metrics für Prometheus
     metrics:
-      enable: true
-      port: 9113
-
-    nginxGateway:
-      productTelemetry:
-        enable: false
-      resources:
-        requests:
-          cpu: 100m
-          memory: 128Mi
-        limits:
-          memory: 256Mi
-
-    nginx:
-      resources:
-        requests:
-          cpu: 100m
-          memory: 128Mi
-        limits:
-          memory: 256Mi
+      prometheus:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: gateway-system
+    
+    # Resources
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        memory: 256Mi

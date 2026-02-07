@@ -1,10 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: OCIRepository
+kind: HelmRepository
 metadata:
-  name: nginx-gateway-fabric
+  name: traefik
   namespace: flux-system
 spec:
   interval: 24h
-  url: oci://ghcr.io/nginxinc/charts/nginx-gateway-fabric
-  ref:
-    tag: 1.5.0
+  url: https://traefik.github.io/charts
