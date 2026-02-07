@@ -5,3 +5,4 @@ resources:
   - helmrepository.yaml
   - secret.enc.yaml
   - helmrelease.yaml
+  - httproute.yaml

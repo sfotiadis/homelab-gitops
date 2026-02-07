@@ -5,6 +5,7 @@ resources:
   - helmrepository.yaml
   - helmrelease_postgres.yaml
   - helmrelease_keycloak.yaml
+  - httproute.yaml
   - secret_backup-credentials.enc.yaml
   - secret_keycloak-db-credentials.enc.yaml
   - secret_keycloak-credentials.enc.yaml

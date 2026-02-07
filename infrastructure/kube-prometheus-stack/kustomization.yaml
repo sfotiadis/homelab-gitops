@@ -5,6 +5,7 @@ resources:
   - helmrepository.yaml
   - grafana-admin-secret.enc.yaml
   - helmrelease.yaml
+  - httproute.yaml
 
 configMapGenerator:
   - name: flux-dashboards
