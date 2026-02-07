@@ -5,6 +5,9 @@ metadata:
   namespace: gateway-system
 spec:
   gatewayClassName: traefik
+  addresses:
+  - value: k8s-lb-01.crulabs.intern
+    type: Hostname
   listeners:
   - name: web
     protocol: HTTP
