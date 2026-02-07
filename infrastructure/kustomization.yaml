@@ -6,6 +6,7 @@ resources:
   - kube-prometheus-stack
   - external-dns
   - ingress-nginx
+  - gateway-api
   - local-path-provisioner
   - nfs-csi-driver
   - minio
