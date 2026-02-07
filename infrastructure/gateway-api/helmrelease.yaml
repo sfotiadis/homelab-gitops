@@ -10,7 +10,7 @@ spec:
       chart: nginx-gateway-fabric
       version: 1.5.0
       sourceRef:
-        kind: HelmRepository
+        kind: OCIRepository
         name: nginx-gateway-fabric
         namespace: flux-system
   values:
