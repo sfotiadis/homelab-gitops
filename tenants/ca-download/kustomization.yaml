@@ -4,6 +4,5 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - service.yaml
-  - ingress.yaml
   - httproute.yaml
   - configmap.enc.yaml
