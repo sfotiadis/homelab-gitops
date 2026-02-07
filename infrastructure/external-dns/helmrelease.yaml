@@ -19,9 +19,6 @@ spec:
       - ingress
       - gateway-httproute
       - gateway-grpcroute
-      - gateway-tcproute
-      - gateway-tlsroute
-      - gateway-udproute
     domainFilters:
       - "crulabs.intern"
     policy: sync
