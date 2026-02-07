@@ -29,17 +29,7 @@ spec:
         passwordKey: admin-password
       defaultDashboardsEnabled: true
       ingress:
-        enabled: true
-        ingressClassName: nginx
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "k8s-lb-01.crulabs.intern"
-          cert-manager.io/cluster-issuer: "crulabs-ca-issuer"
-        hosts:
-          - grafana.crulabs.intern
-        tls:
-          - secretName: grafana-tls
-            hosts:
-              - grafana.crulabs.intern
+        enabled: false
       sidecar:
         dashboards:
           enabled: true
