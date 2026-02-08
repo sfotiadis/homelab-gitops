@@ -42,10 +42,12 @@ spec:
       MINIO_IDENTITY_OPENID_CLAIM_NAME: "policy"
       MINIO_IDENTITY_OPENID_CLAIM_PREFIX: ""
     
-    secrets:
-      - name: minio-oauth
-        keys:
-          - MINIO_IDENTITY_OPENID_CLIENT_SECRET
+    extraEnv:
+      - name: MINIO_IDENTITY_OPENID_CLIENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: minio-oauth
+            key: MINIO_IDENTITY_OPENID_CLIENT_SECRET
     
     extraVolumes:
       - name: ca-cert
