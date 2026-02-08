@@ -44,9 +44,9 @@ spec:
           email_attribute_path: email
           login_attribute_path: preferred_username
           name_attribute_path: name
-          auth_url: https://keycloak.crulabs.intern/realms/crulabs/protocol/openid-connect/auth
-          token_url: https://keycloak.crulabs.intern/realms/crulabs/protocol/openid-connect/token
-          api_url: https://keycloak.crulabs.intern/realms/crulabs/protocol/openid-connect/userinfo
+          auth_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/auth
+          token_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/token
+          api_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/userinfo
           role_attribute_path: contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'editor') && 'Editor' || 'Viewer'
       sidecar:
         dashboards:
