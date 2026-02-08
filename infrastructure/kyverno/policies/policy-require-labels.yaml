@@ -1,0 +1,30 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-labels
+  annotations:
+    policies.kyverno.io/title: Require Common Labels
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: low
+    policies.kyverno.io/description: >-
+      Require that all resources have common labels for better 
+      organization and management.
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+    - name: check-for-labels
+      match:
+        any:
+        - resources:
+            kinds:
+              - Deployment
+              - StatefulSet
+              - DaemonSet
+      validate:
+        message: "The labels 'app.kubernetes.io/name' and 'app.kubernetes.io/instance' are required."
+        pattern:
+          metadata:
+            labels:
+              app.kubernetes.io/name: "?*"
+              app.kubernetes.io/instance: "?*"

@@ -1,0 +1,35 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: policy-reporter
+  namespace: kyverno
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: policy-reporter
+      version: 2.24.1
+      sourceRef:
+        kind: HelmRepository
+        name: policy-reporter
+        namespace: flux-system
+  values:
+    ui:
+      enabled: false
+    
+    kyvernoPlugin:
+      enabled: true
+    
+    monitoring:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        labels:
+          release: kube-prometheus-stack
+    
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi

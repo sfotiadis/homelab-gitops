@@ -39,6 +39,8 @@ This repository manages application workloads for my productive homelab Kubernet
 | **Gateway API** | v1.2.1 | Modern ingress and traffic management |
 | **Traefik** | v32.1.0 | Gateway controller implementation |
 | **Keycloak** | v25.0.0 | Identity and access management |
+| **Kyverno** | v3.3.6 | Policy engine for Kubernetes |
+| **Policy Reporter** | v2.24.1 | Policy compliance dashboard |
 | **cert-manager** | v1.18.2 | Automated certificate management |
 | **external-dns** | v0.19.0 | Automatic DNS record management |
 | **CloudNativePG** | Latest | PostgreSQL operator for databases |
@@ -66,6 +68,13 @@ This repository manages application workloads for my productive homelab Kubernet
 - **Group-Based Access Control**: Fine-grained permissions via Keycloak groups
 - **Grafana Integration**: Role mapping (admin/editor) via OAuth
 - **MinIO Integration**: Policy-based access (consoleAdmin/readwrite)
+
+### Policy & Governance
+- **Policy Enforcement**: Kyverno for validation and mutation policies
+- **Policy Metrics**: Policy Reporter for Prometheus/Grafana integration
+- **Security Standards**: Automated compliance checks
+- **Resource Management**: Default configurations and best practices
+- **Audit & Reporting**: Policy violation tracking with dashboards
 
 ### Observability & Monitoring
 - **Metrics**: Prometheus with ServiceMonitors
@@ -96,6 +105,8 @@ This repository manages application workloads for my productive homelab Kubernet
 │   ├── gateway-api/             # Gateway and HTTPRoutes
 │   ├── keycloak/                # Identity provider
 │   ├── kube-prometheus-stack/   # Monitoring stack
+│   ├── kyverno/                 # Policy engine
+│   │   └── policies/            # Kyverno policies
 │   ├── local-path-provisioner/  # Local storage
 │   ├── loki/                    # Log aggregation
 │   ├── minio/                   # Object storage
