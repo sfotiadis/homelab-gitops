@@ -4,6 +4,7 @@ resources:
   - namespace.yaml
   - helmrepository.yaml
   - grafana-admin-secret.enc.yaml
+  - secret_grafana-oauth.enc.yaml
   - helmrelease.yaml
   - httproute.yaml
 

@@ -30,6 +30,24 @@ spec:
       defaultDashboardsEnabled: true
       ingress:
         enabled: false
+      envFromSecret: grafana-oauth
+      grafana.ini:
+        server:
+          root_url: https://grafana.crulabs.intern
+        auth.generic_oauth:
+          enabled: true
+          name: Keycloak
+          allow_sign_up: true
+          client_id: $__env{CLIENT_ID}
+          client_secret: $__env{CLIENT_SECRET}
+          scopes: openid email profile offline_access roles
+          email_attribute_path: email
+          login_attribute_path: preferred_username
+          name_attribute_path: name
+          auth_url: https://keycloak.crulabs.intern/realms/crulabs/protocol/openid-connect/auth
+          token_url: https://keycloak.crulabs.intern/realms/crulabs/protocol/openid-connect/token
+          api_url: https://keycloak.crulabs.intern/realms/crulabs/protocol/openid-connect/userinfo
+          role_attribute_path: contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'editor') && 'Editor' || 'Viewer'
       sidecar:
         dashboards:
           enabled: true
