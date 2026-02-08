@@ -33,3 +33,51 @@ spec:
     consoleIngress:
       enabled: false
     existingSecret: minio-credentials
+    
+    environment:
+      MINIO_IDENTITY_OPENID_CLIENT_ID:
+        valueFrom:
+          secretKeyRef:
+            name: minio-oauth
+            key: MINIO_IDENTITY_OPENID_CLIENT_ID
+      MINIO_IDENTITY_OPENID_CLIENT_SECRET:
+        valueFrom:
+          secretKeyRef:
+            name: minio-oauth
+            key: MINIO_IDENTITY_OPENID_CLIENT_SECRET
+      MINIO_IDENTITY_OPENID_CONFIG_URL:
+        valueFrom:
+          secretKeyRef:
+            name: minio-oauth
+            key: MINIO_IDENTITY_OPENID_CONFIG_URL
+      MINIO_IDENTITY_OPENID_SCOPES:
+        valueFrom:
+          secretKeyRef:
+            name: minio-oauth
+            key: MINIO_IDENTITY_OPENID_SCOPES
+      MINIO_IDENTITY_OPENID_REDIRECT_URI:
+        valueFrom:
+          secretKeyRef:
+            name: minio-oauth
+            key: MINIO_IDENTITY_OPENID_REDIRECT_URI
+      MINIO_IDENTITY_OPENID_CLAIM_NAME:
+        valueFrom:
+          secretKeyRef:
+            name: minio-oauth
+            key: MINIO_IDENTITY_OPENID_CLAIM_NAME
+      MINIO_IDENTITY_OPENID_CLAIM_PREFIX:
+        valueFrom:
+          secretKeyRef:
+            name: minio-oauth
+            key: MINIO_IDENTITY_OPENID_CLAIM_PREFIX
+    
+    extraVolumes:
+      - name: ca-cert
+        configMap:
+          name: crulabs-ca-cert
+    
+    extraVolumeMounts:
+      - name: ca-cert
+        mountPath: /etc/ssl/certs/crulabs-ca.crt
+        subPath: ca.crt
+        readOnly: true
