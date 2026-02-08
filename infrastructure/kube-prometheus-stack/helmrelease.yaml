@@ -31,6 +31,15 @@ spec:
       ingress:
         enabled: false
       envFromSecret: grafana-oauth
+      extraVolumes:
+        - name: ca-cert
+          configMap:
+            name: crulabs-ca-cert
+      extraVolumeMounts:
+        - name: ca-cert
+          mountPath: /etc/ssl/certs/crulabs-ca.crt
+          subPath: ca.crt
+          readOnly: true
       grafana.ini:
         server:
           root_url: https://grafana.crulabs.intern
@@ -48,6 +57,8 @@ spec:
           token_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/token
           api_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/userinfo
           role_attribute_path: contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'editor') && 'Editor' || 'Viewer'
+          tls_skip_verify_insecure: false
+          tls_client_ca: /etc/ssl/certs/crulabs-ca.crt
       sidecar:
         dashboards:
           enabled: true
