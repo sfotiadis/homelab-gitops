@@ -27,7 +27,7 @@ spec:
         labels:
           release: kube-prometheus-stack
       grafana:
-        namespace: monitoring
+        namespace: kyverno
         dashboards:
           enabled: true 
           label: grafana_dashboard
