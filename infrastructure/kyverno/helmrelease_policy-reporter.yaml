@@ -26,7 +26,14 @@ spec:
         enabled: true
         labels:
           release: kube-prometheus-stack
-    
+      grafana:
+        namespace: monitoring
+        dashboards:
+          enabled: true 
+          label: grafana_dashboard
+        folder:
+          annotation: grafana_folder
+          name: Policy Reporter
     resources:
       limits:
         memory: 512Mi
