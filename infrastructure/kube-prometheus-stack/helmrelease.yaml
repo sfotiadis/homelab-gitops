@@ -47,18 +47,21 @@ spec:
           enabled: true
           name: Keycloak
           allow_sign_up: true
+          auto_login: false
           client_id: $__env{CLIENT_ID}
           client_secret: $__env{CLIENT_SECRET}
           scopes: openid email profile offline_access roles
           email_attribute_path: email
           login_attribute_path: preferred_username
           name_attribute_path: name
+          use_pkce: true
           auth_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/auth
           token_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/token
           api_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/userinfo
           role_attribute_path: contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'editor') && 'Editor' || 'Viewer'
           tls_skip_verify_insecure: false
           tls_client_ca: /etc/ssl/certs/crulabs-ca.crt
+          allow_assign_grafana_admin: true
       sidecar:
         dashboards:
           enabled: true
