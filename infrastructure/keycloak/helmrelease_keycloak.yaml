@@ -30,6 +30,18 @@ spec:
     cache:
       stack: jdbc-ping
 
+    extraEnv: |
+      - name: KEYCLOAK_ADMIN
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-admin-credentials
+            key: username
+      - name: KEYCLOAK_ADMIN_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: keycloak-admin-credentials
+            key: password
+
     database:
       vendor: postgres
       hostname: keycloak-postgres-rw
