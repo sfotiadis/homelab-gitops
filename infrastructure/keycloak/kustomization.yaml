@@ -8,4 +8,4 @@ resources:
   - httproute.yaml
   - secret_backup-credentials.enc.yaml
   - secret_keycloak-db-credentials.enc.yaml
-  - secret_keycloak-credentials.enc.yaml
+  - secret_keycloak-admin-credentials.enc.yaml
