@@ -16,7 +16,6 @@ spec:
   values:
     provider: rfc2136
     sources:
-      - ingress
       - gateway-httproute
       - gateway-grpcroute
     domainFilters:
