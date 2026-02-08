@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: keycloakx
-      version: 2.x
+      version: 7.x
       sourceRef:
         kind: HelmRepository
         name: codecentric
