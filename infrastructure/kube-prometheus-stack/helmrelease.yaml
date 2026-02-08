@@ -50,15 +50,18 @@ spec:
           auto_login: false
           client_id: $__env{CLIENT_ID}
           client_secret: $__env{CLIENT_SECRET}
-          scopes: openid email profile offline_access roles
+          scopes: openid email profile
           email_attribute_path: email
           login_attribute_path: preferred_username
-          name_attribute_path: name
+          name_attribute_path: full_name
+          groups_attribute_path: groups
+          id_token_attribute_name: preferred_username
           use_pkce: true
           auth_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/auth
           token_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/token
           api_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/userinfo
           role_attribute_path: contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'editor') && 'Editor' || 'Viewer'
+          skip_org_role_sync: false
           tls_skip_verify_insecure: false
           tls_client_ca: /etc/ssl/certs/crulabs-ca.crt
           allow_assign_grafana_admin: true
