@@ -7,3 +7,4 @@ resources:
   - gatewayclass.yaml
   - gateway.yaml
   - certificate.yaml
+  - wildcard-tls.enc.yaml
