@@ -33,6 +33,12 @@ spec:
       websecure:
         port: 8443
         nodePort: 30543
+      web-public:
+        port: 80
+        expose: true
+      websecure-public:
+        port: 443
+        expose: true
       metrics:
         port: 9100
     
