@@ -1,0 +1,289 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: batch-html
+  namespace: batch
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Monte Carlo Batch Computing</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            body {
+                font-family: 'Amazon Ember', 'Helvetica Neue', Arial, sans-serif;
+                color: #232f3e;
+                background: #fff;
+            }
+    
+            /* Header */
+            header {
+                background: linear-gradient(135deg, #232f3e 0%, #1a242f 100%);
+                color: white;
+                padding: 80px 20px;
+                text-align: center;
+            }
+    
+            header h1 {
+                font-size: 3em;
+                font-weight: 300;
+                margin-bottom: 20px;
+            }
+    
+            header p {
+                font-size: 1.3em;
+                max-width: 800px;
+                margin: 0 auto 30px;
+                line-height: 1.6;
+                opacity: 0.9;
+            }
+    
+            .cta-button {
+                display: inline-block;
+                background: #ff9900;
+                color: white;
+                padding: 15px 40px;
+                text-decoration: none;
+                border-radius: 3px;
+                font-size: 1.1em;
+                font-weight: 500;
+                transition: background 0.3s;
+            }
+    
+            .cta-button:hover {
+                background: #ec7211;
+            }
+    
+            /* Container */
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 60px 20px;
+            }
+    
+            /* Features Section */
+            .features {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 40px;
+                margin-bottom: 60px;
+            }
+    
+            .feature-card {
+                background: #f9f9f9;
+                padding: 30px;
+                border-radius: 8px;
+                border-left: 4px solid #ff9900;
+            }
+    
+            .feature-card h3 {
+                color: #232f3e;
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+    
+            .feature-card p {
+                color: #555;
+                line-height: 1.6;
+            }
+    
+            /* Use Cases */
+            .use-cases {
+                background: #f4f4f4;
+                padding: 60px 20px;
+                margin: 60px 0;
+            }
+    
+            .use-cases h2 {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 50px;
+                color: #232f3e;
+            }
+    
+            .use-case-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+    
+            .use-case {
+                background: white;
+                padding: 25px;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+    
+            .use-case h4 {
+                color: #ff9900;
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+    
+            /* Benefits */
+            .benefits {
+                padding: 60px 20px;
+            }
+    
+            .benefits h2 {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 50px;
+                color: #232f3e;
+            }
+    
+            .benefit-list {
+                max-width: 900px;
+                margin: 0 auto;
+            }
+    
+            .benefit {
+                display: flex;
+                align-items: start;
+                margin-bottom: 30px;
+                padding: 20px;
+                background: #f9f9f9;
+                border-radius: 8px;
+            }
+    
+            .benefit-icon {
+                background: #ff9900;
+                color: white;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5em;
+                margin-right: 20px;
+                flex-shrink: 0;
+            }
+    
+            .benefit-content h4 {
+                color: #232f3e;
+                margin-bottom: 8px;
+            }
+    
+            .benefit-content p {
+                color: #555;
+                line-height: 1.6;
+            }
+    
+            /* Footer */
+            footer {
+                background: #232f3e;
+                color: white;
+                text-align: center;
+                padding: 40px 20px;
+                margin-top: 60px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Monte Carlo Batch Computing</h1>
+            <p>Führen Sie komplexe Monte-Carlo-Simulationen mit skalierbarer Cloud-Infrastruktur durch. 
+               Optimiert für Finanzmodelle, Risikoanalysen und wissenschaftliche Berechnungen.</p>
+            <a href="#" class="cta-button">Jetzt starten</a>
+        </header>
+    
+        <div class="container">
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Dynamische Skalierung</h3>
+                    <p>Automatische Anpassung der Rechenressourcen basierend auf Ihrer Workload. 
+                       Von einzelnen Jobs bis zu Millionen paralleler Simulationen.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Kostenoptimiert</h3>
+                    <p>Bezahlen Sie nur für die tatsächlich genutzten Ressourcen. 
+                       Spot-Instanzen für bis zu 90% Kostenersparnis bei fehlertoleranten Workloads.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Verwaltete Infrastruktur</h3>
+                    <p>Keine Server-Verwaltung nötig. Konzentrieren Sie sich auf Ihre Algorithmen, 
+                       wir kümmern uns um die Infrastruktur.</p>
+                </div>
+            </div>
+        </div>
+    
+        <section class="use-cases">
+            <h2>Anwendungsfälle</h2>
+            <div class="use-case-grid">
+                <div class="use-case">
+                    <h4>Finanzmodellierung</h4>
+                    <p>Optionspreisberechnung, Risikobewertung und Portfolio-Optimierung mit 
+                       Millionen von Szenarien.</p>
+                </div>
+                <div class="use-case">
+                    <h4>Wettervorhersage</h4>
+                    <p>Ensemble-Vorhersagen durch Simulation multipler atmosphärischer Modelle 
+                       mit unterschiedlichen Anfangsbedingungen.</p>
+                </div>
+                <div class="use-case">
+                    <h4>Maschinelles Lernen</h4>
+                    <p>Hyperparameter-Tuning und Training von Modellen mit verschiedenen 
+                       Konfigurationen parallel.</p>
+                </div>
+                <div class="use-case">
+                    <h4>Wissenschaftliche Forschung</h4>
+                    <p>Molekulardynamik-Simulationen, Teilchenphysik und statistische Analysen 
+                       mit hohem Durchsatz.</p>
+                </div>
+            </div>
+        </section>
+    
+        <section class="benefits">
+            <h2>Vorteile</h2>
+            <div class="benefit-list">
+                <div class="benefit">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-content">
+                        <h4>Hohe Performance</h4>
+                        <p>Nutzen Sie leistungsstarke GPU- und CPU-Instanzen für rechenintensive Simulationen. 
+                           Optimierte Netzwerk-Performance für verteilte Berechnungen.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🔒</div>
+                    <div class="benefit-content">
+                        <h4>Sicherheit & Compliance</h4>
+                        <p>End-to-End Verschlüsselung, isolierte Umgebungen und vollständige Audit-Logs. 
+                           Erfüllung gängiger Compliance-Standards.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-content">
+                        <h4>Monitoring & Insights</h4>
+                        <p>Echtzeitüberwachung Ihrer Jobs, detaillierte Metriken und automatische Benachrichtigungen. 
+                           Optimieren Sie Ihre Simulationen kontinuierlich.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🔄</div>
+                    <div class="benefit-content">
+                        <h4>Einfache Integration</h4>
+                        <p>RESTful API, SDKs für gängige Programmiersprachen und nahtlose Integration 
+                           in bestehende Workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <footer>
+            <p>&copy; 2026 Monte Carlo Batch Computing. Powered by CruLabs.</p>
+        </footer>
+    </body>
+    </html>
