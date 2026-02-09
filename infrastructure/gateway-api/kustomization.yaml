@@ -6,5 +6,6 @@ resources:
   - helmrelease.yaml
   - gatewayclass.yaml
   - gateway.yaml
+  - gateway-public.yaml
   - certificate.yaml
   - wildcard-tls.enc.yaml

@@ -5,10 +5,10 @@ metadata:
   namespace: batch
 spec:
   parentRefs:
-    - name: gateway
-      namespace: gateway-api
+    - name: public-gateway
+      namespace: gateway-system
   hostnames:
-    - batch.crulabs.intern
+    - batch.crulabs.io
   rules:
     - matches:
         - path:
