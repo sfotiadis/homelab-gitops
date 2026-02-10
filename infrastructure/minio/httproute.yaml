@@ -22,11 +22,12 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: minio-console
+  name: minio-console-https
   namespace: minio
 spec:
   parentRefs:
   - name: crulabs-gateway
+    sectionName: websecure
     namespace: gateway-system
   hostnames:
   - "minio-console.crulabs.intern"
@@ -38,3 +39,21 @@ spec:
     backendRefs:
     - name: minio-console
       port: 9001
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: minio-console-http
+  namespace: minio
+spec:
+  parentRefs:
+  - name: crulabs-gateway
+    sectionName: web
+    namespace: gateway-system
+  hostnames:
+  - "minio-console.crulabs.intern"
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
