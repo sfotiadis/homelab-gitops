@@ -6,6 +6,7 @@ metadata:
 spec:
   parentRefs:
   - name: crulabs-gateway
+    sectionName: websecure
     namespace: gateway-system
   hostnames:
   - "ca.crulabs.intern"
@@ -17,7 +18,3 @@ spec:
       backendRefs:
       - name: ca-download
         port: 80
-    - filters:
-        - type: RequestRedirect
-          requestRedirect:
-            scheme: https
