@@ -1,11 +1,12 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: batch
+  name: batch-https
   namespace: batch
 spec:
   parentRefs:
-    - name: public-gateway
+    - name: public-gateway-https
+      sectionName: websecure
       namespace: gateway-system
   hostnames:
     - batch.crulabs.io
@@ -17,6 +18,22 @@ spec:
       backendRefs:
         - name: batch
           port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: batch-http
+  namespace: batch
+spec:
+  parentRefs:
+    - name: public-gateway-http
+      sectionName: web
+      namespace: gateway-system
+
+  hostnames:
+    - batch.crulabs.io
+
+  rules:
     - filters:
         - type: RequestRedirect
           requestRedirect:
