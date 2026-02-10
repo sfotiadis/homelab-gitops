@@ -10,10 +10,14 @@ spec:
   hostnames:
   - "ca.crulabs.intern"
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
-    backendRefs:
-    - name: ca-download
-      port: 80
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /
+      backendRefs:
+      - name: ca-download
+        port: 80
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
