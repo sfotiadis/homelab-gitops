@@ -14,6 +14,12 @@ spec:
         - path:
             type: PathPrefix
             value: /
+      filters:
+        - extensionRef:
+            apiVersion: traefik.io/v1alpha1
+            kind: Middleware
+            name: redirect-https-batch
+            namespace: gateway-system
       backendRefs:
         - name: batch
           port: 80
