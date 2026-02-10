@@ -21,7 +21,7 @@ spec:
       database: grafana
       owner: app
       secret:
-        name: grafana-db-credentials
+        name: grafana
 
     enableSuperuserAccess: false
 
