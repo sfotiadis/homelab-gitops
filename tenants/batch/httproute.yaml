@@ -17,3 +17,7 @@ spec:
       backendRefs:
         - name: batch
           port: 80
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
