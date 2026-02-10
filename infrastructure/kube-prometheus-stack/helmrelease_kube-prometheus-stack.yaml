@@ -24,13 +24,13 @@ spec:
     grafana:
       enabled: true
       admin:
-        existingSecret: grafana-admin-secret
+        existingSecret: grafana
         userKey: admin-user
         passwordKey: admin-password
       defaultDashboardsEnabled: true
       ingress:
         enabled: false
-      envFromSecret: grafana-oauth
+      envFromSecret: grafana
       extraVolumes:
         - name: ca-cert
           configMap:
@@ -65,6 +65,14 @@ spec:
           tls_skip_verify_insecure: false
           tls_client_ca: /etc/ssl/certs/crulabs-ca.crt
           allow_assign_grafana_admin: true
+        database:
+          type: postgres
+          host: grafana-postgres.monitoring.svc.cluster.local
+          port: 5432
+          name: grafana
+          user: $__env{GRAFANA_DB_USER}
+          password: $__env{GRAFANA_DB_PASSWORD}
+          
       sidecar:
         dashboards:
           enabled: true

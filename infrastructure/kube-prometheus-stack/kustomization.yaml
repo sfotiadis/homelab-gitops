@@ -3,10 +3,10 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - helmrepository.yaml
-  - grafana-admin-secret.enc.yaml
-  - secret_grafana-oauth.enc.yaml
+  - secret_grafana.enc.yaml
   - configmap_ca-cert.yaml
-  - helmrelease.yaml
+  - helmrelease_kube-prometheus-stack.yaml
+  - helmrelease_postgres.yaml
   - httproute.yaml
 
 configMapGenerator:
