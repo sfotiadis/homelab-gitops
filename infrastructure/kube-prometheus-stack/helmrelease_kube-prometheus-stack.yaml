@@ -5,6 +5,8 @@ metadata:
   namespace: monitoring
 spec:
   interval: 5m
+  dependsOn:
+  - name: grafana-postgres
   chart:
     spec:
       chart: kube-prometheus-stack
@@ -67,7 +69,7 @@ spec:
           allow_assign_grafana_admin: true
         database:
           type: postgres
-          host: grafana-postgres.monitoring.svc.cluster.local
+          host: grafana-postgres-rw.monitoring.svc.cluster.local
           port: 5432
           name: grafana
           user: $__env{username}
