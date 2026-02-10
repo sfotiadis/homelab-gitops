@@ -70,8 +70,8 @@ spec:
           host: grafana-postgres.monitoring.svc.cluster.local
           port: 5432
           name: grafana
-          user: $__env{GRAFANA_DB_USER}
-          password: $__env{GRAFANA_DB_PASSWORD}
+          user: $__env{username}
+          password: $__env{password}
           
       sidecar:
         dashboards:
