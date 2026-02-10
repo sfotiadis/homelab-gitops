@@ -1,0 +1,40 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana-postgres
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: ./charts/cnpg-cluster
+      sourceRef:
+        kind: GitRepository
+        name: homelab-gitops
+        namespace: flux-system
+  values:
+    imageName: ghcr.io/cloudnative-pg/postgresql:17.5
+    instances: 1
+
+    initdb:
+      database: grafana
+      owner: app
+      secret:
+        name: grafana-db-credentials
+
+    enableSuperuserAccess: false
+
+    storageClass: local-path
+    storage:
+      size: 5Gi
+
+    backup:
+      enabled: false
+      
+    affinity:
+      enablePodAntiAffinity: true
+      topologyKey: kubernetes.io/hostname
+
+    monitoring:
+      enablePodMonitor: true
