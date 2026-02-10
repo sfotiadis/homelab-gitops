@@ -5,7 +5,7 @@ metadata:
   namespace: batch
 spec:
   parentRefs:
-    - name: public-gateway-https
+    - name: public-gateway
       sectionName: websecure
       namespace: gateway-system
   hostnames:
@@ -26,7 +26,7 @@ metadata:
   namespace: batch
 spec:
   parentRefs:
-    - name: public-gateway-http
+    - name: public-gateway
       sectionName: web
       namespace: gateway-system
 
