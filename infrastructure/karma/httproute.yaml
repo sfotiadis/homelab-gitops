@@ -1,0 +1,40 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: karma-https
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: crulabs-gateway
+      sectionName: websecure
+      namespace: gateway-system
+  hostnames:
+    - karma.crulabs.intern
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: karma
+          port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: karma-http
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: crulabs-gateway
+      sectionName: web
+      namespace: gateway-system
+
+  hostnames:
+    - karma.crulabs.intern
+
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https

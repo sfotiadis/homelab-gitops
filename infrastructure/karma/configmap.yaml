@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: karma
+  namespace: monitoring
+data:
+  karma.yaml: |
+    alertmanager:
+      servers:
+        - name: crulabs
+          uri: http://kube-prometheus-stack-alertmanager.monitoring.svc:9093
