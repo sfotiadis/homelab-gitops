@@ -9,7 +9,7 @@ spec:
       sectionName: websecure
       namespace: gateway-system
   hostnames:
-    - homer.crulabs.io
+    - homer.crulabs.intern
   rules:
     - matches:
         - path:
@@ -31,7 +31,7 @@ spec:
       namespace: gateway-system
 
   hostnames:
-    - homer.crulabs.io
+    - homer.crulabs.intern
 
   rules:
     - filters:
