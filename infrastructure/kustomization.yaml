@@ -15,3 +15,4 @@ resources:
   - cloudnative-pg
   - keycloak
   - karma
+  - homer

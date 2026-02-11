@@ -1,0 +1,176 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homer-html
+  namespace: homer
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>CruLabs Intern</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+      <style>
+        body {
+          font-family: 'Segoe UI', Arial, sans-serif;
+          background: #181c24;
+          margin: 0;
+          color: #f5f6fa;
+        }
+        header {
+          background: linear-gradient(90deg, #273c75 0%, #353b48 100%);
+          color: #fff;
+          padding: 2rem 1rem 1rem 1rem;
+          text-align: center;
+          box-shadow: 0 2px 8px #22242844;
+        }
+        .container {
+          max-width: 1100px;
+          margin: 2rem auto;
+          background: #23283a;
+          border-radius: 12px;
+          box-shadow: 0 4px 24px #22242866;
+          padding: 2.5rem 2rem;
+        }
+        h2 {
+          color: #00a8ff;
+          margin-top: 0;
+        }
+        .services {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+          justify-content: center;
+        }
+        .service {
+          flex: 1 1 260px;
+          max-width: 320px;
+          background: #20232e;
+          border-radius: 10px;
+          padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+          box-shadow: 0 2px 12px #22242833;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          transition: transform 0.15s, box-shadow 0.15s;
+          position: relative;
+        }
+        .service:hover {
+          transform: translateY(-4px) scale(1.03);
+          box-shadow: 0 6px 24px #0097e655;
+        }
+        .service a {
+          color: #00a8ff;
+          font-weight: 600;
+          font-size: 1.2em;
+          text-decoration: none;
+          margin-bottom: 0.5em;
+          display: flex;
+          align-items: center;
+          gap: 0.5em;
+        }
+        .service a:hover {
+          text-decoration: underline;
+        }
+        .service .icon {
+          font-size: 1.5em;
+          margin-right: 0.3em;
+          color: #00a8ff;
+        }
+        .status {
+          font-size: 0.95em;
+          margin-top: 0.5em;
+          color: #44bd32;
+        }
+        .desc {
+          color: #dcdde1;
+          font-size: 1em;
+          margin-top: 0.3em;
+        }
+        @media (max-width: 900px) {
+          .services { flex-direction: column; align-items: center; }
+          .service { width: 100%; max-width: 500px; }
+        }
+        ul.info {
+          margin-top: 2.5rem;
+          color: #b2bec3;
+          font-size: 1.05em;
+        }
+        ul.info a { color: #00a8ff; }
+      </style>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          fetch('https://karma.crulabs.intern/api/alerts')
+            .then(response => response.json())
+            .then(data => {
+              // Zähle alle Alerts, die nicht resolved sind
+              const activeAlerts = (data || []).filter(alert => alert.state !== 'resolved').length;
+              const badge = document.getElementById('alert-badge');
+              if (activeAlerts > 0) {
+                badge.textContent = activeAlerts;
+                badge.style.display = 'inline-block';
+              } else {
+                badge.style.display = 'none';
+              }
+            })
+            .catch(() => {
+              // Bei Fehler Badge ausblenden
+              const badge = document.getElementById('alert-badge');
+              badge.style.display = 'none';
+            });
+        });
+      </script>
+    </head>
+    <body>
+      <header>
+        <h1><i class="fa-solid fa-house"></i>CruLabs Homer</h1>
+        <p>Übersicht aller internen Services</p>
+      </header>
+      <div class="container">
+        <h2>Services</h2>
+        <div class="services">
+          <div class="service">
+            <a href="https://grafana.crulabs.intern" target="_blank"><span class="icon"><i class="fa-solid fa-chart-line"></i></span>Grafana</a>
+            <div class="status"><i class="fa-solid fa-circle-check"></i> Online</div>
+            <div class="desc">Monitoring & Dashboards</div>
+          </div>
+          <div class="service">
+            <a href="https://keycloak.crulabs.intern" target="_blank"><span class="icon"><i class="fa-solid fa-user-shield"></i></span>Keycloak</a>
+            <div class="status"><i class="fa-solid fa-circle-check"></i> Online</div>
+            <div class="desc">Identity & Access Management</div>
+          </div>
+          <div class="service">
+            <a href="https://minio-console.crulabs.intern" target="_blank"><span class="icon"><i class="fa-solid fa-database"></i></span>Minio</a>
+            <div class="status"><i class="fa-solid fa-circle-check"></i> Online</div>
+            <div class="desc">S3-kompatibler Storage</div>
+          </div>
+          <div class="service">
+            <a href="https://karma.crulabs.intern/?q=alertname%21%3DWatchdog" target="_blank">
+              <span class="icon"><i class="fa-solid fa-bell"></i></span>
+              Alerting Dashboard
+              <span id="alert-badge" class="badge" style="background:#e84118;color:#fff;border-radius:12px;padding:0.2em 0.7em;font-size:0.9em;margin-left:0.5em;vertical-align:middle;display:none;">0</span>
+            </a>
+            <div class="status"><i class="fa-solid fa-circle-check"></i> Online</div>
+            <div class="desc">Metrics & Alerting</div>
+          </div>
+          <div class="service">
+            <a href="https://ca.crulabs.intern" target="_blank"><span class="icon"><i class="fa-solid fa-certificate"></i></span>CA Download</a>
+            <div class="status"><i class="fa-solid fa-circle-check"></i> Online</div>
+            <div class="desc">Zertifikate für interne Clients</div>
+          </div>
+          <div class="service">
+            <a href="https://pve.internal" target="_blank"><span class="icon"><i class="fa-solid fa-gears"></i></span>Proxmox VE</a>
+            <div class="status"><i class="fa-solid fa-circle-check"></i> Online</div>
+            <div class="desc">Virtualisierung & Servermanagement</div>
+          </div>
+          <!-- Weitere Services hier ergänzen -->
+        </div>
+        <h2 style="margin-top:2rem;">Informationen</h2>
+        <ul class="info">
+          <li>Alle Services sind nur intern erreichbar.</li>
+        </ul>
+      </div>
+    </body>
+    </html>
