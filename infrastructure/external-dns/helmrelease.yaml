@@ -18,6 +18,7 @@ spec:
     sources:
       - gateway-httproute
       - gateway-grpcroute
+      - dnsrecord
     domainFilters:
       - "crulabs.intern"
     policy: sync

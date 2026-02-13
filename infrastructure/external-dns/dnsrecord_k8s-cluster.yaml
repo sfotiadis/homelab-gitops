@@ -1,0 +1,10 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSRecord
+metadata:
+  name: k8s-cluster-alias
+  namespace: external-dns
+spec:
+  endpoints:
+    - dnsName: k8s.crulabs.intern
+      recordType: CNAME
+      targets: ["k8s-lb-01.crulabs.intern"]
