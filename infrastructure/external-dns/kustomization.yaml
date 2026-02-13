@@ -5,5 +5,4 @@ resources:
   - external-dns-config.enc.yaml
   - external-dns-tsig.enc.yaml
   - helmrepository.yaml
-  - dnsrecord_k8s-cluster.yaml
   - helmrelease.yaml
