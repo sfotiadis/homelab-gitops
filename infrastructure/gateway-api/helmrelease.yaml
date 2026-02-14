@@ -14,18 +14,16 @@ spec:
         name: traefik
         namespace: flux-system
   values:
-    # Gateway API Provider aktivieren
     providers:
       kubernetesGateway:
         enabled: true
-    
-    # Service Konfiguration
+
     service:
       type: NodePort
       nodePorts:
         web: 30180
         websecure: 30543
-    
+
     ports:
       web:
         port: 8000
@@ -35,16 +33,14 @@ spec:
         nodePort: 30543
       metrics:
         port: 9100
-    
-    # Metrics für Prometheus
+
     metrics:
       prometheus:
         enabled: true
         serviceMonitor:
           enabled: true
           namespace: gateway-system
-    
-    # Resources
+
     resources:
       requests:
         cpu: 100m
