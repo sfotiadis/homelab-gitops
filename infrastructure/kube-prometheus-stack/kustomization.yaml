@@ -8,6 +8,7 @@ resources:
   - helmrelease_kube-prometheus-stack.yaml
   - helmrelease_postgres.yaml
   - httproute.yaml
+  - podmonitor_etcd.yaml
 
 configMapGenerator:
   - name: flux-dashboards
