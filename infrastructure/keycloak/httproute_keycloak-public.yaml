@@ -1,0 +1,26 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: keycloak-public-https
+  namespace: keycloak
+spec:
+  parentRefs:
+    - name: public-gateway
+      sectionName: websecure
+      namespace: gateway-system
+  hostnames:
+    - "batch.crulabs.io"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /auth
+      filters:
+        - type: RequestRewrite
+          requestRewrite:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /auth/realms/compute/protocol/openid-connect/token
+      backendRefs:
+        - name: keycloak-keycloakx-http
+          port: 80
