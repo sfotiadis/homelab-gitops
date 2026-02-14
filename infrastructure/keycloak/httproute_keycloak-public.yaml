@@ -16,8 +16,8 @@ spec:
             type: PathPrefix
             value: /auth
       filters:
-        - type: RequestRewrite
-          requestRewrite:
+        - type: URLRewrite
+          urlRewrite:
             path:
               type: ReplaceFullPath
               replaceFullPath: /auth/realms/compute/protocol/openid-connect/token
