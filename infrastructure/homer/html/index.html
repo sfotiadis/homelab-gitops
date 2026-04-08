@@ -94,26 +94,6 @@
     }
     ul.info a { color: #00a8ff; }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      fetch('https://karma.crulabs.intern/api/alerts')
-        .then(response => response.json())
-        .then(data => {
-          const activeAlerts = (data || []).filter(alert => alert.state !== 'resolved').length;
-          const badge = document.getElementById('alert-badge');
-          if (activeAlerts > 0) {
-            badge.textContent = activeAlerts;
-            badge.style.display = 'inline-block';
-          } else {
-            badge.style.display = 'none';
-          }
-        })
-        .catch(() => {
-          const badge = document.getElementById('alert-badge');
-          badge.style.display = 'none';
-        });
-    });
-  </script>
 </head>
 <body>
   <header>
@@ -140,9 +120,8 @@
       </div>
       <div class="service">
         <a href="https://karma.crulabs.intern/?q=alertname%21%3DWatchdog" target="_blank">
-          <span class="icon"><i class="fa-solid fa-bell"></i></span>
+          <span class="icon"><i class="fa-solid fa-bell"></i> Online</span>
           Alerting Dashboard
-          <span id="alert-badge" class="badge" style="background:#e84118;color:#fff;border-radius:12px;padding:0.2em 0.7em;font-size:0.9em;margin-left:0.5em;vertical-align:middle;display:none;">0</span>
         </a>
         <div class="status"><i class="fa-solid fa-circle-check"></i> Online</div>
         <div class="desc">Metrics & Alerting</div>
