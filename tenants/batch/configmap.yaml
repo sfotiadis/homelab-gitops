@@ -10,7 +10,7 @@ data:
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Monte Carlo Batch Computing</title>
+        <title>Batch Computing</title>
         <style>
             * {
                 margin: 0;
@@ -192,8 +192,8 @@ data:
     </head>
     <body>
         <header>
-            <h1>Monte Carlo Batch Computing</h1>
-            <p>Führen Sie komplexe Monte-Carlo-Simulationen mit skalierbarer Cloud-Infrastruktur durch. 
+            <h1>Batch Computing</h1>
+            <p>Führen Sie komplexe Simulationen mit skalierbarer Cloud-Infrastruktur durch. 
                Optimiert für Finanzmodelle, Risikoanalysen und wissenschaftliche Berechnungen.</p>
             <a href="#" class="cta-button">Jetzt starten</a>
         </header>
@@ -283,7 +283,7 @@ data:
         </section>
     
         <footer>
-            <p>&copy; 2026 Monte Carlo Batch Computing. Powered by CruLabs.</p>
+            <p>&copy; 2026 Batch Computing. Powered by CruLabs.</p>
         </footer>
     </body>
     </html>
