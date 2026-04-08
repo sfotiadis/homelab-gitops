@@ -5,7 +5,6 @@
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
 [![Flux](https://img.shields.io/badge/Flux_CD-5468FF?style=for-the-badge&logo=flux&logoColor=white)](https://fluxcd.io/)
 [![Gateway API](https://img.shields.io/badge/Gateway_API-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://gateway-api.sigs.k8s.io/)
-[![Keycloak](https://img.shields.io/badge/Keycloak-008aaa?style=for-the-badge&logo=keycloak&logoColor=white)](https://www.keycloak.org/)
 
 > **Infrastructure Setup**: The underlying infrastructure (Proxmox VE, VMs, networking) is provisioned using Terraform, Ansible, and Packer in [homelab-automation](https://github.com/sfotiadis/homelab-automation).
 
@@ -33,21 +32,21 @@ This repository manages application workloads for my productive homelab Kubernet
 
 ### Core Components
 
-| Component | Version | Purpose |
-|-----------|---------|---------|
-| **Flux CD** | v2.7.5 | GitOps continuous delivery |
-| **Gateway API** | v1.2.1 | Modern ingress and traffic management |
-| **Traefik** | v32.1.0 | Gateway controller implementation |
-| **Keycloak** | v25.0.0 | Identity and access management |
-| **Kyverno** | v3.3.6 | Policy engine for Kubernetes |
-| **Policy Reporter** | v2.24.1 | Policy compliance dashboard |
-| **cert-manager** | v1.18.2 | Automated certificate management |
-| **external-dns** | v0.19.0 | Automatic DNS record management |
-| **CloudNativePG** | Latest | PostgreSQL operator for databases |
-| **Prometheus Stack** | Latest | Metrics collection and alerting |
-| **Grafana** | Latest | Observability and dashboards |
-| **Loki** | Latest | Log aggregation |
-| **MinIO** | v5.4.0 | S3-compatible object storage |
+| Component | Purpose |
+|-----------|---------|
+| **Flux CD** | GitOps continuous delivery |
+| **Gateway API** | Modern ingress and traffic management |
+| **Traefik** | Gateway controller implementation |
+| **Keycloak** | Identity and access management |
+| **Kyverno** | Policy engine for Kubernetes |
+| **Policy Reporter** | Policy compliance dashboard |
+| **cert-manager** | Automated certificate management |
+| **external-dns** | Automatic DNS record management |
+| **CloudNativePG** | PostgreSQL operator for databases |
+| **Prometheus Stack** | Metrics collection and alerting |
+| **Grafana** | Observability and dashboards |
+| **Loki** | Log aggregation |
+| **MinIO** | S3-compatible object storage |
 
 ## Key Features
 
