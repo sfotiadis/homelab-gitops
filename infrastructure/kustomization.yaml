@@ -5,7 +5,6 @@ resources:
   - cluster-issuer
   - kube-prometheus-stack
   - external-dns
-  - gateway-api-crds
   - gateway-api
   - kyverno
   - local-path-provisioner
