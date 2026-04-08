@@ -5,6 +5,7 @@ resources:
   - cloudnative-pg
   - cluster-issuer
   - external-dns
+  - flagger
   - gateway-api
   - homer
   - karma
