@@ -17,5 +17,9 @@ spec:
     kubeletDir: /var/lib/kubelet
     controller:
       replicas: 2
+      nfs:
+        labels:
+          app.kubernetes.io/name: csi-driver-nfs
+          app.kubernetes.io/instance: controller
     feature:
       enableFSGroupPolicy: true
