@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: statefulset-latest
+spec:
+  serviceName: app
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: app
+        image: nginx:latest
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: statefulset-no-tag
+spec:
+  serviceName: app
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: app
+        image: nginx
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: statefulset-fixed-tag
+spec:
+  serviceName: app
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: app
+        image: nginx:1.20

@@ -1,0 +1,21 @@
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: image-version-validation
+policies:
+  - ../../policies/validating_require-labels.yaml
+resources:
+  - deployment.yaml
+results:
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: require-labels
+    resources:
+      - deployment-with-labels
+    result: pass
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: require-labels
+    resources:
+      - deployment-without-labels
+    result: fail

@@ -1,0 +1,64 @@
+---
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
+metadata:
+  name: image-version
+  annotations:
+    policies.kyverno.io/title: Require Image Version
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: low
+    policies.kyverno.io/description: >-
+      Ensures that container images specify a version and do not use the 'latest' tag.
+spec:
+  validationActions:
+    - Audit
+  matchConstraints:
+    resourceRules:
+      - apiGroups: ["apps", "batch"]
+        apiVersions: ["v1"]
+        resources: ["deployments", "daemonsets", "statefulsets", "jobs"]
+        operations: ["CREATE", "UPDATE"]
+      - apiGroups: ["batch"]
+        apiVersions: ["v1"]
+        resources: ["cronjobs"]
+        operations: ["CREATE", "UPDATE"]
+  validations:
+    - message: "Image must include a tag and must not be latest."
+      expression: >
+        has(object.spec.jobTemplate) || !has(object.spec.template) ||
+        (
+          object.spec.template.spec.containers.all(c,
+            has(c.image) && (
+              c.image.contains("@sha256:") ||
+              (c.image.contains(":") && !c.image.endsWith(":latest"))
+            )
+          ) &&
+          (!has(object.spec.template.spec.initContainers) ||
+            object.spec.template.spec.initContainers.all(c,
+              has(c.image) && (
+                c.image.contains("@sha256:") ||
+                (c.image.contains(":") && !c.image.endsWith(":latest"))
+              )
+            )
+          )
+        )
+
+    - message: "CronJob image must include a tag and must not be latest."
+      expression: >
+        !has(object.spec.jobTemplate) ||
+        (
+          object.spec.jobTemplate.spec.template.spec.containers.all(c,
+            has(c.image) && (
+              c.image.contains("@sha256:") ||
+              (c.image.contains(":") && !c.image.endsWith(":latest"))
+            )
+          ) &&
+          (!has(object.spec.jobTemplate.spec.template.spec.initContainers) ||
+            object.spec.jobTemplate.spec.template.spec.initContainers.all(c,
+              has(c.image) && (
+                c.image.contains("@sha256:") ||
+                (c.image.contains(":") && !c.image.endsWith(":latest"))
+              )
+            )
+          )
+        )
