@@ -4,6 +4,7 @@ resources:
   - cert-manager
   - cloudnative-pg
   - cluster-issuer
+  - coredns
   - external-dns
   - flagger
   - gateway-api
