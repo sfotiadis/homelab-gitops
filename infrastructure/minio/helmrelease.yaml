@@ -21,6 +21,9 @@ spec:
   values:
     mode: standalone
     replicas: 1
+    additionalLabels:
+      app.kubernetes.io/name: minio
+      app.kubernetes.io/instance: minio
     persistence:
       enabled: true
       storageClass: nfs-csi
