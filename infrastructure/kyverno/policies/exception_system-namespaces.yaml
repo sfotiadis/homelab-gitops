@@ -1,0 +1,12 @@
+apiVersion: policies.kyverno.io/v1alpha1
+kind: PolicyException
+metadata:
+  name: system-namespaces
+  namespace: kyverno
+spec:
+  policyRefs:
+    - name: require-labels
+      kind: ValidatingPolicy
+  matchConditions:
+    - name: exclude-system-namespaces
+      expression: "request.namespace in ['kube-system', 'flux-system', 'cert-manager', 'kyverno']"   
