@@ -14,3 +14,16 @@ spec:
     provider: sops
     secretRef:
       name: sops-gpg
+
+  patches:
+    - target:
+        kind: Deployment
+        name: coredns
+        namespace: kube-system
+      patch: |-
+        - op: add
+          path: /metadata/labels/app.kubernetes.io~1name
+          value: "coredns"
+        - op: add 
+          path: /metadata/labels/app.kubernetes.io~1instance
+          value: "coredns"
