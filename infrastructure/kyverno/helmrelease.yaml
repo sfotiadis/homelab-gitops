@@ -15,9 +15,10 @@ spec:
         namespace: flux-system
   values:
     admissionController:
-      labels:
-        app.kubernetes.io/name: kyverno
-        app.kubernetes.io/instance: admission-controller
+      deployment:  
+        labels:
+          app.kubernetes.io/name: kyverno
+          app.kubernetes.io/instance: admission-controller
       replicas: 1
       resources:
         limits:
