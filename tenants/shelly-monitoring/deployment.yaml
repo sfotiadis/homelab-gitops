@@ -4,16 +4,19 @@ metadata:
   name: telegraf
   namespace: shelly-monitoring
   labels:
-    app: telegraf
+    app.kubernetes.io/name: telegraf
+    app.kubernetes.io/instance: telegraf
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: telegraf
+      app.kubernetes.io/name: telegraf
+      app.kubernetes.io/instance: telegraf
   template:
     metadata:
       labels:
-        app: telegraf
+        app.kubernetes.io/name: telegraf
+        app.kubernetes.io/instance: telegraf
     spec:
       containers:
       - name: telegraf
