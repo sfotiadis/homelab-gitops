@@ -11,6 +11,7 @@ resources:
   - karma
   - keycloak
   - kube-prometheus-stack
+  - kyverno
   - local-path-provisioner
   - loki
   - minio
