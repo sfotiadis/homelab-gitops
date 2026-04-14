@@ -14,13 +14,13 @@ spec:
     - Audit
   matchConstraints:
     resourceRules:
-      - apiGroups: ["apps", "batch"]
+      - apiGroups: ["apps"]
         apiVersions: ["v1"]
-        resources: ["deployments", "daemonsets", "statefulsets", "jobs"]
+        resources: ["deployments", "daemonsets", "statefulsets"]
         operations: ["CREATE", "UPDATE"]
       - apiGroups: ["batch"]
         apiVersions: ["v1"]
-        resources: ["cronjobs"]
+        resources: ["cronjobs", "jobs"]
         operations: ["CREATE", "UPDATE"]
   validations:
     - message: "Image must include a tag and must not be latest."
