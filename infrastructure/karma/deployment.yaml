@@ -3,15 +3,20 @@ kind: Deployment
 metadata:
   name: karma
   namespace: monitoring
+  labels:
+    app.kubernetes.io/name: karma
+    app.kubernetes.io/instance: karma
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: karma
+      app.kubernetes.io/instance: karma
   template:
     metadata:
       labels:
         app.kubernetes.io/name: karma
+        app.kubernetes.io/instance: karma
     spec:
       containers:
         - name: karma

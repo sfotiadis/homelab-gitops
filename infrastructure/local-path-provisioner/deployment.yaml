@@ -3,15 +3,20 @@ kind: Deployment
 metadata:
   name: local-path-provisioner
   namespace: local-path-storage
+  labels:
+    app.kubernetes.io/name: local-path-provisioner
+    app.kubernetes.io/instance: local-path-storage
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: local-path-provisioner
+      app.kubernetes.io/name: local-path-provisioner
+      app.kubernetes.io/instance: local-path-storage
   template:
     metadata:
       labels:
-        app: local-path-provisioner
+        app.kubernetes.io/name: local-path-provisioner
+        app.kubernetes.io/instance: local-path-storage
     spec:
       serviceAccountName: local-path-provisioner-service-account
       containers:
