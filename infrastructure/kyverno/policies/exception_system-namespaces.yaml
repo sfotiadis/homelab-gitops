@@ -9,4 +9,4 @@ spec:
       kind: ValidatingPolicy
   matchConditions:
     - name: exclude-system-namespaces
-      expression: "request.namespace in ['kube-system', 'flux-system', 'cert-manager', 'kyverno']"   
+      expression: "object.metadata.namespace in ['kube-system', 'flux-system', 'cert-manager', 'kyverno']"   
