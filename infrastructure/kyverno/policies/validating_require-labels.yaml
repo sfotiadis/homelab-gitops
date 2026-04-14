@@ -1,0 +1,27 @@
+---
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
+metadata:
+  name: require-labels
+  annotations:
+    policies.kyverno.io/title: Require Common Labels
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: low
+    policies.kyverno.io/description: >-
+      Ensures that all resources have common labels for better 
+      organization and management.
+spec:
+  validationActions:
+    - Audit
+  matchConstraints:
+    resourceRules:
+      - apiGroups: ["apps"]
+        apiVersions: ["v1"]
+        resources: ["deployments", "daemonsets", "statefulsets"]
+        operations: ["CREATE", "UPDATE"]
+  validations:
+    - message: "The labels 'app.kubernetes.io/name' and 'app.kubernetes.io/instance' are required."
+      expression: >
+        object.metadata.labels != null &&
+        "app.kubernetes.io/name" in object.metadata.labels &&
+        "app.kubernetes.io/instance" in object.metadata.labels

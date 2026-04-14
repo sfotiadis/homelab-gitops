@@ -6,4 +6,6 @@ resources:
   - helmrelease.yaml
   - helmrepository_policy-reporter.yaml
   - helmrelease_policy-reporter.yaml
-  - policies
+  # Policies
+  - policies/validating_image-version.yaml
+  - policies/validating_require-labels.yaml
