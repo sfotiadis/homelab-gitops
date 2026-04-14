@@ -10,11 +10,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: local-path-storage
+      app: local-path-provisioner
   template:
     metadata:
       labels:
-        app: local-path-storage
+        app: local-path-provisioner
     spec:
       serviceAccountName: local-path-provisioner-service-account
       containers:
