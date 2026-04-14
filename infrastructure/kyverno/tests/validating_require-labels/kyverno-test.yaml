@@ -4,6 +4,8 @@ metadata:
   name: image-version-validation
 policies:
   - ../../policies/validating_require-labels.yaml
+exceptions:
+  - ../../policies/exception_system-namespaces.yaml
 resources:
   - deployment.yaml
 results:
@@ -19,3 +21,9 @@ results:
     resources:
       - deployment-without-labels
     result: fail
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: require-labels
+    resources:
+      - system-deployment
+    result: skip

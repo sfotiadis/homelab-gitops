@@ -57,3 +57,8 @@ spec:
         requests:
           cpu: 100m
           memory: 256Mi
+
+    features:
+      policyExceptions:
+        enabled: true
+        namespace: kyverno
