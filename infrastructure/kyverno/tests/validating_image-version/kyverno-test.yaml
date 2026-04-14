@@ -1,0 +1,136 @@
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: image-version-validation
+policies:
+  - ../../policies/validating_image-version.yaml
+resources:
+  - deployment.yaml
+  - cronjob.yaml
+  - statefulset.yaml
+  - job.yaml
+  - daemonset.yaml
+results:
+  # Deployment results
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: image-version
+    resources:
+      - deployment-latest
+    result: fail
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: image-version
+    resources:
+      - deployment-no-tag
+    result: fail
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: image-version
+    resources:
+      - deployment-fixed-tag
+    result: pass
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: image-version
+    resources:
+      - deployment-init-latest
+    result: fail
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: image-version
+    resources:
+      - deployment-init-digest
+    result: pass
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: image-version
+    resources:
+      - deployment-init-fixed-tag
+    result: pass
+  - isValidatingPolicy: true
+    kind: Deployment
+    policy: image-version
+    resources:
+      - deployment-init-no-tag
+    result: fail
+
+  # CronJob results
+  - isValidatingPolicy: true
+    kind: CronJob
+    policy: image-version
+    resources:
+      - cronjob-latest
+    result: fail
+  - isValidatingPolicy: true
+    kind: CronJob
+    policy: image-version
+    resources:
+      - cronjob-no-tag
+    result: fail
+  - isValidatingPolicy: true
+    kind: CronJob
+    policy: image-version
+    resources:
+      - cronjob-fixed-tag
+    result: pass
+
+  # StatefulSet results
+  - isValidatingPolicy: true
+    kind: StatefulSet
+    policy: image-version
+    resources:
+      - statefulset-latest
+    result: fail
+  - isValidatingPolicy: true
+    kind: StatefulSet
+    policy: image-version
+    resources:
+      - statefulset-no-tag
+    result: fail
+  - isValidatingPolicy: true
+    kind: StatefulSet
+    policy: image-version
+    resources:
+      - statefulset-fixed-tag
+    result: pass
+
+  # Job results
+  - isValidatingPolicy: true
+    kind: Job
+    policy: image-version
+    resources:
+      - job-latest
+    result: fail
+  - isValidatingPolicy: true
+    kind: Job
+    policy: image-version
+    resources:
+      - job-no-tag
+    result: fail
+  - isValidatingPolicy: true
+    kind: Job
+    policy: image-version
+    resources:
+      - job-fixed-tag
+    result: pass
+  
+  # DaemonSet results
+  - isValidatingPolicy: true
+    kind: DaemonSet
+    policy: image-version
+    resources:
+      - daemonset-latest
+    result: fail
+  - isValidatingPolicy: true
+    kind: DaemonSet
+    policy: image-version
+    resources:
+      - daemonset-no-tag
+    result: fail
+  - isValidatingPolicy: true
+    kind: DaemonSet
+    policy: image-version
+    resources:
+      - daemonset-fixed-tag
+    result: pass

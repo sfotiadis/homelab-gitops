@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-latest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: app
+        image: nginx:latest
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-no-tag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: app
+        image: nginx
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-fixed-tag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: app
+        image: nginx:1.20
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-init-latest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      initContainers:
+      - name: init
+        image: busybox:latest
+      containers:
+      - name: app
+        image: nginx:1.20  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-init-no-tag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      initContainers:
+      - name: init
+        image: busybox
+      containers:
+      - name: app
+        image: nginx:1.20
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-init-fixed-tag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      initContainers:
+      - name: init
+        image: busybox:1.36
+      containers:
+      - name: app
+        image: nginx:1.20
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-init-digest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      initContainers:
+      - name: init
+        image: busybox@sha256:abc123...
+      containers:
+      - name: app
+        image: nginx:1.20
