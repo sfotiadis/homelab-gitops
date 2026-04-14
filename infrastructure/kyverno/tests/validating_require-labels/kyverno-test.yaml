@@ -25,5 +25,5 @@ results:
     kind: Deployment
     policy: require-labels
     resources:
-      - system-deployment
+      - coredns
     result: skip
