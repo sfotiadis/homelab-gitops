@@ -9,3 +9,4 @@ resources:
   - gateway-public.yaml
   - certificate.yaml
   - wildcard-tls.enc.yaml
+  - referencegrant_batch.yaml
