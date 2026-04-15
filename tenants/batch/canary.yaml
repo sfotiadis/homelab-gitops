@@ -43,8 +43,8 @@ spec:
       interval: 1m
     webhooks:
       - name: load-test
-        type: pre-rollout
+        type: rollout
         url: http://flagger-loadtester.flagger-system/test
-        timeout: 10s
+        timeout: 65s
         metadata:
-          cmd: "hey -z 5m -q 30 -c 10 -host 'batch.crulabs.io' https://batch.crulabs.io/"   
+          cmd: "hey -z 1m -q 30 -c 10 -host 'batch.crulabs.io' https://batch.crulabs.io/"   
