@@ -33,9 +33,9 @@ spec:
         thresholdRange:
           min: 0.99
         query: |
-          sum(rate(traefik_service_requests_total{exported_service=~"batch.*", code!~"5.."}[5m]))
+          sum(rate(traefik_service_requests_total{service=~"batch.*", code!~"5.."}[5m]))
           /
-          clamp_min(sum(rate(traefik_service_requests_total{exported_service=~"batch.*"}[5m])), 1)
+          clamp_min(sum(rate(traefik_service_requests_total{service=~"batch.*"}[5m])), 1)
 
       - name: request-duration
         interval: 1m
@@ -53,4 +53,4 @@ spec:
         url: http://flagger-loadtester.flagger-system/test
         timeout: 10s
         metadata:
-          cmd: "hey -z 5m -q 30 -c 10 http://batch-canary.batch.svc.cluster.local:80/"
+          cmd: "hey -z 5m -q 30 -c 10 http://batch.crulabs.io/"
