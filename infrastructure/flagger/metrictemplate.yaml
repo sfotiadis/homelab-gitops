@@ -9,25 +9,20 @@ spec:
     type: prometheus
     address: http://kube-prometheus-stack-prometheus.monitoring:9090
   query: |
-    sum(
-      rate(
-        traefik_service_request_duration_seconds_bucket{
-          code!~"5..",
-          service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway",
-          le="+Inf"
-        }[{{ interval }}]
+    (
+      sum(
+        rate(traefik_service_requests_total{
+          service=~"{{ namespace }}-{{ target }}-(primary|canary)-.*@kubernetesgateway",
+          code!~"5.."
+        }[{{ interval }}])
       )
-    )
-    /
-    sum(
-      rate(
-        traefik_service_request_duration_seconds_bucket{
-          service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway",
-          le="+Inf"
-        }[{{ interval }}]
+      /
+      sum(
+        rate(traefik_service_requests_total{
+          service=~"{{ namespace }}-{{ target }}-(primary|canary)-.*@kubernetesgateway"
+        }[{{ interval }}])
       )
-    )
-    * 100   
+    ) * 100
 ---
 apiVersion: flagger.app/v1beta1
 kind: MetricTemplate
