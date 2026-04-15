@@ -19,6 +19,11 @@ spec:
         apiVersions: ["v1"]
         resources: ["deployments", "daemonsets", "statefulsets"]
         operations: ["CREATE", "UPDATE"]
+    namespaceSelector:
+      matchExpressions:
+        - key: "kubernetes.io/metadata.name"
+          operator: NotIn
+          values: ["kube-system", "flux-system", "cert-manager", "kyverno"]
   validations:
     - message: "The labels 'app.kubernetes.io/name' and 'app.kubernetes.io/instance' are required."
       expression: >
