@@ -4,8 +4,6 @@ metadata:
   name: image-version-validation
 policies:
   - ../../policies/validating_require-labels.yaml
-exceptions:
-  - ../../policies/exception_system-namespaces.yaml
 resources:
   - deployment.yaml
 results:
