@@ -4,7 +4,7 @@ metadata:
   name: batch-https
   namespace: batch
 spec:
-  provider: gatewayapi:traefik
+  provider: traefik
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
