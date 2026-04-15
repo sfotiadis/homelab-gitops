@@ -16,13 +16,13 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: loadtester
+  name: flagger-loadtester
   namespace: flagger-system
 spec:
   interval: 1h
   url: oci://ghcr.io/fluxcd/charts/loadtester
-  layerSelector:
-    mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
-    operation: copy
   ref:
     tag: "0.36.0"
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
