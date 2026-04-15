@@ -1,0 +1,33 @@
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: batch-https
+  namespace: batch
+spec:
+  provider: gatewayapi:traefik
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: batch
+  progressDeadlineSeconds: 60
+  service:
+    port: 80
+    targetPort: 80
+    gatewayRefs:
+      - name: public-gateway
+        namespace: gateway-system
+        sectionName: websecure
+  analysis:
+    interval: 1m
+    threshold: 5
+    maxWeight: 50
+    stepWeight: 10
+    metrics:
+      - name: request-success-rate
+        thresholdRange:
+          min: 99
+        interval: 1m
+      - name: request-duration
+        thresholdRange:
+          max: 500
+        interval: 1m
