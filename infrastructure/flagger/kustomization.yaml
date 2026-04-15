@@ -5,5 +5,5 @@ resources:
   - namespace.yaml
   - ocirepository.yaml
   - helmrelease_flagger.yaml
-  - helmrelease_loadtester.yaml
+  - flagger_loadtester.yaml
   - prometheusrule.yaml
