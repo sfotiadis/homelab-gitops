@@ -21,22 +21,22 @@ spec:
         namespace: gateway-system
         sectionName: websecure
 
-  analysis:
-    metrics:
-    - name: success-rate
-      templateRef:
-        name: success-rate
-        namespace: flagger-system
-      thresholdRange:
-        min: 99
-      interval: 1m
-    - name: latency
-      templateRef:
-        name: latency
-        namespace: flagger-system
-      thresholdRange:
-        max: 500
-      interval: 1m
+    analysis:
+      metrics:
+      - name: success-rate
+        templateRef:
+          name: success-rate
+          namespace: flagger-system
+        thresholdRange:
+          min: 99
+        interval: 1m
+      - name: latency
+        templateRef:
+          name: latency
+          namespace: flagger-system
+        thresholdRange:
+          max: 500
+        interval: 1m
     webhooks:
       - name: load-test
         type: pre-rollout
