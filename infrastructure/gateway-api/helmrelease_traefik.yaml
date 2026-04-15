@@ -41,6 +41,7 @@ spec:
         serviceMonitor:
           enabled: true
           namespace: gateway-system
+          honorLabels: true
         addServicesLabels: true
     resources:
       requests:
