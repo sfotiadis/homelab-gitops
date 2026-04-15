@@ -46,4 +46,4 @@ spec:
         url: http://flagger-loadtester.flagger-system/test
         timeout: 10s
         metadata:
-          cmd: "hey -z 5m -q 30 -c 10 https://batch.crulabs.io/"
+          cmd: "hey -z 5m -q 30 -c 10 https://batch-canary.batch:80/"
