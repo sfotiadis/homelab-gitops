@@ -41,7 +41,7 @@ spec:
         serviceMonitor:
           enabled: true
           namespace: gateway-system
-
+        addServiceLabels: true
     resources:
       requests:
         cpu: 100m
