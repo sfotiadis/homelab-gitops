@@ -16,6 +16,8 @@ spec:
   service:
     port: 80
     targetPort: 80
+    hosts:
+      - batch.crulabs.io
     gatewayRefs:
       - name: public-gateway
         namespace: gateway-system
