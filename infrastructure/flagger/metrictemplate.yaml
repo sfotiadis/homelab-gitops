@@ -1,0 +1,47 @@
+---
+apiVersion: flagger.app/v1beta1
+kind: MetricTemplate
+metadata:
+  name: success-rate
+  namespace: flagger-system
+spec:
+  provider:
+    type: prometheus
+    address: http://kube-prometheus-stack-prometheus.monitoring:9090
+  query: |
+    sum by (service) (
+      rate(
+        traefik_service_requests_total{
+          code!~"5.*",
+          service=~"{{ namespace }}-{{ target }}-.*"
+        }[{{ interval }}]
+      )
+    )
+    /
+    sum by (service) (
+      rate(
+        traefik_service_requests_total{
+          service=~"{{ namespace }}-{{ target }}-.*"
+        }[{{ interval }}]
+      )
+    )
+---
+apiVersion: flagger.app/v1beta1
+kind: MetricTemplate
+metadata:
+  name: latency
+  namespace: flagger-system
+spec:
+  provider:
+    type: prometheus
+    address: http://kube-prometheus-stack-prometheus.monitoring:9090
+  query: |
+    histogram_quantile(0.99,
+      sum by (le, service) (
+        rate(
+          traefik_service_request_duration_seconds_bucket{
+            service=~"{{ namespace }}-{{ target }}-.*"
+          }[{{ interval }}]
+        )
+      )
+    ) * 1000
