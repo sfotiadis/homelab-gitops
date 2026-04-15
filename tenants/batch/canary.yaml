@@ -22,6 +22,10 @@ spec:
         sectionName: websecure
 
   analysis:
+    interval: 1m
+    threshold: 5
+    maxWeight: 50
+    stepWeight: 10
     metrics:
     - name: success-rate
       templateRef:
