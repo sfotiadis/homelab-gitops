@@ -4,13 +4,12 @@ metadata:
   name: loadtester
   namespace: flagger-system
 spec:
-  interval: 5m
-  chart:
-    spec:
-      chart: loadtester
-      sourceRef:
-        kind: OCIRepository
-        name: loadtester
-        namespace: flagger-system
+  interval: 12h
+  releaseName: flagger-loadtester
+
+  chartRef:
+    kind: OCIRepository
+    name: loadtester
+
   values:
-    enabled: true
+    replicaCount: 1
