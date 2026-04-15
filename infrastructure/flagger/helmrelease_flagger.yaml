@@ -15,7 +15,7 @@ spec:
     kind: OCIRepository
     name: flagger
   values:
-    meshProvider: traefik
+    meshProvider: gatewayapi:v1
     metricsServer: http://kube-prometheus-stack-prometheus.monitoring:9090
     serviceMonitor:
       enabled: true
