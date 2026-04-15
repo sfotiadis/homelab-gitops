@@ -9,19 +9,19 @@ spec:
     type: prometheus
     address: http://kube-prometheus-stack-prometheus.monitoring:9090
   query: |
-    sum by (service) (
+    sum(
       rate(
         traefik_service_requests_total{
           code!~"5.*",
-          service=~"{{ namespace }}-{{ target }}-.*"
+          service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway"
         }[{{ interval }}]
       )
     )
     /
-    sum by (service) (
+    sum(
       rate(
         traefik_service_requests_total{
-          service=~"{{ namespace }}-{{ target }}-.*"
+          service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway"
         }[{{ interval }}]
       )
     )
@@ -37,10 +37,10 @@ spec:
     address: http://kube-prometheus-stack-prometheus.monitoring:9090
   query: |
     histogram_quantile(0.99,
-      sum by (le, service) (
+      sum by (le) (
         rate(
           traefik_service_request_duration_seconds_bucket{
-            service=~"{{ namespace }}-{{ target }}-.*"
+            service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway"
           }[{{ interval }}]
         )
       )
