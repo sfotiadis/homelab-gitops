@@ -14,3 +14,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: flagger
+  values:
+    meshProvider: gatewayapi:traefik
+    metricsServer: http://kube-prometheus-stack-prometheus.monitoring:9090
