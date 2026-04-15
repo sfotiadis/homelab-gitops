@@ -1,0 +1,19 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: flagger
+  namespace: flagger-system
+spec:
+  interval: 12h
+  releaseName: flagger
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  chartRef:
+    kind: OCIRepository
+    name: flagger
+  values:
+    meshProvider: gatewayapi:traefik
+    metricsServer: http://kube-prometheus-stack-prometheus.monitoring:9090
