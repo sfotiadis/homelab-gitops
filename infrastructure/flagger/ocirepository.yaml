@@ -16,7 +16,7 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: flagger-loadtester
+  name: loadtester
   namespace: flagger-system
 spec:
   interval: 1h
