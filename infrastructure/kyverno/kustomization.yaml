@@ -9,4 +9,3 @@ resources:
   # Policies
   - policies/validating_image-version.yaml
   - policies/validating_require-labels.yaml
-  - policies/exception_system-namespaces.yaml
