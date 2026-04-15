@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: loadtester
+  namespace: flagger-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: loadtester
+      sourceRef:
+        kind: OCIRepository
+        name: loadtester
+        namespace: flagger-system
+  values:
+    enabled: true
