@@ -30,25 +30,18 @@ spec:
     stepWeight: 10
 
     metrics:
-      - name: request-success-rate
-        interval: 1m
-        thresholdRange:
-          min: 0.99
-        query: |
-          sum(rate(traefik_service_requests_total{service=~"batch.*", code!~"5.."}[5m]))
-          /
-          clamp_min(sum(rate(traefik_service_requests_total{service=~"batch.*"}[5m])), 1)
-
-      - name: request-duration
-        interval: 1m
-        thresholdRange:
-          max: 500
-        query: |
-          histogram_quantile(
-            0.99,
-            sum(rate(traefik_entrypoint_request_duration_seconds_bucket{entrypoint=~".*"}[5m])) by (le)
-          ) * 1000
-
+    - name: request-success-rate
+      interval: 1m
+      # minimum req success rate (non 5xx responses)
+      # percentage (0-100)
+      thresholdRange:
+        min: 99
+    - name: request-duration
+      interval: 1m
+      # maximum req duration P99
+      # milliseconds
+      thresholdRange:
+        max: 500
     webhooks:
       - name: load-test
         type: pre-rollout
