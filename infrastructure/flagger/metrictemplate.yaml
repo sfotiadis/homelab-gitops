@@ -12,7 +12,7 @@ spec:
     sum(
       rate(
         traefik_service_requests_total{
-          code!~"5.*",
+          code="200",
           service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway"
         }[{{ interval }}]
       )
