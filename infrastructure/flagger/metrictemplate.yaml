@@ -11,20 +11,23 @@ spec:
   query: |
     sum(
       rate(
-        traefik_service_requests_total{
-          code="200",
-          service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway"
+        traefik_service_request_duration_seconds_bucket{
+          code!~"5..",
+          service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway",
+          le="+Inf"
         }[{{ interval }}]
       )
     )
     /
     sum(
       rate(
-        traefik_service_requests_total{
-          service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway"
+        traefik_service_request_duration_seconds_bucket{
+          service=~"{{ namespace }}-{{ target }}-.*-http-80@kubernetesgateway",
+          le="+Inf"
         }[{{ interval }}]
       )
     )
+    * 100   
 ---
 apiVersion: flagger.app/v1beta1
 kind: MetricTemplate
