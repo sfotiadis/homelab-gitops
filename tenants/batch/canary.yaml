@@ -47,4 +47,4 @@ spec:
         url: http://flagger-loadtester.flagger-system/test
         timeout: 65s
         metadata:
-          cmd: "hey -z 10m -q 10 -c 2 -host 'batch.crulabs.io' https://batch.crulabs.io/"   
+          cmd: "hey -z 10m -q 10 -c 2 -host 'batch.crulabs.io' https://public-gateway.gateway-system/"   
