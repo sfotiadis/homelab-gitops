@@ -12,7 +12,7 @@ spec:
   verify: # verify the artifact signature with Cosign keyless
     provider: cosign
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: flagger-loadtester
