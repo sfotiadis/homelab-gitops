@@ -47,10 +47,10 @@ spec:
         url: http://flagger-loadtester.flagger-system/test
         timeout: 30s
         metadata:
-          cmd: "hey -z 25s -q 10 -c 2 -host 'batch.crulabs.io' -insecure https://traefik.gateway-system.svc.cluster.local:443/"
+          cmd: "hey -z 25s -q 10 -c 2 -host 'batch.crulabs.io' https://traefik.gateway-system.svc.cluster.local:443/"
       - name: load-test
         type: rollout
         url: http://flagger-loadtester.flagger-system/test
         timeout: 65s
         metadata:
-          cmd: "hey -z 10m -q 10 -c 2 -host 'batch.crulabs.io' -insecure https://traefik.gateway-system.svc.cluster.local:443/"
+          cmd: "hey -z 10m -q 10 -c 2 -host 'batch.crulabs.io' https://traefik.gateway-system.svc.cluster.local:443/"
