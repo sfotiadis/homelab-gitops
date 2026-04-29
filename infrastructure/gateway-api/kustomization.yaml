@@ -5,8 +5,8 @@ resources:
   - helmrepository_traefik.yaml
   - helmrelease_traefik.yaml
   - gatewayclass.yaml
-  - gateway.yaml
-  - gateway-public.yaml
+  - gateway_crulabs.yaml
+  - gateway_public.yaml
   - certificate.yaml
   - wildcard-tls.enc.yaml
   - referencegrant_batch.yaml
