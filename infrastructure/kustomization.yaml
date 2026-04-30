@@ -8,6 +8,7 @@ resources:
   - flagger
   - gateway-api
   - homer
+  - influxdb
   - karma
   - keycloak
   - kube-prometheus-stack
