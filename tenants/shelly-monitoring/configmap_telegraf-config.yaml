@@ -17,6 +17,12 @@ data:
       hostname = ""
       omit_hostname = false
 
+    [[outputs.influxdb_v2]]
+      urls = ["http://influxdb-influxdb2.influxdb.svc.cluster.local:80"]
+      token = "${INFLUXDB_TOKEN}"
+      organization = "crulabs"
+      bucket = "shelly"
+
     [[outputs.prometheus_client]]
       listen = ":9273"
       metric_version = 2

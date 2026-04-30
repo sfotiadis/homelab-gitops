@@ -28,6 +28,11 @@ spec:
             configMapKeyRef:
               name: shelly-config
               key: shelly-url
+        - name: INFLUXDB_TOKEN
+          valueFrom:
+            configMapKeyRef:
+              name: influxdb-token
+              key: token
         volumeMounts:
         - name: config
           mountPath: /etc/telegraf
