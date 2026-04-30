@@ -30,7 +30,7 @@ spec:
               key: shelly-url
         - name: INFLUXDB_TOKEN
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: influxdb-token
               key: token
         volumeMounts:
