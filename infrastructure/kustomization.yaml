@@ -6,6 +6,7 @@ resources:
   - cluster-issuer
   - external-dns
   - flagger
+  - flux
   - gateway-api
   - homer
   - influxdb
