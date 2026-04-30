@@ -7,9 +7,8 @@ spec:
   groups:
     - name: flux
       rules:
-
         - alert: FluxHelmReleaseNotReady
-          expr: gotk_reconcile_condition{kind="HelmRelease",type="Ready",status="False"} > 0
+          expr: gotk_resource_info{customresource_kind="HelmRelease",ready="False"} > 0
           for: 10m
           labels:
             severity: warning
@@ -18,7 +17,7 @@ spec:
             description: "HelmRelease {{ $labels.name }} in {{ $labels.namespace }} is not ready."
 
         - alert: FluxKustomizationNotReady
-          expr: gotk_reconcile_condition{kind="Kustomization",type="Ready",status="False"} > 0
+          expr: gotk_resource_info{customresource_kind="Kustomization",ready="False"} > 0
           for: 10m
           labels:
             severity: warning
@@ -27,27 +26,10 @@ spec:
             description: "Kustomization {{ $labels.name }} in {{ $labels.namespace }} is not ready."
 
         - alert: FluxSourceNotReady
-          expr: gotk_reconcile_condition{kind=~"GitRepository|HelmRepository|OCIRepository|Bucket",type="Ready",status="False"} > 0
+          expr: gotk_resource_info{customresource_kind=~"GitRepository|HelmRepository|OCIRepository|Bucket",ready="False"} > 0
           for: 10m
           labels:
             severity: warning
           annotations:
             summary: "Flux source not ready"
             description: "{{ $labels.kind }} {{ $labels.name }} in {{ $labels.namespace }} is not ready."
-
-        - alert: FluxResourceSuspended
-          expr: gotk_suspend_status > 0
-          for: 10m
-          labels:
-            severity: warning
-          annotations:
-            summary: "Flux resource suspended"
-            description: "{{ $labels.kind }} {{ $labels.name }} in {{ $labels.namespace }} is suspended."
-
-        - alert: FluxReconciliationStalled
-          expr: time() - gotk_reconcile_last_success_timestamp_seconds > 1800
-          labels:
-            severity: warning
-          annotations:
-            summary: "Flux reconciliation stalled"
-            description: "{{ $labels.kind }} {{ $labels.name }} in {{ $labels.namespace }} has not successfully reconciled for 30 minutes."
