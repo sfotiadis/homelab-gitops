@@ -6,5 +6,4 @@ resources:
   - ocirepository.yaml
   - helmrelease_flagger.yaml
   - flagger_loadtester.yaml
-  - prometheusrule.yaml
   - metrictemplate.yaml
