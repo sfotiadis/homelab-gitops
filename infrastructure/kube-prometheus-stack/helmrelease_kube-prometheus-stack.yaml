@@ -100,6 +100,8 @@ spec:
             version: Flux
             organization: crulabs
             defaultBucket: default
+          secureJsonData:
+            token: $__env{influx-token}
 
     prometheus:
       prometheusSpec:
