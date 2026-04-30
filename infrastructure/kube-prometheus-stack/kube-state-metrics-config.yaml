@@ -52,6 +52,16 @@ kube-state-metrics:
                   suspended: [ spec, suspend ]
                   revision: [ status, lastAppliedRevision ]
                   source_name: [ spec, sourceRef, name ]
+              - name: reconcile_condition
+                help: "Flux Kustomization reconcile conditions"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      name: [metadata, name]
+                labelsFromPath:
+                  namespace: [metadata, namespace]
           - groupVersionKind:
               group: helm.toolkit.fluxcd.io
               version: v2
@@ -74,6 +84,23 @@ kube-state-metrics:
                   chart_app_version: [ status, history, "0", appVersion ]
                   chart_ref_name: [ spec, chartRef, name ]
                   chart_source_name: [ spec, chart, spec, sourceRef, name ]
+              - name: reconcile_condition
+                help: "Flux HelmRelease reconcile conditions"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      name: [metadata, name]
+                labelsFromPath:
+                  exported_namespace: [ metadata, namespace ]
+                  ready: [ status, conditions, "[type=Ready]", status ]
+                  suspended: [ spec, suspend ]
+                  revision: [ status, history, "0", chartVersion ]
+                  chart_name: [ status, history, "0", chartName ]
+                  chart_app_version: [ status, history, "0", appVersion ]
+                  chart_ref_name: [ spec, chartRef, name ]
+                  chart_source_name: [ spec, chart, spec, sourceRef, name ]
           - groupVersionKind:
               group: source.toolkit.fluxcd.io
               version: v1
@@ -87,6 +114,20 @@ kube-state-metrics:
                   info:
                     labelsFromPath:
                       name: [ metadata, name ]
+                labelsFromPath:
+                  exported_namespace: [ metadata, namespace ]
+                  ready: [ status, conditions, "[type=Ready]", status ]
+                  suspended: [ spec, suspend ]
+                  revision: [ status, artifact, revision ]
+                  url: [ spec, url ]
+              - name: reconcile_condition
+                help: "Flux GitRepository reconcile conditions"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      name: [metadata, name]
                 labelsFromPath:
                   exported_namespace: [ metadata, namespace ]
                   ready: [ status, conditions, "[type=Ready]", status ]
@@ -132,6 +173,20 @@ kube-state-metrics:
                   suspended: [ spec, suspend ]
                   revision: [ status, artifact, revision ]
                   url: [ spec, url ]
+              - name: reconcile_condition
+                help: "Flux HelmRepository reconcile conditions"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      name: [metadata, name]
+                labelsFromPath:
+                  exported_namespace: [ metadata, namespace ]
+                  ready: [ status, conditions, "[type=Ready]", status ]
+                  suspended: [ spec, suspend ]
+                  revision: [ status, artifact, revision ]
+                  url: [ spec, url ]
           - groupVersionKind:
               group: source.toolkit.fluxcd.io
               version: v1
@@ -152,6 +207,21 @@ kube-state-metrics:
                   revision: [ status, artifact, revision ]
                   chart_name: [ spec, chart ]
                   chart_version: [ spec, version ]
+              - name: reconcile_condition
+                help: "Flux HelmChart reconcile conditions"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      name: [metadata, name]
+                labelsFromPath:
+                  exported_namespace: [ metadata, namespace ]
+                  ready: [ status, conditions, "[type=Ready]", status ]
+                  suspended: [ spec, suspend ]
+                  revision: [ status, artifact, revision ]
+                  chart_name: [ spec, chart ]
+                  chart_version: [ spec, version ]
           - groupVersionKind:
               group: source.toolkit.fluxcd.io
               version: v1
@@ -165,6 +235,20 @@ kube-state-metrics:
                   info:
                     labelsFromPath:
                       name: [ metadata, name ]
+                labelsFromPath:
+                  exported_namespace: [ metadata, namespace ]
+                  ready: [ status, conditions, "[type=Ready]", status ]
+                  suspended: [ spec, suspend ]
+                  revision: [ status, artifact, revision ]
+                  url: [ spec, url ]
+              - name: reconcile_condition
+                help: "Flux OCIRepository reconcile conditions"
+                each:
+                  type: Gauge
+                  gauge:
+                    path: [status, conditions]
+                    labelsFromPath:
+                      name: [metadata, name]
                 labelsFromPath:
                   exported_namespace: [ metadata, namespace ]
                   ready: [ status, conditions, "[type=Ready]", status ]
