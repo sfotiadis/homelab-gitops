@@ -23,10 +23,10 @@ configMapGenerator:
         app.kubernetes.io/part-of: flux
         app.kubernetes.io/component: monitoring
         kustomize.toolkit.fluxcd.io/substitute: disabled
-  - name: shelly-dashboards
+  - name: cluster-power-monitoring-dashboard
     namespace: monitoring
     files:
-      - shelly-plug.json=dashboards/shelly-plug.json
+      - cluster-power-monitoring.json=dashboards/cluster-power-monitoring.json
     options:
       labels:
         grafana_dashboard: "1"

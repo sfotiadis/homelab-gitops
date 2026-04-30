@@ -595,7 +595,11 @@
     }
   },
   "preload": false,
-  "tags": [],
+  "tags": [
+    "shelly",
+    "energy",
+    "power"
+  ],
   "timeSettings": {
     "autoRefresh": "",
     "autoRefreshIntervals": [
@@ -611,7 +615,7 @@
       "1d"
     ],
     "fiscalYearStartMonth": 0,
-    "from": "now-3h",
+    "from": "now-6h",
     "hideTimepicker": false,
     "timezone": "browser",
     "to": "now"
