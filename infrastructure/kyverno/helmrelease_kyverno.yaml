@@ -15,8 +15,6 @@ spec:
         namespace: flux-system
   values:
     admissionController:
-      labels:
-        app.kubernetes.io/name: admission-controller
       replicas: 1
       resources:
         limits:
@@ -26,8 +24,6 @@ spec:
           memory: 256Mi
 
     backgroundController:
-      labels:
-        app.kubernetes.io/name: background-controller
       enabled: true
       resources:
         limits:
@@ -37,8 +33,6 @@ spec:
           memory: 256Mi
 
     cleanupController:
-      labels:
-        app.kubernetes.io/name: cleanup-controller
       enabled: true
       resources:
         limits:
@@ -48,8 +42,6 @@ spec:
           memory: 128Mi
 
     reportsController:
-      labels:
-        app.kubernetes.io/name: reports-controller
       enabled: true
       resources:
         limits:
