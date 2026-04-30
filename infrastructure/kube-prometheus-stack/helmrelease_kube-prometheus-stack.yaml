@@ -92,6 +92,14 @@ spec:
             maxLines: 1000
           isDefault: false
           editable: true
+        - name: InfluxDB
+          type: influxdb
+          access: proxy
+          url: http://influxdb-influxdb2.influxdb.svc.cluster.local
+          jsonData:
+            version: Flux
+            organization: crulabs
+            defaultBucket: default
 
     prometheus:
       prometheusSpec:
