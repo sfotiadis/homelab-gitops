@@ -1,37 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: telegraf
-  namespace: shelly-monitoring
+  name: shelly-telegraf
+  namespace: monitoring
   labels:
-    app.kubernetes.io/name: telegraf
+    app.kubernetes.io/name: shelly-telegraf
     app.kubernetes.io/instance: telegraf
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: telegraf
+      app.kubernetes.io/name: shelly-telegraf
   template:
     metadata:
       labels:
-        app: telegraf
+        app.kubernetes.io/name: shelly-telegraf
+        app.kubernetes.io/instance: telegraf
     spec:
       containers:
       - name: telegraf
         image: telegraf:1.38-alpine
-        ports:
-        - containerPort: 9273
-          name: metrics
         env:
         - name: SHELLY_URL
           valueFrom:
-            configMapKeyRef:
-              name: shelly-config
-              key: shelly-url
+            secretKeyRef:
+              name: shelly-telegraf
+              key: url
         - name: INFLUXDB_TOKEN
           valueFrom:
             secretKeyRef:
-              name: influxdb-token
+              name: shelly-telegraf
               key: token
         volumeMounts:
         - name: config
@@ -46,4 +44,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: telegraf-config
+          name: shelly-telegraf

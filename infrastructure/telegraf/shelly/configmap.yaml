@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: telegraf-config
-  namespace: shelly-monitoring
+  name: shelly-telegraf
+  namespace: monitoring
 data:
   telegraf.conf: |
     [agent]
@@ -22,13 +22,6 @@ data:
       token = "${INFLUXDB_TOKEN}"
       organization = "crulabs"
       bucket = "shelly"
-
-    [[outputs.prometheus_client]]
-      listen = ":9273"
-      metric_version = 2
-      path = "/metrics"
-      expiration_interval = "60s"
-      collectors_exclude = ["gocollector", "process"]
 
     [[inputs.http]]
       urls = ["${SHELLY_URL}"]

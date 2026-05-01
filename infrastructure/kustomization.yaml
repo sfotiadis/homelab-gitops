@@ -17,3 +17,4 @@ resources:
   - loki
   - minio
   - nfs-csi-driver
+  - telegraf

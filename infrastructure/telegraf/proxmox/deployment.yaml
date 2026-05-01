@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxmox-telegraf
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: proxmox-telegraf
+    app.kubernetes.io/instance: telegraf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: proxmox-telegraf
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: proxmox-telegraf
+        app.kubernetes.io/instance: telegraf
+    spec:
+      containers:
+      - name: telegraf
+        image: telegraf:1.38-alpine
+        env:
+        - name: PROXMOX_URL
+          valueFrom:
+            secretKeyRef:
+              name: proxmox-telegraf
+              key: url
+        - name: PROXMOX_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: proxmox-telegraf
+              key: api-token
+        - name: INFLUXDB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: proxmox-telegraf
+              key: influx-token
+        volumeMounts:
+        - name: config
+          mountPath: /etc/telegraf
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+      volumes:
+      - name: config
+        configMap:
+          name: proxmox-telegraf
