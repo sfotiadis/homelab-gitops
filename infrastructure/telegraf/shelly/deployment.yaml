@@ -30,7 +30,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: shelly-telegraf
-              key: token
+              key: influx-token
         volumeMounts:
         - name: config
           mountPath: /etc/telegraf
