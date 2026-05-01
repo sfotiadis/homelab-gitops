@@ -24,6 +24,6 @@ data:
       bucket = "pve"
 
     [[inputs.proxmox]]
-      urls = ["${PROXMOX_URL}"]
+      base_url = "${PROXMOX_URL}"
       api_token = "${PROXMOX_API_TOKEN}"
       insecure_skip_verify = true
