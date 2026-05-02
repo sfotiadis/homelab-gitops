@@ -6,6 +6,7 @@ metadata:
 data:
   telegraf.conf: |
     [agent]
+      debug=true
       interval = "30s"
       round_interval = true
       metric_batch_size = 1000
@@ -26,4 +27,5 @@ data:
     [[inputs.proxmox]]
       base_url = "${PROXMOX_URL}"
       api_token = "${PROXMOX_API_TOKEN}"
+      node_name = "pve"
       insecure_skip_verify = true
