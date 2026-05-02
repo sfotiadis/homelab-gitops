@@ -12,3 +12,14 @@ spec:
     operation: copy
   ref:
     tag: "1.43.0"
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: flagger-loadtester
+  namespace: flagger-system
+spec:
+  interval: 6h
+  url: oci://ghcr.io/fluxcd/flagger-manifests
+  ref:
+    tag: "1.42.0"
