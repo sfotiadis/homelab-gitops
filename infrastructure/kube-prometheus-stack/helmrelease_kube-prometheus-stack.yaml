@@ -62,7 +62,7 @@ spec:
           auth_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/auth
           token_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/token
           api_url: https://keycloak.crulabs.intern/auth/realms/crulabs/protocol/openid-connect/userinfo
-          role_attribute_path: contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'editor') && 'Editor' || 'Viewer'
+          role_attribute_path: contains(groups[*], 'Admin') && 'Admin' || contains(groups[*], 'Editor') && 'Editor' || 'Viewer'
           skip_org_role_sync: false
           tls_skip_verify_insecure: false
           tls_client_ca: /etc/ssl/certs/crulabs-ca.crt
