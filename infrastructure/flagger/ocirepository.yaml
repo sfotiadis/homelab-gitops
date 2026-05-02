@@ -22,4 +22,4 @@ spec:
   interval: 6h
   url: oci://ghcr.io/fluxcd/flagger-manifests
   ref:
-    tag: "1.42.0"
+    tag: "1.43.0"
