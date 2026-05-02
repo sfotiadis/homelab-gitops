@@ -3,7 +3,15 @@ kind: Kustomization
 namespace: homer
 resources:
   - namespace.yaml
-  - configmap.yaml
   - deployment.yaml
   - service.yaml
   - httproute.yaml
+
+configMapGenerator:
+  - name: homer-html
+    namespace: homer
+    files:
+      - index.html=html/index.html
+
+generatorOptions:
+  disableNameSuffixHash: true
