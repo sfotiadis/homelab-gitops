@@ -25,7 +25,12 @@ spec:
           envFrom:
             - secretRef:
                 name: fritzbox-telegraf
-
+          env:
+          - name: INFLUXDB_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: fritzbox-telegraf
+                key: influx-token
           volumeMounts:
             - name: config
               mountPath: /etc/telegraf/telegraf.conf
