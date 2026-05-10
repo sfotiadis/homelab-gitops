@@ -16,30 +16,30 @@ spec:
       labels:
         app.kubernetes.io/name: fritzbox-telegraf
         app.kubernetes.io/instance: telegraf
-      spec:  
-        containers:
-          - name: telegraf
-            image: telegraf:1.38-alpine
-            imagePullPolicy: IfNotPresent
+    spec:  
+      containers:
+        - name: telegraf
+          image: telegraf:1.38-alpine
+          imagePullPolicy: IfNotPresent
 
-            envFrom:
-              - secretRef:
-                  name: fritzbox-telegraf
+          envFrom:
+            - secretRef:
+                name: fritzbox-telegraf
 
-            volumeMounts:
-              - name: config
-                mountPath: /etc/telegraf/telegraf.conf
-                subPath: telegraf.conf
+          volumeMounts:
+            - name: config
+              mountPath: /etc/telegraf/telegraf.conf
+              subPath: telegraf.conf
 
-            resources:
-              requests:
-                cpu:    "50m"
-                memory: "64Mi"
-              limits:
-                cpu:    "200m"
-                memory: "128Mi"
+          resources:
+            requests:
+              cpu:    "50m"
+              memory: "64Mi"
+            limits:
+              cpu:    "200m"
+              memory: "128Mi"
 
-        volumes:
-          - name: config
-            configMap:
-              name: fritzbox-telegraf
+      volumes:
+        - name: config
+          configMap:
+            name: fritzbox-telegraf
