@@ -1,0 +1,20 @@
+# tenants/batch/rbac.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: batch
+  namespace: batch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: batch-reconciler
+  namespace: batch
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: batch
+    namespace: batch

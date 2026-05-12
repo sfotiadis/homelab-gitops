@@ -1,4 +1,7 @@
+# tenants/batch/namespace.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
   name: batch
+  labels:
+    team: "platform"
