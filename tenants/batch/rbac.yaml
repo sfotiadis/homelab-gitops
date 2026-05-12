@@ -8,7 +8,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: batch-reconciler
+  name: batch
   namespace: batch
 roleRef:
   apiGroup: rbac.authorization.k8s.io
