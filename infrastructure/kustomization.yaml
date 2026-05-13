@@ -16,6 +16,7 @@ resources:
   - kyverno
   - local-path-provisioner
   - loki
+  - metallb
   - minio
   - nfs-csi-driver
   - telegraf

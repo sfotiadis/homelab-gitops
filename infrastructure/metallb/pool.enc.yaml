@@ -1,0 +1,35 @@
+# metallb-addresspool.yaml
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+    name: default
+spec:
+    addresses:
+        - ENC[AES256_GCM,data:6rlJpdqMSlemBfB7mqQaklTJumsq8/7jBFsisq0=,iv:S2L83BAeY3FySrYZPx0tgQ6Ft9Mk4evlcqbWcanAO74=,tag:ZgjvOm9pY/snNfN8Er7VQg==,type:str]
+sops:
+    lastmodified: "2026-05-13T02:17:15Z"
+    mac: ENC[AES256_GCM,data:eAiGXZ+YzYyQoZns6O8H86TRZUL8Nw7cIoGUNfgTCeyBm9ThY8sNSwT0QLYVhyRRHB9Jig2jcwnwBUjDSkzmHEJvcY5Ngeo/mAJF/jeEaJSlus6Ctyy9JVrxQMc4NuDQ5QhiDT4qc7rL96n49H7ja84n9CO2pXT6osPKNP/OWiI=,iv:5n3oapAUVhL+ERbMyiRMf57imU97DKAFyHNzAQ/HwUk=,tag:Qe24A1v3eNNZSq8DQYyOBQ==,type:str]
+    pgp:
+        - created_at: "2026-05-13T02:17:15Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA0FBPlwYR03bARAAmUvSjDvvd8jfYKqk/xjDkjPYHm0ZS+XOfO38cQliLHP2
+            qzsw0jP2TfeI2EJEJt2ol7tZPLpz5dYeWdsIZHHqU5kBxujqF07mrSPEf7RRi7e8
+            lguK1RB9+ueyROzk2xVVu1kNQxEXQlq7V8nJOczVdtAxHXBtX6hkySqk68l20/xl
+            E1mMhKPtMiAn/W91SzDQwnXMBG/WAKDqxWXp1ds8QECclrUaDVUQ2Q+35neziIkM
+            F16052mFPBinsrOA0aFElkw0dhLCcYXKRTd/gEbOP/wGybzDL1eiYcbpznBF8GLf
+            b2wgA14MqenjXWUpNPB3hH9ZVuOBKHQEtF8L8qnzVnOxHyY7nVSj7M7jQ5fjnSEz
+            gd9k+85ErwDBqgVhCUSI1xEQcEr+Y/9j7epd+H2u1mgQiAzYLcXVXKKRlBPrJxjf
+            78AI8+tPhU7Gj0mOZDmrG1hsFACfIUhUyTXHpmlvfiASAQVS/SARFWzTCnGQfrq3
+            Wr4V1IhutPBy5ScipnzrrAxOYOL5T4l9rLNsR/I2QnBeD5KF+tdJqFVrYJFepCra
+            eGsyspppigr8Z0g/2akuUu7jKBb29Id5QA1+H3JiSoBrrHmLhZGBOEfzmBOYmSO5
+            WRrx+E3sjJo3Pv4cudefia6Ljc9IdL07Ga7vMyzruBMHLuVSYt9Cn+f8+/uIGgzU
+            aAEJAhAgtMJfJ93LJuWRhKDkFfSHUfRYHed8b2nHXlE9iy++oN2PN2TgfPNY/T3B
+            B2tUQCLuK0ROBP6AnUTtCdrCBLfqBzA7LvMEQszlw3MnfTyjC0RXflsbgpfzn3AU
+            EziWct+FKQI4
+            =dioN
+            -----END PGP MESSAGE-----
+          fp: 2F45BC42327907C5B833A93041413E5C18474DDB
+    encrypted_regex: ^(data|stringData|addresses)$
+    version: 3.11.0
