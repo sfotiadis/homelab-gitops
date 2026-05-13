@@ -4,4 +4,4 @@ kind: Namespace
 metadata:
   name: batch
   labels:
-    team: "platform"
+    toolkit.fluxcd.io/tenant: "platform"
