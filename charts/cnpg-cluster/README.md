@@ -1,6 +1,6 @@
 # cloudnative-pg
 
-![Version: 0.1.15](https://img.shields.io/badge/Version-0.1.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 This cloudnative-pg Helm Chart is a simple wrapper chart to deploy a [CloudNativePG](https://cloudnative-pg.io) cluster in Kubernetes.
 Optimized for running on my raspberry pi cluster  with [FluxCD](https://fluxcd.io).
@@ -127,3 +127,11 @@ stringData:
 ## References
 
 - [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/) 
+
+## Changelog
+
+### 0.2.0
+- **fix**: Set `backupOwnerReference: cluster` in ScheduledBackup to ensure old backup objects are automatically cleaned up according to the retention policy
+
+### 0.1.0
+- Initial release

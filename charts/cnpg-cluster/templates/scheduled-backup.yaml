@@ -10,6 +10,7 @@ spec:
   # at every reconciliation of the operator
   immediate: false
   schedule: {{ .Values.backup.schedule }}
+  backupOwnerReference: cluster
   cluster:
     name: {{ .Release.Name }}
 {{ end }}
