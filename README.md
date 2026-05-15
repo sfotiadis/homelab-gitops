@@ -1,132 +1,148 @@
 # Homelab GitOps Platform
 
-> Production Kubernetes workload management for my homelab cluster, powered by GitOps principles with centralized authentication, observability, and automated operations.
+> Production-grade workload and platform management for a homelab Kubernetes environment, built on GitOps principles with declarative infrastructure, centralized authentication, observability, and automated operations.
 
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
 [![Flux](https://img.shields.io/badge/Flux_CD-5468FF?style=for-the-badge&logo=flux&logoColor=white)](https://fluxcd.io/)
 [![Gateway API](https://img.shields.io/badge/Gateway_API-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://gateway-api.sigs.k8s.io/)
 
-> **Infrastructure Setup**: The underlying infrastructure (Proxmox VE, VMs, networking) is provisioned using Terraform, Ansible, and Packer in [homelab-automation](https://github.com/sfotiadis/homelab-automation).
+> **Infrastructure Layer**: Underlying compute, networking, and VM provisioning is managed separately via Terraform, Ansible, and Packer in [homelab-automation](https://github.com/sfotiadis/homelab-automation).
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Core Components](#core-components)
+- [Core Plaatform Components](#core-components)
 - [Key Features](#key-features)
 - [Repository Structure](#repository-structure)
+- [Architecture Summary](#architecture-summary)
 - [Related Projects](#related-projects)
 - [About](#about)
 - [Resources](#resources)
 
 ## Overview
 
-This repository manages application workloads for my productive homelab Kubernetes cluster using GitOps with Flux CD. It implements modern cloud-native patterns including:
+This repository defines the entire application and platform layer of a GitOps-driven homelab built on Kubernetes via Flux CD.
 
-- **Gateway API** for next-generation ingress management
-- **Centralized Identity Management** with Keycloak OAuth2/OIDC SSO
-- **GitOps Workflows** with Flux CD for declarative operations
-- **Secrets Management** using SOPS encryption
-- **Full Observability Stack** with Prometheus, Grafana, and Loki
-- **Automated DNS** with external-dns and RFC2136
-- **Multi-tenant Architecture** with namespace isolation
+It implements a cloud-native platform stack including:
 
-### Core Components
+- GitOps-based reconciliation of cluster state
+- Modern CNI networking with Cilium
+- Gateway API-based ingress and traffic management
+- Progressive delivery with Flagger
+- Centralized identity with Keycloak (OIDC/OAuth2)
+- Full observability stack (metrics, logs, time-series, alerts)
+- Multi-tenant workload isolation
+- Git-encrypted secrets via SOPS
+
+
+## Core Platform Components
 
 | Component | Purpose |
-|-----------|---------|
-| **Flux CD** | GitOps continuous delivery |
-| **Gateway API** | Modern ingress and traffic management |
-| **Traefik** | Gateway controller implementation |
-| **Keycloak** | Identity and access management |
-| **Kyverno** | Policy engine for Kubernetes |
-| **Policy Reporter** | Policy compliance dashboard |
-| **cert-manager** | Automated certificate management |
-| **external-dns** | Automatic DNS record management |
-| **CloudNativePG** | PostgreSQL operator for databases |
-| **Prometheus Stack** | Metrics collection and alerting |
-| **Grafana** | Observability and dashboards |
-| **Loki** | Log aggregation |
-| **MinIO** | S3-compatible object storage |
+|----------|--------|
+| Flux CD | GitOps continuous delivery |
+| Kubernetes | Container orchestration platform |
+| Cilium | eBPF-based networking and security |
+| Gateway API | Modern ingress abstraction |
+| Traefik | Gateway / ingress controller |
+| Keycloak | Identity and access management |
+| Kyverno | Policy enforcement |
+| cert-manager | TLS certificate automation |
+| external-dns | DNS automation |
+| CloudNativePG | PostgreSQL operator |
+| Prometheus | Metrics and alerting |
+| Grafana | Dashboards and visualization |
+| Loki | Log aggregation |
+| MinIO | S3-compatible object storage |
+| MetalLB | LoadBalancer for bare metal |
+| Flagger | Progressive delivery / canary deployments |
+| InfluxDB | Time-series database |
+| Telegraf | Metrics collection |
+
 
 ## Key Features
 
-### GitOps-Driven Operations
-- **Declarative Infrastructure**: All cluster state managed via Git
-- **Automated Reconciliation**: Flux continuously syncs cluster state
-- **Secrets Encryption**: SOPS with age encryption for secure secrets
-- **Multi-Environment Support**: Infrastructure and tenant separation
+### GitOps-Driven Platform
+- Fully declarative cluster state via Git
+- Continuous reconciliation using FluxCD
+- Encrypted secrets using SOPS + gpg
+- Separation of infrastructure and tenant workloads
 
-### Modern Networking
-- **Gateway API**: Next-generation Kubernetes ingress (replacing Ingress resources)
-- **Automated DNS**: external-dns creates DNS records for HTTPRoutes
-- **TLS Everywhere**: Custom CA with wildcard certificates (*.crulabs.intern)
-- **Service Mesh Ready**: Gateway API foundation for future mesh integration
+### Modern Networking Stack
+- Cilium as CNI (eBPF-based networking)
+- Gateway API for ingress abstraction
+- Traefik as gateway controller
+- MetalLB for LoadBalancer support
+- Automated DNS via external-dns
+- TLS everywhere via cert-manager
 
-### Centralized Authentication
-- **Single Sign-On**: Keycloak OAuth2/OIDC for all services
-- **Group-Based Access Control**: Fine-grained permissions via Keycloak groups
-- **Grafana Integration**: Role mapping (admin/editor) via OAuth
-- **MinIO Integration**: Policy-based access (consoleAdmin/readwrite)
+### Identity & Access Management
+- Central SSO via Keycloak
+- OAuth2/OIDC integration for services
+- Group-based access control
 
 ### Policy & Governance
-- **Policy Enforcement**: Kyverno for validation and mutation policies
-- **Policy Metrics**: Policy Reporter for Prometheus/Grafana integration
-- **Security Standards**: Automated compliance checks
-- **Resource Management**: Default configurations and best practices
-- **Audit & Reporting**: Policy violation tracking with dashboards
+- Kyverno policies for validation and mutation
+- Enforced cluster standards and security rules
+- Policy reporting and auditability
 
-### Observability & Monitoring
-- **Metrics**: Prometheus with ServiceMonitors
-- **Visualization**: Grafana dashboards with SSO
-- **Logs**: Loki log aggregation with Promtail
-- **Alerting**: Prometheus Alertmanager integration
+### Observability Stack
+- Prometheus for metrics and alerting
+- Grafana for dashboards
+- Loki for logs
+- InfluxDB for time-series data
+- Telegraf for telemetry collection
+- Karma for alert UI
 
-### Data Management
-- **Database as a Service**: CloudNativePG for PostgreSQL clusters
-- **Persistent Storage**: NFS CSI driver and local-path provisioner
-- **Object Storage**: MinIO with SSO and backup capabilities
-- **Automated Backups**: Integrated backup solutions
+### Data & Storage Layer
+- PostgreSQL via CloudNativePG
+- MinIO for object storage (S3-compatible)
+- NFS CSI + local-path provisioner for persistence
+
+### Progressive Delivery
+- Flagger for canary deployments
+- Metrics-driven rollout strategies via Prometheus
+
 
 ## Repository Structure
 
-```
-.
-├── clusters/
-│   └── crulabs-k8s/             # Cluster-specific configurations
-│       ├── infrastructure.yaml  # Infrastructure components
-│       └── tenants.yaml         # Tenant workloads
-│
-├── infrastructure/              # Platform infrastructure
-│   ├── cert-manager/            # Certificate management
-│   ├── cloudnative-pg/          # PostgreSQL operator
-│   ├── cluster-issuer/          # Custom CA configuration
-│   ├── external-dns/            # DNS automation
-│   ├── gateway-api/             # Gateway and HTTPRoutes
-│   ├── keycloak/                # Identity provider
-│   ├── kube-prometheus-stack/   # Monitoring stack
-│   ├── kyverno/                 # Policy engine
-│   │   └── policies/            # Kyverno policies
-│   ├── local-path-provisioner/  # Local storage
-│   ├── loki/                    # Log aggregation
-│   ├── minio/                   # Object storage
-│   └── nfs-csi-driver/          # NFS storage
-│
-├── tenants/                     # Application workloads
-│   ├── ca-download/             # CA certificate distribution
-│   └── shelly-monitoring/       # IoT device monitoring
-│
-└── charts/                      # Custom Helm charts
-    └── cnpg-cluster/            # CloudNativePG cluster chart
-```
+- `clusters/` – Flux bootstrap and cluster configuration
+- `infrastructure/` – Core platform components (networking, IAM, observability, storage, policies)
+- `tenants/` – Application workloads and namespaces
+
+
+## Architecture Summary
+
+1. **Cluster Bootstrap Layer**
+   - Flux installation and Git sources
+
+2. **Infrastructure Layer**
+   - Networking (Cilium, MetalLB)
+   - Ingress (Gateway API, Traefik)
+   - Identity (Keycloak)
+   - Observability (Prometheus, Grafana, Loki, InfluxDB)
+   - Storage (MinIO, NFS, CNPG)
+   - Policy (Kyverno)
+   - Delivery (Flagger)
+
+3. **Tenant Layer**
+   - Application deployments
+   - Namespace isolation
+   - GitOps-managed workloads
+
 
 ## Related Projects
 
-- **[homelab-automation](https://github.com/sfotiadis/homelab-automation)** - Infrastructure provisioning with Terraform, Ansible, and Packer on Proxmox VE (VMs, Kubernetes cluster, networking)
-- **homelab-gitops** (this repo) - Kubernetes workload and application management with Flux CD
+- **[homelab-automation](https://github.com/sfotiadis/homelab-automation)**  
+  Infrastructure provisioning (Proxmox VE, VMs, Kubernetes bootstrap)
+
+- **homelab-gitops (this repo)**  
+  Kubernetes workload and platform management via Flux CD
+
 
 ## About
 
 This is my actively running production homelab environment. The setup demonstrates enterprise-grade platform engineering practices applied to a homelab context. Configurations are specific to my environment, but the patterns and architecture can serve as reference for similar setups.
+
 
 ## Resources
 
