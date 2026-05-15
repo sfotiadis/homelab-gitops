@@ -8,10 +8,10 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: ./charts/cnpg-cluster
+      chart: ./cnpg-cluster
       sourceRef:
         kind: GitRepository
-        name: homelab-gitops
+        name: crulabs-helm
         namespace: flux-system
   values:
     imageName: ghcr.io/cloudnative-pg/postgresql:17.5
