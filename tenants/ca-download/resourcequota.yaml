@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ca-download
+  namespace: ca-download
+  labels:
+    toolkit.fluxcd.io/tenant: "platform"
+spec:
+  hard:
+    requests.cpu: "200m"
+    requests.memory: "256Mi"
+    limits.cpu: "500m"
+    limits.memory: "512Mi"
+    pods: "4"
+    requests.storage: "1Gi"

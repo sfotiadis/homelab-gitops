@@ -17,14 +17,28 @@ spec:
         app: ca-download
     spec:
       containers:
-      - name: nginx
-        image: nginx:alpine
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: ca-cert
-          mountPath: /usr/share/nginx/html
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html
+            - name: ca-cert
+              mountPath: /etc/ssl/certs
+              readOnly: true
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+
       volumes:
-      - name: ca-cert
-        configMap:
-          name: ca-cert
+        - name: html
+          configMap:
+            name: html
+        - name: ca-cert
+          secret:
+            secretName: ca-cert

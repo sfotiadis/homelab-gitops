@@ -1,0 +1,119 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: html
+  namespace: ca-download
+data:
+  index.html: |-
+    <!DOCTYPE html>
+    <html lang="de">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CruLabs CA Zertifikat</title>
+
+        <style>
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+              Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+          }
+
+          .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          }
+
+          h1 {
+            color: #333;
+          }
+
+          .download-btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 20px 0;
+          }
+
+          .download-btn:hover {
+            background: #0056b3;
+          }
+
+          .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #007bff;
+            margin: 20px 0;
+          }
+
+          code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+          }
+        </style>
+      </head>
+
+      <body>
+        <div class="container">
+          <h1>CruLabs Root CA Zertifikat</h1>
+
+          <p>
+            Um HTTPS-Verbindungen zu internen CruLabs-Diensten zu vertrauen,
+            installiere das Root CA Zertifikat auf deinem Gerät.
+          </p>
+
+          <a
+            href="/etc/ssl/certs/crulabs-ca.crt"
+            class="download-btn"
+            download
+          >
+            📥 CA-Zertifikat herunterladen
+          </a>
+
+          <div class="instructions">
+            <h3>Installation:</h3>
+
+            <h4>Windows:</h4>
+            <ol>
+              <li>Doppelklick auf <code>crulabs-ca.crt</code></li>
+              <li>"Zertifikat installieren" → "Lokaler Computer"</li>
+              <li>
+                "Alle Zertifikate in folgendem Speicher" →
+                "Vertrauenswürdige Stammzertifizierungsstellen"
+              </li>
+            </ol>
+
+            <h4>macOS:</h4>
+            <ol>
+              <li>Doppelklick auf <code>crulabs-ca.crt</code></li>
+              <li>Schlüsselbundverwaltung → "Immer vertrauen"</li>
+            </ol>
+
+            <h4>Linux (Firefox):</h4>
+            <ol>
+              <li>Firefox Einstellungen → Datenschutz & Sicherheit → Zertifikate</li>
+              <li>
+                "Zertifikate anzeigen" → "Zertifizierungsstellen" → "Importieren"
+              </li>
+            </ol>
+
+            <h4>Android/iOS:</h4>
+            <ol>
+              <li>Datei herunterladen und öffnen</li>
+              <li>Den Anweisungen folgen (CA installieren)</li>
+            </ol>
+          </div>
+
+          <p><strong>Hinweis:</strong> Das Zertifikat ist gültig bis 2035.</p>
+        </div>
+      </body>
+    </html>
