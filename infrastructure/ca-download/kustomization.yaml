@@ -5,6 +5,5 @@ resources:
   - deployment.yaml
   - httproute.yaml
   - namespace.yaml
-  - resourcequota.yaml
   - secret.enc.yaml
   - service.yaml
