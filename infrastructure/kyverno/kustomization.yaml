@@ -9,3 +9,4 @@ resources:
   # Policies
   - policies/validating_image-version.yaml
   - policies/validating_require-labels.yaml
+  - policies/validating_require-requests-limits.yaml
