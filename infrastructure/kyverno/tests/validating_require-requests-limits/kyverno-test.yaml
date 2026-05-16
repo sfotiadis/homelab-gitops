@@ -3,7 +3,7 @@ kind: Test
 metadata:
   name: image-version-validation
 policies:
-  - ../../policies/validating_require-requests-limits.yaml
+  - ../../policies/validating_require-tenant-requests-limits.yaml
 resources:
   - deployment.yaml
 values:
@@ -17,19 +17,19 @@ values:
 results:
   - isValidatingPolicy: true
     kind: Deployment
-    policy: require-requests-limits
+    policy: require-tenant-requests-limits
     resources:
       - deployment-with-resources-limits
     result: pass
   - isValidatingPolicy: true
     kind: Deployment
-    policy: require-requests-limits
+    policy: require-tenant-requests-limits
     resources:
       - deployment-without-resources-limits
     result: fail
   - isValidatingPolicy: true
     kind: Deployment
-    policy: require-requests-limits
+    policy: require-tenant-requests-limits
     resources:
       - system-deployment-without-resources-limits
     result: skip
