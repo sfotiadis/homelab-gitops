@@ -6,12 +6,10 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  chart:
-    spec:
-      chartRef:
-        kind: OCIRepository
-        name: tenant
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: tenant
+    namespace: flux-system
   values:
     namespace: batch
     team: platform
