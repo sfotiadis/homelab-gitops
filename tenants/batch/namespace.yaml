@@ -1,7 +1,0 @@
-# tenants/batch/namespace.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: batch
-  labels:
-    toolkit.fluxcd.io/tenant: "platform"
