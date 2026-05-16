@@ -8,10 +8,9 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: ./tenant
-      sourceRef:
-        kind: GitRepository
-        name: crulabs-helm
+      chartRef:
+        kind: OCIRepository
+        name: tenant
         namespace: flux-system
   values:
     namespace: batch
