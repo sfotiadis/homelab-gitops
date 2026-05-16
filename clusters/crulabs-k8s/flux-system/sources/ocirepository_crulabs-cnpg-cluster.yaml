@@ -1,0 +1,14 @@
+# infrastructure/ocirepositories/cnpg-cluster.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: cnpg-cluster
+  namespace: flux-system
+spec:
+  interval: 24h
+  url: oci://ghcr.io/crulabs/helm/cnpg-cluster
+  layerSelector:
+    mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
+    operation: copy
+  ref:
+    tag: "0.2.0"
