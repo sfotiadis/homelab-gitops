@@ -11,6 +11,11 @@ spec:
         apiVersions: ["v1"]
         resources: ["pods"]
         operations: ["CREATE", "UPDATE"]
+    namespaceSelector:
+      matchExpressions:
+        - key: "kubernetes.io/metadata.name"
+          operator: NotIn
+          values: ["kube-system"]
   validations:
     - message: "Privileged containers are not allowed"
       expression: >-

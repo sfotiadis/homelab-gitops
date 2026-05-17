@@ -11,7 +11,7 @@ metadata:
       Ensures that container images specify a version and do not use the 'latest' tag.
 spec:
   validationActions:
-    - Audit
+    - Deny
   matchConstraints:
     resourceRules:
       - apiGroups: ["apps"]
