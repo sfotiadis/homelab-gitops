@@ -23,8 +23,14 @@ results:
     kind: Pod
     policy: deny-privileged-and-root
     resources:
-      - test-valid
-    result: pass
+      - test-privileged-kubesystem
+    result: skip
+  - isValidatingPolicy: true
+    kind: Pod
+    policy: deny-privileged-and-root
+    resources:
+      - test-root-kubesystem
+    result: fail
   - isValidatingPolicy: true
     kind: Pod
     policy: deny-privileged-and-root
