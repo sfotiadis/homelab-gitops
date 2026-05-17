@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-privileged
+  namespace: batch
+spec:
+  containers:
+    - name: test
+      image: alpine:3.19
+      securityContext:
+        privileged: true
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "200m"
+          memory: "256Mi"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-root
+  namespace: batch
+spec:
+  containers:
+    - name: test
+      image: alpine:3.19
+      securityContext:
+        runAsUser: 0
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "200m"
+          memory: "256Mi"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-valid
+  namespace: batch
+spec:
+  containers:
+    - name: test
+      image: alpine:3.19
+      securityContext:
+        privileged: false
+        runAsNonRoot: true
+        runAsUser: 1000
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "200m"
+          memory: "256Mi"

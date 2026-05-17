@@ -1,0 +1,33 @@
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: deny-privileged-and-root
+policies:
+  -  ../../policies/validating_deny-privileged-and-root.yaml
+resources:
+  - pod.yaml
+results:
+  - isValidatingPolicy: true
+    kind: Pod
+    policy: deny-privileged-and-root
+    resources:
+      - test-privileged
+    result: fail
+  - isValidatingPolicy: true
+    kind: Pod
+    policy: deny-privileged-and-root
+    resources:
+      - test-root
+    result: fail
+  - isValidatingPolicy: true
+    kind: Pod
+    policy: deny-privileged-and-root
+    resources:
+      - test-valid
+    result: pass
+  - isValidatingPolicy: true
+    kind: Pod
+    policy: deny-privileged-and-root
+    resources:
+      - test-valid
+    result: pass
