@@ -8,9 +8,7 @@ spec:
     matchExpressions:
       - key: io.cilium.k8s.namespace.labels.toolkit.fluxcd.io/tenant
         operator: Exists
-  ingressDeny:
-    - fromEndpoints:
-        - {}
-  egressDeny:
-    - toEndpoints:
-        - {}
+  ingress:
+    - {}
+  egress:
+    - {}
