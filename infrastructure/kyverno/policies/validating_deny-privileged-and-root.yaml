@@ -2,9 +2,16 @@ apiVersion: policies.kyverno.io/v1
 kind: ValidatingPolicy
 metadata:
   name: deny-privileged-and-root
+  annotations:
+    policies.kyverno.io/title: Deny Privileged and Root Containers
+    policies.kyverno.io/category: Security
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/description: >-
+      Privileged containers and containers running as root are not allowed.
+      All containers must set privileged to false and run as a non-root user.
 spec:
   validationActions: 
-    - Audit
+    - Deny
   matchConstraints:
     resourceRules:
       - apiGroups: [""]
