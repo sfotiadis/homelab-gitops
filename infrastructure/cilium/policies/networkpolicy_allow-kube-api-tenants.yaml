@@ -1,0 +1,16 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: allow-kube-api-tenants
+spec:
+  endpointSelector:
+    matchLabels:
+      io.cilium.k8s.namespace.labels.toolkit.fluxcd.io/tenant: ""
+  egress:
+  - toEntities:
+    - kube-apiserver
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
