@@ -5,8 +5,9 @@ metadata:
   name: allow-kube-api-tenants
 spec:
   endpointSelector:
-    matchLabels:
-      io.cilium.k8s.namespace.labels.toolkit.fluxcd.io/tenant: ""
+    matchExpressions:
+      - key: io.cilium.k8s.namespace.labels.toolkit.fluxcd.io/tenant
+        operator: Exists
   egress:
   - toEntities:
     - kube-apiserver

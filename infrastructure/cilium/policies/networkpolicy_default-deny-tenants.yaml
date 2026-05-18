@@ -5,7 +5,8 @@ metadata:
   name: default-deny-tenants
 spec:
   endpointSelector:
-    matchLabels:
-      io.cilium.k8s.namespace.labels.toolkit.fluxcd.io/tenant: ""
+    matchExpressions:
+      - key: io.cilium.k8s.namespace.labels.toolkit.fluxcd.io/tenant
+        operator: Exists
   ingress: []
   egress: []
