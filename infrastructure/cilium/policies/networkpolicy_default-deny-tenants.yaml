@@ -1,14 +1,26 @@
----
 apiVersion: cilium.io/v2
 kind: CiliumClusterwideNetworkPolicy
 metadata:
   name: default-deny-tenants
 spec:
+  description: "Default deny tenants except DNS"
   endpointSelector:
     matchExpressions:
       - key: io.cilium.k8s.namespace.labels.toolkit.fluxcd.io/tenant
         operator: Exists
-  ingress:
-    - {}
   egress:
-    - {}
+  - toEndpoints:
+    - matchLabels:
+        k8s:io.kubernetes.pod.namespace: kube-system
+        k8s:k8s-app: kube-dns
+    toPorts:
+    - ports:
+      - port: "53"
+        protocol: UDP
+      - port: "53"
+        protocol: TCP
+      rules:
+        dns:
+        - matchPattern: "*"
+  ingress:
+  - {}
