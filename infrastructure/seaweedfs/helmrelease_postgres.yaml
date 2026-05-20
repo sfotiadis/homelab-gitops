@@ -1,0 +1,61 @@
+# infrastructure/ocirepositories/cnpg-cluster.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: cnpg-cluster
+  namespace: seaweedfs
+spec:
+  interval: 24h
+  url: oci://ghcr.io/crulabs/helm/cnpg-cluster
+  layerSelector:
+    mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
+    operation: copy
+  ref:
+    tag: "0.3.0"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: seaweedfs-postgres
+  namespace: seaweedfs
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: cnpg-cluster
+    namespace: seaweedfs
+  values:
+    imageName: ghcr.io/cloudnative-pg/postgresql:17.5
+    instances: 2
+
+    initdb:
+      database: seaweedfs
+      owner: seaweedfs
+      secret:
+        name: seaweedfs-db-credentials
+      postInitSQL:
+        - "CREATE SCHEMA IF NOT EXISTS seaweedfs AUTHORIZATION seaweedfs;"
+        - |
+          CREATE TABLE IF NOT EXISTS seaweedfs.filemeta (
+            dirhash BIGINT NOT NULL,
+            name VARCHAR(766) NOT NULL,
+            directory TEXT NOT NULL,
+            meta BYTEA,
+            PRIMARY KEY (dirhash, name)
+          );
+
+    enableSuperuserAccess: false
+
+    storageClass: local-path
+    storage:
+      size: 10Gi
+
+    backup:
+      enabled: false
+
+    affinity:
+      enablePodAntiAffinity: true
+      topologyKey: kubernetes.io/hostname
+
+    monitoring:
+      enablePodMonitor: true
