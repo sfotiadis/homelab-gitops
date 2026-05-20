@@ -34,9 +34,8 @@ spec:
       secret:
         name: seaweedfs-db-credentials
       postInitSQL:
-        - "CREATE SCHEMA IF NOT EXISTS seaweedfs AUTHORIZATION seaweedfs;"
         - |
-          CREATE TABLE IF NOT EXISTS seaweedfs.filemeta (
+          CREATE TABLE IF NOT EXISTS filemeta (
             dirhash BIGINT NOT NULL,
             name VARCHAR(766) NOT NULL,
             directory TEXT NOT NULL,
