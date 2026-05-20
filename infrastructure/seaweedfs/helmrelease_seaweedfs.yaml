@@ -1,0 +1,109 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: seaweedfs
+  namespace: seaweedfs
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: seaweedfs
+      version: "4.27.0"
+      sourceRef:
+        kind: HelmRepository
+        name: seaweedfs
+        namespace: flux-system
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    global:
+      seaweedfs:
+        image:
+          repository: chrislusf/seaweedfs
+        imagePullPolicy: IfNotPresent
+
+    master:
+      enabled: true
+      replicas: 3
+      defaultReplication: "001"
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 512Mi
+
+    volume:
+      enabled: true
+      replicas: 3
+
+      dataDirs:
+        - name: data
+          type: persistentVolumeClaim
+          size: 500Gi
+          storageClass: nfs-csi
+
+      affinity: |
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: volume
+                  app.kubernetes.io/name: seaweedfs
+              topologyKey: kubernetes.io/hostname
+
+      resources:
+        requests:
+          cpu: 250m
+          memory: 512Mi
+        limits:
+          memory: 1Gi
+
+    filer:
+      enabled: true
+      replicas: 2
+
+      data:
+        type: persistentVolumeClaim
+        size: 50Gi
+        storageClass: nfs-csi
+
+      secretExtraEnvironmentVars:
+        WEED_MYSQL_USERNAME:
+          secretKeyRef:
+            name: seaweedfs-db-credentials
+            key: username
+
+        WEED_MYSQL_PASSWORD:
+          secretKeyRef:
+            name: seaweedfs-db-credentials
+            key: password
+
+      extraEnvironmentVars:
+        WEED_MYSQL_ENABLED: "true"
+        WEED_MYSQL_HOSTNAME: "seaweedfs-postgres-rw.seaweedfs.svc.cluster.local"
+        WEED_MYSQL_PORT: "5432"
+        WEED_MYSQL_DATABASE: "seaweedfs"
+        WEED_MYSQL_INTERPOLATEPARAMS: "true"
+        WEED_LEVELDB2_ENABLED: "false"
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 512Mi
+
+    s3:
+      enabled: true
+      replicas: 2
+      port: 8333
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 512Mi
