@@ -35,7 +35,7 @@ spec:
         name: seaweedfs-db-credentials
       postInitSQL:
         - |
-          CREATE TABLE IF NOT EXISTS filemeta (
+          CREATE TABLE IF NOT EXISTS seaweedfs.filemeta (
             dirhash BIGINT NOT NULL,
             name VARCHAR(766) NOT NULL,
             directory TEXT NOT NULL,
