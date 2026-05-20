@@ -20,7 +20,7 @@ spec:
     global:
       seaweedfs:
         image:
-          repository: chrislusf/seaweedfs
+          repository: ghcr.io/seaweedfs/seaweedfs
         imagePullPolicy: IfNotPresent
 
     master:
@@ -70,17 +70,6 @@ spec:
         size: 50Gi
         storageClass: nfs-csi
 
-      secretExtraEnvironmentVars:
-        WEED_MYSQL_USERNAME:
-          secretKeyRef:
-            name: seaweedfs-db-credentials
-            key: username
-
-        WEED_MYSQL_PASSWORD:
-          secretKeyRef:
-            name: seaweedfs-db-credentials
-            key: password
-
       extraEnvironmentVars:
         WEED_MYSQL_ENABLED: "true"
         WEED_MYSQL_HOSTNAME: "seaweedfs-postgres-rw.seaweedfs.svc.cluster.local"
@@ -88,6 +77,16 @@ spec:
         WEED_MYSQL_DATABASE: "seaweedfs"
         WEED_MYSQL_INTERPOLATEPARAMS: "true"
         WEED_LEVELDB2_ENABLED: "false"
+
+      secretExtraEnvironmentVars:
+        WEED_MYSQL_USERNAME:
+          secretKeyRef:
+            name: seaweedfs-db-credentials
+            key: username
+        WEED_MYSQL_PASSWORD:
+          secretKeyRef:
+            name: seaweedfs-db-credentials
+            key: password
 
       resources:
         requests:
