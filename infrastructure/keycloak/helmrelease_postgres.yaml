@@ -1,3 +1,17 @@
+# infrastructure/ocirepositories/cnpg-cluster.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: cnpg-cluster
+  namespace: keycloak
+spec:
+  interval: 24h
+  url: oci://ghcr.io/crulabs/helm/cnpg-cluster
+  layerSelector:
+    mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
+    operation: copy
+  ref:
+    tag: "0.4.1"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -9,7 +23,7 @@ spec:
   chartRef:
     kind: OCIRepository
     name: cnpg-cluster
-    namespace: flux-system
+    namespace: keycloak
   values:
     imageName: ghcr.io/cloudnative-pg/postgresql:17.5
     instances: 2
