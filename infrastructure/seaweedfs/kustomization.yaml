@@ -1,0 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - helmrelease_postgres.yaml
+  - secret_seaweedfs-db-credentials.enc.yaml
