@@ -1,3 +1,4 @@
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
@@ -17,4 +18,4 @@ spec:
         type: PathPrefix
     backendRefs:
     - name: rook-ceph-mgr-dashboard
-      port: 8443
+      port: 700
