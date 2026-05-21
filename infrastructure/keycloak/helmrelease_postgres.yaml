@@ -25,18 +25,11 @@ spec:
     name: cnpg-cluster
     namespace: keycloak
   values:
-    imageName: ghcr.io/cloudnative-pg/postgresql:17.5
-    instances: 2
-
     initdb:
       database: keycloak
-      owner: app
       secret:
         name: keycloak-db-credentials
 
-    enableSuperuserAccess: false
-
-    storageClass: local-path
     storage:
       size: 10Gi
 
@@ -45,7 +38,3 @@ spec:
 
     affinity:
       enablePodAntiAffinity: true
-      topologyKey: kubernetes.io/hostname
-
-    monitoring:
-      enablePodMonitor: true
