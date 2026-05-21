@@ -77,16 +77,6 @@ spec:
         WEED_MYSQL_INTERPOLATEPARAMS: "true"
         WEED_LEVELDB2_ENABLED: "false"
 
-      secretExtraEnvironmentVars:
-        WEED_MYSQL_USERNAME:
-          secretKeyRef:
-            name: seaweedfs-db-credentials
-            key: username
-        WEED_MYSQL_PASSWORD:
-          secretKeyRef:
-            name: seaweedfs-db-credentials
-            key: password
-
       resources:
         requests:
           cpu: 100m
