@@ -41,7 +41,7 @@ spec:
       size: 10Gi
 
     backup:
-      enabled: true
+      enabled: false
 
     affinity:
       enablePodAntiAffinity: true
