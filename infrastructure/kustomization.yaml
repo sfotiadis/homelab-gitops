@@ -20,5 +20,4 @@ resources:
   - metallb
   - minio
   - nfs-csi-driver
-  - seaweedfs
   - telegraf
