@@ -19,8 +19,7 @@ spec:
   values:
     global:
       seaweedfs:
-        image:
-          repository: ghcr.io/seaweedfs/seaweedfs
+        image: {}
         imagePullPolicy: IfNotPresent
 
     master:
