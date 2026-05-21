@@ -18,4 +18,4 @@ spec:
         type: PathPrefix
     backendRefs:
     - name: rook-ceph-mgr-dashboard
-      port: 700
+      port: 7000
