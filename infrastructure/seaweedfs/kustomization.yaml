@@ -4,5 +4,6 @@ resources:
   - namespace.yaml
   - helmrelease_postgres.yaml
   - secret_seaweedfs-db-credentials.enc.yaml
+  - secret_seaweedfs-db-secret.enc.yaml
   - helmrepository.yaml
   - helmrelease_seaweedfs.yaml
