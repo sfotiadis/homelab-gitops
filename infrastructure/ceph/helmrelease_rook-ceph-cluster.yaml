@@ -38,6 +38,7 @@ spec:
 
       dashboard:
         enabled: true
+        ssl: false
 
       storage:
         useAllNodes: true
@@ -76,22 +77,6 @@ spec:
         namespace: monitoring
         labels:
           grafana_dashboard: "1"
-    route:
-      dashboard:
-        parentRefs:
-        - name: crulabs-gateway
-          sectionName: websecure
-          namespace: gateway-system
-        hostnames:
-        - "ceph-dashboard.crulabs.intern"
-        rules:
-        - matches:
-          - path: 
-              value: "/"
-              type: PathPrefix
-          backendRefs:
-          - name: rook-ceph-mgr-dashboard
-            port: 8443
 
     cephBlockPools: []
     cephFileSystems: []
