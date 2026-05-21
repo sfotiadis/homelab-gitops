@@ -11,7 +11,7 @@ spec:
     mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
     operation: copy
   ref:
-    tag: "0.4.1"
+    tag: "1.0.0"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -42,7 +42,7 @@ spec:
 
     backup:
       enabled: false
-      
+
     affinity:
       enablePodAntiAffinity: true
       topologyKey: kubernetes.io/hostname
