@@ -41,13 +41,7 @@ spec:
       size: 10Gi
 
     backup:
-      enabled: false
-      destinationPath: s3://keycloak-backups/
-      endpointURL: http://minio.minio.svc.cluster.local:9000
-      secret:
-        name: backup-credentials
-      schedule: "0 0 2 * * *"  # daily at 2 AM
-      retentionPolicy: "30d"
+      enabled: true
 
     affinity:
       enablePodAntiAffinity: true
