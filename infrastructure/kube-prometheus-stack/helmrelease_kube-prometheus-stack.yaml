@@ -112,8 +112,9 @@ spec:
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
-                  storage: 50Gi
-        retention: 90d
+                  storage: 25Gi
+        retention: 30d
+        retentionSize: 24GB
         additionalScrapeConfigs:
           - job_name: 'node-exporter'
             honor_labels: true
