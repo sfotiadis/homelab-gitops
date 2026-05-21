@@ -65,6 +65,18 @@ spec:
           limits:
             memory: 2Gi
 
+    monitoring:
+      enabled: true
+      createPrometheusRules: true
+
+    grafana:
+      enabled: true
+      dashboards:
+        enabled: true
+        namespace: monitoring  # dein Grafana/Prometheus Namespace
+        labels:
+          grafana_dashboard: "1"  # muss zu deinem Grafana Sidecar Label passen
+
     cephBlockPools: []
     cephFileSystems: []
     cephObjectStores:
