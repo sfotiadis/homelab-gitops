@@ -70,14 +70,6 @@ spec:
       enabled: true
       createPrometheusRules: true
 
-    grafana:
-      enabled: true
-      dashboards:
-        enabled: true
-        namespace: monitoring
-        labels:
-          grafana_dashboard: "1"
-
     cephBlockPools: []
     cephFileSystems: []
     cephObjectStores:
