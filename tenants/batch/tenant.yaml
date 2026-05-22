@@ -28,12 +28,22 @@ spec:
       kind: GitRepository
       url: https://github.com/crulabs/batch
       branch: main
-      path: ./
+      path: ./overlays/production
 
     networkPolicy:
       endpointSelector: {}
       ingress:
+        # Allow inbound traffic from Traefik Gateway (HTTPRoute)
         - fromEndpoints:
             - matchLabels:
                 k8s:io.kubernetes.pod.namespace: gateway-system
-      egress: []
+      egress:
+        # Allow outbound traffic to Ceph RGW for S3 backups (CNPG barman)
+        - toEndpoints:
+            - matchLabels:
+                k8s:io.kubernetes.pod.namespace: rook-ceph
+                app: rook-ceph-rgw
+          toPorts:
+            - ports:
+                - port: "80"
+                  protocol: TCP

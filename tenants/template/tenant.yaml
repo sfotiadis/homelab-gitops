@@ -30,7 +30,7 @@ spec:
       kind: GitRepository
       url: https://github.com/org/repository
       branch: main
-      path: ./
+      path: ./overlays/production
       secretref:
         name: git-credentials
     
