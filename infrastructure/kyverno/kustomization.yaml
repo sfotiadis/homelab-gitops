@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - helmrelease_kyverno.yaml
-  - helmrelease_policy-reporter.yaml
+  # - helmrelease_policy-reporter.yaml
   - helmrepository_kyverno.yaml
   - helmrepository_policy-reporter.yaml
   - namespace.yaml
