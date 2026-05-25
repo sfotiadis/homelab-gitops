@@ -15,9 +15,9 @@ resources:
    - karma
   # - keycloak
   # - kube-prometheus-stack
-  # - kyverno
-  # - local-path-provisioner
+   - kyverno
+   - local-path-provisioner
   # - loki
   # - metallb
-  # - nfs-csi-driver
+   - nfs-csi-driver
   # - telegraf

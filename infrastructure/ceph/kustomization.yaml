@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - helmrepository.yaml
-  - httproute.yaml
+  # - httproute.yaml
   - helmrelease_rook-ceph.yaml
   - helmrelease_rook-ceph-cluster.yaml

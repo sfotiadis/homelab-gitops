@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - validating_deny-privileged-and-root.yaml
   - validating_image-version.yaml
-  - validating_require-labels.yaml
+  # - validating_require-labels.yaml
   - validating_require-tenant-requests-limits.yaml
