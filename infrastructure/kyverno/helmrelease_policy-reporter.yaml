@@ -5,6 +5,8 @@ metadata:
   namespace: kyverno
 spec:
   interval: 30m
+  dependsOn:
+    - name: kyverno
   chart:
     spec:
       chart: policy-reporter
