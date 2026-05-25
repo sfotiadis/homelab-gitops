@@ -6,4 +6,4 @@ resources:
   - helmrepository_kyverno.yaml
   - helmrepository_policy-reporter.yaml
   - namespace.yaml
-  - policies
+  # - policies
