@@ -7,7 +7,7 @@ spec:
   interval: 10m
   sourceRef:
     kind: GitRepository
-    name: homelab-gitops
+    name: crulabs-k8s
   path: ./tenants
   prune: true
   decryption:
