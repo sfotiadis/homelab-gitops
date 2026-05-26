@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
   # - ca-download
    - ceph
-  # - cert-manager
+   - cert-manager
   # - cilium
-  # - cloudnative-pg
+   - cloudnative-pg
   # - cluster-issuer
   # - external-dns
   # - flagger
@@ -18,6 +18,6 @@ resources:
    - kyverno
    - local-path-provisioner
   # - loki
-  # - metallb
+   - metallb
    - nfs-csi-driver
   # - telegraf
