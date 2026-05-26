@@ -5,32 +5,31 @@ metadata:
     namespace: external-dns
 type: Opaque
 stringData:
-    rfc2136_tsig_secret: ENC[AES256_GCM,data:B0VMIL0PgoW6du0/HyScwnZl3s9hs/Z8F3uBs5aLzOf564tsUYZ1lxsMjFU=,iv:Y3JdfPQsrJjvP6WcimecTOw/xyVrbaSOxduOLoNvDoc=,tag:b824wrVRrNnHw6Fc1k48vw==,type:str]
-    rfc2136_tsig_keyname: ENC[AES256_GCM,data:AJ916RQG1K+FddELl1o6,iv:TczGZXRnAVI628mW6vCjRl9WzhiwQUITPwfyq5U8HyY=,tag:Gl+9gyJA2gMWc5ilcY72tA==,type:str]
-    rfc2136_tsig_algorithm: ENC[AES256_GCM,data:gyhFDXK6PAvdkSg=,iv:RlJrRT1WQ07NWh2Ad3OX1rBeN1ujomDB2KVaRaKpw38=,tag:IwunWGvcvmh8iHY+Hm59QA==,type:str]
+    rfc2136_tsig_secret: ENC[AES256_GCM,data:R6F8eKbxGY7iEd1dIULreKAMNGQpLUkzA9W1/+8EUFfc/T8cV4pyvbj8DwI=,iv:nVBoOUoPdetp9/x6zPjMpoobxA3E+xzR1z+4UyKx3uY=,tag:OgO9XqH+LvDrAhCFXe/GZg==,type:str]
+    rfc2136_tsig_keyname: ENC[AES256_GCM,data:3ntD9HLGasDDjdn/Mp8k,iv:2zMH3essrq1qKa7T8U9obOGUNYOVmOJfX60MwCuEYiE=,tag:qQWiGemx+yIHUladAhgjzw==,type:str]
+    rfc2136_tsig_algorithm: ENC[AES256_GCM,data:Zg8gD9X/E8yI+FQ=,iv:L+IiTUzmyx8Y/8Lp4foo7IvP3uWNNf4T0FpunhBkZi4=,tag:IW9I0w7mExxLxrBFkVLO3g==,type:str]
 sops:
-    lastmodified: "2025-11-23T15:33:44Z"
-    mac: ENC[AES256_GCM,data:6Bxv1pp40jCCBKOrLnr4jY8wM966FI7hH+lrXh4oZXjvikMC9KfdviwLAuBSqEkCexYAfrD0ZP6LRPmp+/VsTDjfNJjWk/O1kmNNLCrwGfmvQUBb9lHZkn39igExyFuNcJmQh0GWewAIG3oVrn6QeaWT644XlT2EDH/b/P5TRtQ=,iv:+tAKsc9vGGJ0Km9h48wO3n0bLuewLLJPXt+zcIhTXzA=,tag:skKlP6zt1O8K4B/kNik4KQ==,type:str]
+    lastmodified: "2026-05-26T09:59:20Z"
+    mac: ENC[AES256_GCM,data:jXao/lluLaa6V9UkQYA7ZnGYo1uMKyQLhCCQOMiMxRgdzv/s4M4il9D80PFhmcIDYPXyrvLGfdw31cpIjeUOLAm5CTAooD8cvnjZq96Jggnz3NnBSy0S4jsg4QQEWZDoef7r+LW/bR6W7YlWCxugYhNRjQBmJsJpvDglWbAv9n8=,iv:HzcA7yCXe2e3Ahd8Ja4gTZVS+Ez0jTMldkcyhWDQiu4=,tag:7GGwsTHLYAgAWjxrHKUNCg==,type:str]
     pgp:
-        - created_at: "2025-11-23T15:33:44Z"
+        - created_at: "2026-05-26T09:59:20Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hQIMA0FBPlwYR03bAQ/9GZ+jJax2P8ffbvgvM4STKSm+lW5qpFmL2tXBrEzINPax
-            OlV2qSmPPUuM4rIAAOAnQqhYoPkYcdDIhfTCBsdKGTH9jhQ5NXh4tfexvTSFRraV
-            deKsLofCb8q6deXH1N8cl5zKEnG+XrIo5qzk4jOUirPAa4NvDraPY/JcZrobuhMA
-            C0/YLSvte1eXwXeZMQI6TkE9UakgiWb1ehl28a1KycE9PfINZfFe6R/Jj1hMqbLV
-            jkC8o8W51aTbGBhaYzKRXjBTPZ4DnmYUdtdRrbiixRdUBG4nTLaW6/3tGGDvJSUO
-            qJDjK3ykFLaMArpiAUy8KiZReCp07/WdkML4RTvD5s9aJ9FQe8f09+ydbdyUzzWl
-            5CXa+9/sfUSoF0wv1c5LzJvOCPVKgjuVadBnYLcnYjWZuMzdQdrMXABVIPBfC6Ye
-            nieg/fwMM55HGJEns/PRFOipS4fNeMjw+658zRtWUSvJxN2RZZwQSJw7R1XNOTOa
-            v1eggeBQA8oT58F66I/s3z+uXmP3kfGPpvtDj1zo7icpH9DmAh28jTmlOw5wNWVk
-            q+bBokGt/jTJqNONG06INXG/zDzje2i2ekY72czSC75hMjAmVrY8WifwohqBfeBx
-            z33QTEsOQroAo/O7Yc3kckzQYAs2hO2fj6GqVprXegXfRr9OzyqWTtBneG5Yta3U
-            ZgEJAhCCypB1v2Ppi9XG9HQzrVFie3B1eNLeBu4Dopby7GvUsXiTy57PjdeNnO+f
-            yeSfJgd+FXz2JE3b/jDJ/Z+6uY+KTVaobsupCYxttp1MY7HRbxI5Y20yPfVF++ql
-            H5sZtcEaEg==
-            =bAER
+            hQIMA0FBPlwYR03bAQ/9ErNBPmGXoUHMLrJWkn+tfuUT5+fN/BWz0SkL3CxMK56E
+            eByB9fHDWuUBoyCPkUu1AyTMHb9tbXejIGVkIDgDNy2wMyGLub3lVxS2POae3BUf
+            chyuAazxjaK/oi4A1HqeeG03WcAFwpYQyXYX+6+SsShQ9wxfBZVkB63mKwmKgE/Y
+            5YH+/bngEjZWcQby4FV4Q35+CPmDp2DVLsJ7hil4PLNHYA7XYlPNBDj8jCUQJ+At
+            biH+Qnzg02UIWMpwx6oxrCfWiCx1pV2dlWm20UweLFuc21SJ7UDCyykdjw4jGrH3
+            5D8KkQFAworSzdmPmavHXT9ORuVDErYkH2bxFIzuhLQNeTMgqZ+0ozbva4jGB6rh
+            ng3/6BXlLI45wEKu7iRBj7tAV4p7nSv65mVHB1Emu2hcqj4U3yqt3K2kXyNIwGi0
+            IaHgjHZi0Wx3MbjfmDI2qRC8dRiZUCt1c5QRXADtGBhVirA/d7g8BpTVhZown+Li
+            GkzNkiUIhvJSH8rc1lo5aAApym5wPJ/dWEuNcAJtN60ua6aZVjzd+MgHsQFqOr2F
+            tnCIDojtRosGcwuGXLAXunlR5Elbc1fZQsxNSjcnnZVAHHQcxTTnRlZdkoXc8rYq
+            SEwDEvJbFPhnMyNLMuf5kHyhCNsf/AFEx/l7O38/HlnhDcUgQ0BSV6lm9Xx2WkHU
+            WwEJAhBWGknZh3ncF+yMCGuC492/ooZTs6oegGOKChf1QlnRrv7fWtpkUVXq8wVh
+            JkxDRbfRj6WaB4PfKllRszgcrOaUFlGBGh8DP5+d2c1qbrPaiuNis4hfZYU=
+            =//+4
             -----END PGP MESSAGE-----
           fp: 2F45BC42327907C5B833A93041413E5C18474DDB
     encrypted_regex: ^(data|stringData|addresses)$

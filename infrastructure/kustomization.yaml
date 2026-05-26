@@ -6,8 +6,8 @@ resources:
    - cert-manager
   # - cilium
    - cloudnative-pg
-  # - cluster-issuer
-  # - external-dns
+   - cluster-issuer
+   - external-dns
   # - flagger
   # - gateway-api
   # - homer
