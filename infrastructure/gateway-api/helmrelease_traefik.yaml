@@ -35,15 +35,14 @@ spec:
       metrics:
         port: 9100
 
-    # TODO: Enable when we have a proper monitoring solution in place
-    # metrics:
-    #   prometheus:
-    #     enabled: true
-    #     serviceMonitor:
-    #       enabled: true
-    #       namespace: gateway-system
-    #       honorLabels: true
-    #     addServicesLabels: true
+    metrics:
+      prometheus:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: gateway-system
+          honorLabels: true
+        addServicesLabels: true
     resources:
       requests:
         cpu: 100m

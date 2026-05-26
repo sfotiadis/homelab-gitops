@@ -66,10 +66,9 @@ spec:
           limits:
             memory: 2Gi
 
-    # TODO: reactivate once kube-prometheus-stack is installed and configured
-    # monitoring:
-    #   enabled: true
-    #   createPrometheusRules: true
+    monitoring:
+      enabled: true
+      createPrometheusRules: true
 
     cephBlockPools: []
     cephFileSystems: []

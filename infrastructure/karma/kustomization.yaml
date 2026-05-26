@@ -4,4 +4,4 @@ resources:
   - configmap.yaml
   - deployment.yaml
   - service.yaml
- # - httproute.yaml
+  - httproute.yaml

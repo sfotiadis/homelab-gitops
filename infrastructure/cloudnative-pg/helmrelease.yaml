@@ -18,8 +18,7 @@ spec:
       create: true
     replicaCount: 3
     monitoring:
-      # TODO: reactivate once kube-prometheus-stack is installed and configured
-      # podMonitorEnabled: true
+      podMonitorEnabled: true
       grafanaDashboard:
         create: true
         namespace: monitoring

@@ -15,12 +15,16 @@ spec:
         namespace: flux-system
   values:
     deploymentMode: SingleBinary
+
     loki:
       auth_enabled: false
+
       commonConfig:
         replication_factor: 1
+
       storage:
         type: filesystem
+
       schemaConfig:
         configs:
           - from: "2024-01-01"
@@ -30,38 +34,67 @@ spec:
             index:
               prefix: loki_index_
               period: 24h
+
+      limits_config:
+        retention_period: 744h
+        ingestion_rate_mb: 4
+        ingestion_burst_size_mb: 6
+        max_query_parallelism: 4
+
+      compactor:
+        working_directory: /var/loki/compactor
+        retention_enabled: true
+        retention_delete_delay: 2h
+        delete_request_store: filesystem
+
     singleBinary:
       replicas: 1
+
       persistence:
         enabled: true
-        storageClass: nfs-csi
-        size: 100Gi
+        storageClass: local-path
+        size: 10Gi
+
       resources:
         requests:
           cpu: 500m
           memory: 1Gi
         limits:
-          cpu: 2000m
+          cpu: "2"
           memory: 2Gi
-    gateway:
-      enabled: true
-      replicas: 1
+
     backend:
       replicas: 0
     read:
       replicas: 0
     write:
       replicas: 0
+
     chunksCache:
       enabled: false
     resultsCache:
       enabled: false
+
+    gateway:
+      enabled: true
+      replicas: 1
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 128Mi
+
     monitoring:
+      serviceMonitor:
+        enabled: true
       selfMonitoring:
         enabled: false
         grafanaAgent:
           installOperator: false
       lokiCanary:
         enabled: false
+
     test:
       enabled: false

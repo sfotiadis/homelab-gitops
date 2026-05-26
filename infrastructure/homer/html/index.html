@@ -95,6 +95,17 @@ h2{
   color:white;
 }
 
+.status-offline{
+  position:absolute;
+  top:14px;
+  right:14px;
+  font-size:.75rem;
+  padding:4px 8px;
+  border-radius:6px;
+  color:white;
+  background:#e84118;
+}
+
 .admin-links{
   display:flex;
   gap:1rem;
@@ -172,11 +183,11 @@ Hubble
 </div>
 
 <div class="service">
-<span class="status">Online</span>
-<a href="https://influxdb.crulabs.intern" target="_blank">
+<span class="status-offline">Offline</span>
+<!-- <a href="https://influxdb.crulabs.intern" target="_blank"> -->
 <i class="icon fa-solid fa-wave-square"></i>
 InfluxDB
-</a>
+<!-- </a> -->
 <div class="desc">Time-Series Database</div>
 </div>
 
@@ -226,6 +237,11 @@ Proxmox VE
 <a href="https://ceph-dashboard.crulabs.intern" target="_blank" class="admin-link">
 <i class="fa-solid fa-hard-drive"></i>
 Ceph Dashboard
+</a>
+
+<a href="https://opnsense.crulabs.intern" target="_blank" class="admin-link">
+<i class="fa-solid fa-shield-halved"></i>
+OPNsense
 </a>
 </div>
 

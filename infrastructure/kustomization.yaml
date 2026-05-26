@@ -1,23 +1,23 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  # - ca-download
+   - ca-download
    - ceph
    - cert-manager
-  # - cilium
+   - cilium
    - cloudnative-pg
    - cluster-issuer
    - external-dns
-  # - flagger
+   - flagger
    - gateway-api
-  # - homer
-  # - influxdb
+   - homer
+#   - influxdb
    - karma
    - keycloak
-  # - kube-prometheus-stack
+   - kube-prometheus-stack
    - kyverno
    - local-path-provisioner
-  # - loki
+   - loki
    - metallb
    - nfs-csi-driver
-  # - telegraf
+#   - telegraf
