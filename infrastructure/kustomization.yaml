@@ -13,7 +13,7 @@ resources:
   # - homer
   # - influxdb
    - karma
-  # - keycloak
+   - keycloak
   # - kube-prometheus-stack
    - kyverno
    - local-path-provisioner
