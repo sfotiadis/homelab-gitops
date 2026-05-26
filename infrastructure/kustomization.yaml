@@ -9,7 +9,7 @@ resources:
    - cluster-issuer
    - external-dns
   # - flagger
-  # - gateway-api
+   - gateway-api
   # - homer
   # - influxdb
    - karma
