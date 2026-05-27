@@ -55,7 +55,6 @@ It implements a cloud-native platform stack including:
 | Rook-Ceph | S3-compatible object storage |
 | MetalLB | LoadBalancer for bare metal |
 | Flagger | Progressive delivery / canary deployments |
-| InfluxDB | Time-series database |
 | Telegraf | Metrics collection |
 
 
@@ -89,12 +88,11 @@ It implements a cloud-native platform stack including:
 - Prometheus for metrics and alerting
 - Grafana for dashboards
 - Loki for logs
-- InfluxDB for time-series data
 - Telegraf for telemetry collection
 - Karma for alert UI
 
 ### Data & Storage Layer
-- PostgreSQL via CloudNativePG
+- PostgreSQL and TimescaleDB via CloudNativePG
 - Rook-Ceph for object storage (S3-compatible)
 - NFS CSI + local-path provisioner for persistence
 
@@ -119,7 +117,7 @@ It implements a cloud-native platform stack including:
    - Networking (Cilium, MetalLB)
    - Ingress (Gateway API, Traefik)
    - Identity (Keycloak)
-   - Observability (Prometheus, Grafana, Loki, InfluxDB)
+   - Observability (Prometheus, Grafana, Loki)
    - Storage (Rook-Ceph, NFS, CNPG)
    - Policy (Kyverno)
    - Delivery (Flagger)
