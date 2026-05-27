@@ -6,7 +6,7 @@ metadata:
 data:
   telegraf.conf: |
     [agent]
-      interval = "30s"
+      interval = "10s"
       round_interval = true
       metric_batch_size = 1000
       metric_buffer_limit = 10000
@@ -15,21 +15,26 @@ data:
       flush_jitter = "0s"
       precision = ""
       hostname = "shelly-telegraf"
-      omit_hostname = false
+      omit_hostname = true
 
     [[outputs.postgresql]]
-      connection="postgres://${TIMESCALE_USERNAME}:${TIMESCALE_PASSWORD}@timescaledb-postgresql:5432/shelly?sslmode=disable"
-      urls = ["http://influxdb-influxdb2.influxdb.svc.cluster.local:80"]
-      token = "${INFLUXDB_TOKEN}"
-      organization = "crulabs"
-      bucket = "shelly"
+      connection="postgres://${TIMESCALE_USERNAME}:${TIMESCALE_PASSWORD}@timescaledb-rw.shelly.svc.cluster.local:5432/shelly"
+
+      tags_as_foreign_keys = false
+      create_templates = [
+        '''CREATE TABLE IF NOT EXISTS {{ .table }} ({{ .columns }})''',
+        '''SELECT create_hypertable('{{ .table }}', 'time', if_not_exists => TRUE)'''
+      ]
 
     [[inputs.http]]
       urls = ["${SHELLY_URL}"]
-      interval = "30s"
+      interval = "10s"
       timeout = "10s"
       method = "GET"
       data_format = "json_v2"
+
+      [inputs.http.tags]
+        url = ""
 
       [[inputs.http.json_v2]]
         measurement_name = "shelly"
@@ -54,6 +59,6 @@ data:
           rename = "energy_wh"
           type = "float"
 
-        [inputs.http.json_v2.tags]
+        [[inputs.http.json_v2.tags]]
           device = "proxmox-server"
           location = "homelab"
