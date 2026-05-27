@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shelly-telegraf
-  namespace: monitoring
+  namespace: shelly
   labels:
     app.kubernetes.io/name: shelly-telegraf
     app.kubernetes.io/instance: telegraf
@@ -26,11 +26,16 @@ spec:
             secretKeyRef:
               name: shelly-telegraf
               key: url
-        - name: INFLUXDB_TOKEN
+        - name: TIMESCALE_USERNAME
           valueFrom:
             secretKeyRef:
               name: shelly-telegraf
-              key: influx-token
+              key: username
+        - name: TIMESCALE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: shelly-telegraf
+              key: password
         volumeMounts:
         - name: config
           mountPath: /etc/telegraf

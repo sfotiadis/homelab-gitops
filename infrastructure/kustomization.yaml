@@ -20,4 +20,4 @@ resources:
    - loki
    - metallb
    - nfs-csi-driver
-#   - telegraf
+   - telegraf

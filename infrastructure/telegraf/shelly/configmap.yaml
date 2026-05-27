@@ -17,7 +17,8 @@ data:
       hostname = "shelly-telegraf"
       omit_hostname = false
 
-    [[outputs.influxdb_v2]]
+    [[outputs.postgresql]]
+      connection="postgres://${TIMESCALE_USERNAME}:${TIMESCALE_PASSWORD}@timescaledb-postgresql:5432/shelly?sslmode=disable"
       urls = ["http://influxdb-influxdb2.influxdb.svc.cluster.local:80"]
       token = "${INFLUXDB_TOKEN}"
       organization = "crulabs"

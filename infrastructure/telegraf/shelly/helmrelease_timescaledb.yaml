@@ -1,0 +1,38 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: cnpg-cluster
+  namespace: shelly
+spec:
+  interval: 10m
+  url: oci://ghcr.io/crulabs/helm/cnpg-cluster
+  layerSelector:
+    mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
+    operation: copy
+  ref:
+    tag: "1.1.0"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: timescaledb
+  namespace: shelly
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: cnpg-cluster
+    namespace: shelly
+  values:
+    type: timescaledb
+    version: 16
+    instances: 2
+    initdb:
+      database: shelly
+      secret:
+        name: shelly-telegraf
+    storage:
+      size: 10Gi
+    backup:
+      enabled: true
