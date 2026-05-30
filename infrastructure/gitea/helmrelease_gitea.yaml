@@ -40,6 +40,10 @@ spec:
               name: gitea-db-credentials
               key: password
       config:
+        server:
+          DOMAIN: "gitea.crulabs.intern"
+          ROOT_URL: "https://gitea.crulabs.intern"
+          LANDING_PAGE: login
         database:
           DB_TYPE: postgres
           HOST: "gitea-postgres-rw.gitea.svc.cluster.local:5432"
