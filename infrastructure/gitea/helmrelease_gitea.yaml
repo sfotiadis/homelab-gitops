@@ -25,6 +25,8 @@ spec:
 
     postgresql:
       enabled: false
+    postgresql-ha:
+      enabled: false
 
     gitea:
       metrics:
