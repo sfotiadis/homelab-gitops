@@ -49,3 +49,35 @@ spec:
           HOST: "gitea-postgres-rw.gitea.svc.cluster.local:5432"
           NAME: gitea
           USER: app
+      
+      extraVolumes:
+        - name: ca-cert
+          configMap:
+            name: crulabs-ca-cert
+        - name: certs
+          emptyDir: {}
+
+      preExtraInitContainers:
+        - name: install-ca
+          image: alpine:3.19
+          command:
+            - sh
+            - -c
+            - cp /ca/ca.crt /certs/crulabs-ca.crt
+          volumeMounts:
+            - name: ca-cert
+              mountPath: /ca
+            - name: certs
+              mountPath: /certs
+
+      extraInitVolumeMounts:
+        - name: certs
+          mountPath: /etc/ssl/certs/crulabs-ca.crt
+          subPath: crulabs-ca.crt
+          readOnly: true
+
+      extraContainerVolumeMounts:
+        - name: certs
+          mountPath: /etc/ssl/certs/crulabs-ca.crt
+          subPath: crulabs-ca.crt
+          readOnly: true
