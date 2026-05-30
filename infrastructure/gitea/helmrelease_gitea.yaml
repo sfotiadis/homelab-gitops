@@ -49,3 +49,14 @@ spec:
           HOST: "gitea-postgres-rw.gitea.svc.cluster.local:5432"
           NAME: gitea
           USER: app
+      
+    extraVolumes:
+      - name: ca-cert
+        configMap:
+          name: crulabs-ca-cert
+
+    extraContainerVolumeMounts:
+      - name: ca-cert
+        mountPath: /etc/ssl/certs/crulabs-ca.pem
+        subPath: ca.pem
+        readOnly: true
