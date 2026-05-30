@@ -22,7 +22,7 @@ spec:
       matchExpressions:
         - key: "kubernetes.io/metadata.name"
           operator: NotIn
-          values: ["kube-system"]
+          values: ["kube-system", "rook-ceph"]
   validations:
     - message: "Privileged containers are not allowed"
       expression: >-
