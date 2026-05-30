@@ -7,3 +7,4 @@ resources:
   - helmrelease_postgres.yaml
   - helmrelease_gitea.yaml
   - secret_gitea-db-credentials.enc.yaml
+  - httproute.yaml
