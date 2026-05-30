@@ -42,6 +42,6 @@ spec:
       config:
         database:
           DB_TYPE: postgres
-          HOST: "gitea-postgres.gitea.svc.cluster.local:5432"
+          HOST: "gitea-postgres-rw.gitea.svc.cluster.local:5432"
           NAME: gitea
-          USER: gitea
+          USER: app
