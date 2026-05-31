@@ -24,6 +24,7 @@ spec:
     name: tenant-access
     namespace: flux-system
   values:
+    apiServer: https://10.0.2.2:6443
     teams:
       - name: platform
         namespaces:
