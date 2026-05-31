@@ -13,7 +13,7 @@ metadata:
       requests and memory limits specified.
 spec:
   validationActions: 
-    - Deny
+    - Audit
   matchConstraints:
     resourceRules:
     - apiGroups:   ["apps"]
