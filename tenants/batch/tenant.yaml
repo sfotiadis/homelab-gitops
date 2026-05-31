@@ -33,51 +33,5 @@ spec:
 
     networkPolicy:
       endpointSelector: {}
-      ingress:
-        - fromEndpoints:
-            - matchLabels:
-                k8s:io.kubernetes.pod.namespace: gateway-system
-        - fromEndpoints:
-            - matchLabels:
-                io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name: cnpg-system
-        - fromEndpoints:
-            - matchLabels:
-                io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name: monitoring
-        - fromEndpoints:
-            - matchLabels:
-                k8s:io.kubernetes.pod.namespace: batch
-                app.kubernetes.io/managed-by: cloudnative-pg
-          toPorts:
-            - ports:
-                - port: "5432"
-                  protocol: TCP
-                - port: "5433"
-                  protocol: TCP
-                - port: "8000"
-                  protocol: TCP
-      egress:
-        - toEndpoints:
-            - matchLabels:
-                io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name: cnpg-system
-        - toEndpoints:
-            - matchLabels:
-                k8s:io.kubernetes.pod.namespace: rook-ceph
-                app: rook-ceph-rgw
-          toPorts:
-            - ports:
-                - port: "80"
-                  protocol: TCP
-                - port: "8080"
-                  protocol: TCP
-        - toEndpoints:
-            - matchLabels:
-                k8s:io.kubernetes.pod.namespace: batch
-                app.kubernetes.io/managed-by: cloudnative-pg
-          toPorts:
-            - ports:
-                - port: "5432"
-                  protocol: TCP
-                - port: "5433"
-                  protocol: TCP
-                - port: "8000"
-                  protocol: TCP
+      ingress: []
+      egress: []
