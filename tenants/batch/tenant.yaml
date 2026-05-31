@@ -29,6 +29,7 @@ spec:
       url: https://github.com/crulabs/batch
       branch: main
       path: ./overlays/production
+      interval: 1m
 
     networkPolicy:
       endpointSelector: {}
