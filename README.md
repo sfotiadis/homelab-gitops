@@ -136,7 +136,7 @@ It implements a cloud-native platform stack including:
 - **homelab-gitops (this repo)**  
   Kubernetes workload and platform management via Flux CD
 
-- **[CruLabs/helm](https://github.com/CruLabs/helm)**  
+- **[crulabs/charts](https://github.com/crulabs/charts)**  
   Custom helm charts built for this cluster
   
 
