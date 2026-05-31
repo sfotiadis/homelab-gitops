@@ -1,0 +1,19 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: allow-cnpg-operator-tenants
+spec:
+  description: "Allow CNPG operator to reach tenant pods and vice versa"
+  endpointSelector:
+    matchExpressions:
+      - key: io.cilium.k8s.namespace.labels.toolkit.fluxcd.io/tenant
+        operator: Exists
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name: cnpg-system
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name: cnpg-system
