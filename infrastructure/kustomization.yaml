@@ -21,3 +21,4 @@ resources:
    - metallb
    - nfs-csi-driver
    - telegraf
+   - tenant-access
