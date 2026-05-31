@@ -4,13 +4,13 @@ metadata:
   name: tenant-access
   namespace: flux-system
 spec:
-  interval: 24h
+  interval: 10m
   url: oci://ghcr.io/crulabs/charts/tenant-access
   layerSelector:
     mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
     operation: copy
   ref:
-    tag: "0.1.0"
+    tag: "0.1.1"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
