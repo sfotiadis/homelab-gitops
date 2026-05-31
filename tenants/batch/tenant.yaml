@@ -34,12 +34,20 @@ spec:
     networkPolicy:
       endpointSelector: {}
       ingress:
-        # Allow inbound traffic from Traefik Gateway (HTTPRoute)
-        - fromEndpoints:
-            - matchLabels:
-                k8s:io.kubernetes.pod.namespace: gateway-system
+      - fromEndpoints:
+          - matchLabels:
+              k8s:io.kubernetes.pod.namespace: gateway-system
+      - fromEndpoints:
+          - matchLabels:
+              io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name: cnpg-system
+      - fromEndpoints:
+          - matchLabels:
+              io.cilium.k8s.namespace.labels.kubernetes.io/metadata.name: monitoring
+        toPorts:
+          - ports:
+              - port: "9187"
+                protocol: TCP
       egress:
-        # Allow outbound traffic to Ceph RGW for S3 backups (CNPG barman)
         - toEndpoints:
             - matchLabels:
                 k8s:io.kubernetes.pod.namespace: rook-ceph
@@ -47,4 +55,6 @@ spec:
           toPorts:
             - ports:
                 - port: "80"
+                  protocol: TCP
+                - port: "8080"
                   protocol: TCP
