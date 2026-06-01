@@ -7,5 +7,6 @@ resources:
   - helmrelease_keycloak.yaml
  # - httproute_keycloak-public.yaml
   - httproute_keycloak-internal.yaml
+  - obc.yaml
   - secret_keycloak-db-credentials.enc.yaml
   - secret_keycloak-admin-credentials.enc.yaml

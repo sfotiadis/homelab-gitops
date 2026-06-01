@@ -1,0 +1,9 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: keycloak-postgres-backups
+  namespace: keycloak
+spec:
+  bucketName: keycloak-postgres-backups-595bbf4c-db5b-4cb1-aeb3-945ae307f79a
+  objectBucketName: obc-keycloak-keycloak-postgres-backups
+  storageClassName: rook-ceph-bucket
