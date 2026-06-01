@@ -6,7 +6,7 @@ metadata:
   namespace: shelly
 spec:
   interval: 10m
-  url: oci://ghcr.io/crulabs/helm/cnpg-cluster
+  url: oci://ghcr.io/crulabs/charts/cnpg-cluster
   layerSelector:
     mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
     operation: copy
