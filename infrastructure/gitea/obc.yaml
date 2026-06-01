@@ -1,0 +1,9 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: gitea-postgres-backups
+  namespace: gitea
+spec:
+  bucketName: gitea-postgres-backups-40e9d792-af7d-4016-a162-9d046e02075a
+  objectBucketName: obc-gitea-gitea-postgres-backups
+  storageClassName: rook-ceph-bucket
