@@ -1,0 +1,9 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: timescaledb-backups
+  namespace: shelly
+spec:
+  generateBucketName: timescaledb-backups
+  objectBucketName: obc-shelly-timescaledb-backups
+  storageClassName: rook-ceph-bucket

@@ -4,6 +4,6 @@ metadata:
   name: keycloak-postgres-backups
   namespace: keycloak
 spec:
-  bucketName: keycloak-postgres-backups-595bbf4c-db5b-4cb1-aeb3-945ae307f79a
+  generateBucketName: keycloak-postgres-backups
   objectBucketName: obc-keycloak-keycloak-postgres-backups
   storageClassName: rook-ceph-bucket
