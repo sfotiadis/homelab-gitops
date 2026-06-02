@@ -5,5 +5,5 @@ resources:
   - deployment.yaml
   - helmrelease_timescaledb.yaml
   - namespace.yaml
-  - obc.yaml
+  #- obc.yaml
   - secret.enc.yaml
