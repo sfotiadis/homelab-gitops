@@ -4,6 +4,5 @@ metadata:
   name: gitea-postgres-backups
   namespace: gitea
 spec:
-  generateBucketName: gitea-postgres-backups
-  objectBucketName: obc-gitea-gitea-postgres-backups
+  bucketName: gitea-postgres-backups
   storageClassName: rook-ceph-bucket

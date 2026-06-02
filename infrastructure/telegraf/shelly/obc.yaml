@@ -4,6 +4,5 @@ metadata:
   name: timescaledb-backups
   namespace: shelly
 spec:
-  generateBucketName: timescaledb-backups
-  objectBucketName: obc-shelly-timescaledb-backups
+  bucketName: timescaledb-backups
   storageClassName: rook-ceph-bucket
