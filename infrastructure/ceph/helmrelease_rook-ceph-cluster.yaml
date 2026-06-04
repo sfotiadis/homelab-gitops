@@ -39,6 +39,8 @@ spec:
       dashboard:
         enabled: true
         ssl: false
+        prometheusEndpoint: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+        prometheusEndpointSSLVerify: false
 
       storage:
         useAllNodes: true
