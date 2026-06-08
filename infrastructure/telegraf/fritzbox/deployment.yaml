@@ -19,7 +19,7 @@ spec:
     spec:  
       containers:
         - name: telegraf
-          image: telegraf:1.38-alpine
+          image: telegraf:1.39-alpine
           imagePullPolicy: IfNotPresent
 
           envFrom:
