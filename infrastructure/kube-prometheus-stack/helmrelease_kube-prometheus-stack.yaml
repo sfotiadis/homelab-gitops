@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 86.3.2
+      version: 87.15.2
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -22,6 +22,8 @@ spec:
   values:
     crds:
       enabled: true
+      upgradeJob: 
+        enabled: true
 
     grafana:
       enabled: true
