@@ -1,0 +1,25 @@
+# infrastructure/rabbitmq-operator/source.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: rabbitmq-cluster-operator
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://github.com/rabbitmq/cluster-operator
+  ref:
+    tag: v2.22.2
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: rabbitmq-cluster-operator
+  namespace: flux-system
+spec:
+  interval: 1h
+  sourceRef:
+    kind: GitRepository
+    name: rabbitmq-cluster-operator
+  path: ./config/default
+  prune: true
+  wait: true
