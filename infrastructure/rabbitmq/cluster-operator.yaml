@@ -1,4 +1,4 @@
-# infrastructure/rabbitmq-operator/source.yaml
+# infrastructure/rabbitmq/cluster-operator.yaml
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
@@ -23,3 +23,6 @@ spec:
   path: ./config/default
   prune: true
   wait: true
+  images:
+  - name: ghcr.io/rabbitmq/cluster-operator
+    newTag: "2.22.2"
