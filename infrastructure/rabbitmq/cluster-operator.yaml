@@ -25,4 +25,4 @@ spec:
   wait: true
   images:
   - name: ghcr.io/rabbitmq/cluster-operator
-    newTag: "2.22.2"
+    newTag: "2.22.3"
