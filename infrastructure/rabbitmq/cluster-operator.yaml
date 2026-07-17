@@ -8,7 +8,7 @@ spec:
   interval: 1h
   url: https://github.com/rabbitmq/cluster-operator
   ref:
-    tag: v2.22.2
+    tag: v2.22.3
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
