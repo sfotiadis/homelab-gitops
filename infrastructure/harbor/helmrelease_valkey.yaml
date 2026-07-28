@@ -38,8 +38,12 @@ spec:
         users:
           - name: default
             enabled: true
-            commands: ["+@all"]
-            keys: ["*"]
+            commands:
+              allow:
+                - "+@all"
+            keys:
+              readWrite:
+                - "*"
             passwordSecret:
               name: valkey-users
               keys:
