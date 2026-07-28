@@ -48,7 +48,7 @@ spec:
             passwordSecret:
               name: valkey-users
               keys:
-                - password
+                - REDIS_PASSWORD
 
     metrics:
       podMonitor:
