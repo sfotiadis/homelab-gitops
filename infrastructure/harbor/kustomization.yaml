@@ -4,5 +4,6 @@ resources:
   - namespace.yaml
   - helmrelease_postgres.yaml
   - helmrelease_valkey.yaml
+  - obc.yaml
   - secret_harbor-db-credentials.enc.yaml
   - secret_valkey-users.enc.yaml
