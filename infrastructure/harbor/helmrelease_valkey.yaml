@@ -18,6 +18,7 @@ spec:
   values:
     cluster:
       spec:
+        shards: 1
         replicas: 3
 
         persistence:
