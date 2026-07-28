@@ -19,7 +19,7 @@ spec:
     cluster:
       spec:
         shards: 1
-        replicas: 3
+        replicas: 2
 
         persistence:
           size: 5Gi
