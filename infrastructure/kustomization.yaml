@@ -19,7 +19,6 @@ resources:
    - local-path-provisioner
    - loki
    - metallb
-   - nfs-csi-driver
    - rabbitmq
    - telegraf
    - tenant-access
