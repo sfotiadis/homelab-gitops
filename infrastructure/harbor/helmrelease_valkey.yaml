@@ -40,7 +40,7 @@ spec:
             enabled: true
             commands:
               allow:
-                - "+@all"
+                - "@all"
             keys:
               readWrite:
                 - "*"
