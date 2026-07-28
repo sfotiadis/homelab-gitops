@@ -1,0 +1,39 @@
+# infrastructure/ocirepositories/cnpg-cluster.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: cnpg-cluster
+  namespace: harbor
+spec:
+  interval: 24h
+  url: oci://ghcr.io/crulabs/charts/cnpg-cluster
+  layerSelector:
+    mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
+    operation: copy
+  ref:
+    tag: "2.0.1"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: harbor-postgres
+  namespace: harbor
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: cnpg-cluster
+    namespace: harbor
+  values:
+    type: postgresql
+    version: 17
+    initdb:
+      database: harbor
+      secret:
+        name: harbor-db-credentials
+
+    storage:
+      size: 5Gi
+
+    backup:
+      enabled: false
