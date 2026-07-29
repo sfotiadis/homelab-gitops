@@ -31,7 +31,7 @@ spec:
             group: gateway.networking.k8s.io
             kind: Gateway
         hosts:
-          - harbor.crulabs.io
+          - harbor.crulabs.intern
         filters: []
 
     internalTLS:
