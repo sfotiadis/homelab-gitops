@@ -25,6 +25,7 @@ spec:
       aclUsers:
         default:
           permissions: "~* &* +@all"
+          passwordKey: REDIS_PASSWORD
 
     replica:
       enabled: true
