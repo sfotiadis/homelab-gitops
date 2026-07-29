@@ -69,7 +69,7 @@ spec:
     redis:
       type: external
       external:
-        addr: valkey-valkey-valkey-resources.harbor.svc.cluster.local:6379
+        addr: valkey.harbor.svc.cluster.local:6379
         existingSecret: valkey-users
 
     trace:
