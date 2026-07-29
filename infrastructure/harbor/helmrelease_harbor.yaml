@@ -1,0 +1,86 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: harbor
+  namespace: harbor
+  labels:
+    toolkit.fluxcd.io/tenant: harbor
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: harbor
+      version: "1.18.4"
+      sourceRef:
+        kind: HelmRepository
+        name: harbor
+        namespace: flux-system
+  values:
+    externalURL: https://harbor.crulabs.io
+
+    expose:
+      type: route
+      tls:
+        enabled: false
+      route:
+        parentRefs:
+          - name: crulabs-gateway
+            sectionName: websecure
+            namespace: gateway-system
+            group: gateway.networking.k8s.io
+            kind: Gateway
+        hosts:
+          - harbor.crulabs.io
+        filters: []
+
+    internalTLS:
+      enabled: false
+
+    persistence:
+      enabled: true
+      resourcePolicy: keep
+      persistentVolumeClaim:
+        jobservice:
+          jobLog:
+            storageClass: local-path
+            size: 10Gi
+        trivy:
+          storageClass: local-path
+          size: 10Gi
+      imageChartStorage:
+        type: s3
+        s3:
+          region: us-east-1
+          bucket: harbor-registry
+          regionendpoint: http://rook-ceph-rgw.rook-ceph.svc.cluster.local
+          secure: false
+
+    database:
+      type: external
+      external:
+        host: harbor-postgres-rw.harbor.svc.cluster.local
+        port: "5432"
+        username: app
+        existingSecret: harbor-db-credentials
+        coreDatabase: harbor
+        sslmode: disable
+
+    redis:
+      type: external
+      external:
+        addr: valkey-valkey-valkey-resources.harbor.svc.cluster.local:6379
+        existingSecret: valkey-users
+
+    trace:
+      enabled: false
+
+  valuesFrom:
+    - kind: Secret
+      name: harbor-registry
+      valuesKey: AWS_ACCESS_KEY_ID
+      targetPath: persistence.imageChartStorage.s3.accesskey
+    - kind: Secret
+      name: harbor-registry
+      valuesKey: AWS_SECRET_ACCESS_KEY
+      targetPath: persistence.imageChartStorage.s3.secretkey
