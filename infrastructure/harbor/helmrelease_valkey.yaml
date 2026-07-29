@@ -7,49 +7,33 @@ spec:
   interval: 1h
   chart:
     spec:
-      chart: valkey-resources
-      version: "0.1.2"
+      chart: valkey
+      version: "0.11.0"
       sourceRef:
         kind: HelmRepository
         name: valkey
         namespace: flux-system
-      interval: 12h
-
   values:
-    cluster:
-      spec:
-        shards: 1
-        replicas: 2
+    dataStorage:
+      enabled: true
+      requestedSize: 5Gi
+      className: local-path
 
-        persistence:
-          size: 5Gi
-          storageClassName: local-path
+    auth:
+      enabled: true
+      usersExistingSecret: valkey-users
+      aclUsers:
+        default:
+          permissions: "~* &* +@all"
 
-        resources:
-          requests:
-            cpu: 100m
-            memory: 256Mi
-          limits:
-            cpu: 500m
-            memory: 512Mi
-
-        podDisruptionBudget:
-          mode: Cluster
-
-        users:
-          - name: default
-            enabled: true
-            commands:
-              allow:
-                - "@all"
-            keys:
-              readWrite:
-                - "*"
-            passwordSecret:
-              name: valkey-users
-              keys:
-                - REDIS_PASSWORD
+    replica:
+      enabled: true
+      replicas: 2
+      persistence:
+        size: 5Gi
+        storageClass: local-path
 
     metrics:
-      podMonitor:
+      enabled: true
+      serviceMonitor:
         enabled: true
