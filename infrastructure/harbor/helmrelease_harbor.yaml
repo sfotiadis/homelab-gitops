@@ -17,7 +17,7 @@ spec:
         name: harbor
         namespace: flux-system
   values:
-    externalURL: https://harbor.crulabs.io
+    externalURL: https://harbor.crulabs.intern
 
     expose:
       type: route
