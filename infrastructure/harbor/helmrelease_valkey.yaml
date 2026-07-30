@@ -16,7 +16,7 @@ spec:
   values:
     dataStorage:
       enabled: true
-      requestedSize: 5Gi
+      requestedSize: 1Gi
       className: local-path
 
     auth:
@@ -31,7 +31,7 @@ spec:
       enabled: true
       replicas: 2
       persistence:
-        size: 5Gi
+        size: 1Gi
         storageClass: local-path
 
     metrics:

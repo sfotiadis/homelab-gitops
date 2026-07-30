@@ -33,7 +33,7 @@ spec:
         name: harbor-db-credentials
 
     storage:
-      size: 5Gi
+      size: 2Gi
 
     backup:
       enabled: false

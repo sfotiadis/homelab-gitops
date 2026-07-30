@@ -8,6 +8,11 @@ metadata:
     toolkit.fluxcd.io/tenant: harbor
 spec:
   interval: 30m
+  dependsOn:
+    - name: harbor-postgres
+      namespace: harbor
+    - name: valkey
+      namespace: harbor
   chart:
     spec:
       chart: harbor
@@ -44,10 +49,10 @@ spec:
         jobservice:
           jobLog:
             storageClass: local-path
-            size: 10Gi
+            size: 2Gi
         trivy:
           storageClass: local-path
-          size: 10Gi
+          size: 5Gi
       imageChartStorage:
         type: s3
         s3:

@@ -11,7 +11,7 @@ resources:
    - flagger
    - gateway-api
    - gitea
-   # - harbor
+   - harbor
    - homer
    - karma
    - keycloak
