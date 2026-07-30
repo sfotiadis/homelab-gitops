@@ -8,5 +8,4 @@ resources:
   - helmrepository_harbor.yaml
   - obc.yaml
   - secret_harbor-db-credentials.enc.yaml
-  - secret_harbor-oidc-secret.enc.yaml
   - secret_valkey-users.enc.yaml
