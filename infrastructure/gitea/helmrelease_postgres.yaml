@@ -36,7 +36,7 @@ spec:
       size: 10Gi
 
     backup:
-      enabled: false
+      enabled: true
       obc:
         name: gitea-postgres-backups
 
