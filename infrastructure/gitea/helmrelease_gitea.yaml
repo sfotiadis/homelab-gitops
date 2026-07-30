@@ -60,3 +60,13 @@ spec:
         mountPath: /etc/ssl/certs/crulabs-ca.pem
         subPath: ca.pem
         readOnly: true
+    
+    oauth:
+      - name: keycloak
+        provider: openidConnect
+        active: true
+        synchronizeUsers: true
+        autoDiscoverURL: "https://keycloak.crulabs.intern/auth/realms/crulabs/.well-known/openid-configuration"
+        groupClaimName: "groups"
+        adminGroup: "gitea-admin"
+        existingSecret: gitea-oauth-secret

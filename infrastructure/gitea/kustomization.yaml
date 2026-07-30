@@ -8,5 +8,6 @@ resources:
   - helmrelease_gitea.yaml
   #- obc.yaml
   - secret_gitea-db-credentials.enc.yaml
+  - secret_gitea-oauth-secret.enc.yaml
   - httproute.yaml
   - configmap_ca-cert.yaml
