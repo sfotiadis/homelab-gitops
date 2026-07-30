@@ -6,8 +6,11 @@ resources:
   - helmrepository.yaml
   - helmrelease_postgres.yaml
   - helmrelease_gitea.yaml
+  - helmrelease_valkey.yaml
   #- obc.yaml
   - secret_gitea-db-credentials.enc.yaml
   - secret_gitea-oauth-secret.enc.yaml
+  - secret_valkey-users.enc.yaml
+  - secret_gitea-valkey-connstrings.enc.yaml
   - httproute.yaml
   - configmap_ca-cert.yaml

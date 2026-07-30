@@ -9,6 +9,8 @@ spec:
   dependsOn:
     - name: gitea-postgres
       namespace: gitea
+    - name: valkey
+      namespace: gitea
   chart:
     spec:
       chart: gitea
@@ -27,6 +29,10 @@ spec:
       enabled: false
     postgresql-ha:
       enabled: false
+    valkey-cluster:
+      enabled: false
+    valkey:
+      enabled: false
 
     gitea:
       metrics:
@@ -39,6 +45,21 @@ spec:
             secretKeyRef:
               name: gitea-db-credentials
               key: password
+        - name: GITEA__CACHE__HOST
+          valueFrom:
+            secretKeyRef:
+              name: gitea-valkey-connstrings
+              key: cache_host
+        - name: GITEA__SESSION__PROVIDER_CONFIG
+          valueFrom:
+            secretKeyRef:
+              name: gitea-valkey-connstrings
+              key: session_provider_config
+        - name: GITEA__QUEUE__CONN_STR
+          valueFrom:
+            secretKeyRef:
+              name: gitea-valkey-connstrings
+              key: queue_conn_str
       config:
         server:
           DOMAIN: "gitea.crulabs.intern"
@@ -49,7 +70,13 @@ spec:
           HOST: "gitea-postgres-rw.gitea.svc.cluster.local:5432"
           NAME: gitea
           USER: app
-      
+        cache:
+          ADAPTER: redis
+        session:
+          PROVIDER: redis
+        queue:
+          TYPE: redis
+
     extraVolumes:
       - name: ca-cert
         configMap:
@@ -60,7 +87,7 @@ spec:
         mountPath: /etc/ssl/certs/crulabs-ca.pem
         subPath: ca.pem
         readOnly: true
-    
+
     oauth:
       - name: keycloak
         provider: openidConnect
