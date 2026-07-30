@@ -42,6 +42,20 @@ spec:
     internalTLS:
       enabled: false
 
+    core:
+      extraEnvVars:
+        - name: CONFIG_OVERWRITE_JSON
+          value: |
+            {
+              "auth_mode": "oidc_auth",
+              "oidc_name": "Keycloak",
+              "oidc_endpoint": "https://keycloak.crulabs.intern/auth/realms/crulabs",
+              "oidc_client_id": "harbor",
+              "oidc_scope": "openid,profile,roles",
+              "oidc_verify_cert": "false",
+              "oidc_auto_onboard": "false"
+            }
+
     persistence:
       enabled: true
       resourcePolicy: keep
@@ -89,3 +103,7 @@ spec:
       name: harbor-registry
       valuesKey: AWS_SECRET_ACCESS_KEY
       targetPath: persistence.imageChartStorage.s3.secretkey
+    - kind: Secret
+      name: harbor-oidc-secret
+      valuesKey: OIDC_CLIENT_SECRET
+      targetPath: core.extraEnvVars[0].value
