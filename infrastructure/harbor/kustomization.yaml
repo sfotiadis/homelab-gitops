@@ -6,6 +6,6 @@ resources:
   - helmrelease_postgres.yaml
   - helmrelease_valkey.yaml
   - helmrepository_harbor.yaml
-  - obc.yaml
+  # - obc.yaml
   - secret_harbor-db-credentials.enc.yaml
   - secret_valkey-users.enc.yaml
