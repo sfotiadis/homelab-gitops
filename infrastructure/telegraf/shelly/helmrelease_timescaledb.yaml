@@ -33,7 +33,7 @@ spec:
       secret:
         name: shelly-telegraf
     storage:
-      size: 10Gi
+      size: 3Gi
     backup:
       enabled: false
       obc:
