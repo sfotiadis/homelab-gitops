@@ -60,6 +60,7 @@ spec:
           bucket: harbor-bucket
           regionendpoint: http://rook-ceph-rgw.rook-ceph.svc.cluster.local
           secure: false
+          disableredirect: true
 
     database:
       type: external
