@@ -58,11 +58,11 @@ spec:
         s3:
           region: us-east-1
           bucket: harbor-bucket
-          regionendpoint: http://rook-ceph-rgw.rook-ceph.svc.cluster.local
+          regionendpoint: http://rook-ceph-rgw-objectstore.rook-ceph.svc.cluster.local
           secure: false
           disableredirect: true
           v4auth: true
-          encrypt: false
+          forcepathstyle: true
 
     database:
       type: external
@@ -85,10 +85,10 @@ spec:
 
   valuesFrom:
     - kind: Secret
-      name: harbor-bucket-claim
+      name: harbor-bucket
       valuesKey: AWS_ACCESS_KEY_ID
       targetPath: persistence.imageChartStorage.s3.accesskey
     - kind: Secret
-      name: harbor-bucket-claim
+      name: harbor-bucket
       valuesKey: AWS_SECRET_ACCESS_KEY
       targetPath: persistence.imageChartStorage.s3.secretkey
