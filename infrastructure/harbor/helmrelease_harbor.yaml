@@ -61,6 +61,8 @@ spec:
           regionendpoint: http://rook-ceph-rgw.rook-ceph.svc.cluster.local
           secure: false
           disableredirect: true
+          v4auth: true
+          encrypt: false
 
     database:
       type: external
