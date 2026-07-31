@@ -1,8 +1,8 @@
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: harbor-registry
+  name: harbor-bucket-claim
   namespace: harbor
 spec:
-  generateBucketName: harbor-registry
+  generateBucketName: harbor-bucket
   storageClassName: rook-ceph-bucket
