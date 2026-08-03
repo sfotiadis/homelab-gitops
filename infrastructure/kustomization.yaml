@@ -23,4 +23,5 @@ resources:
    - rabbitmq
    - telegraf
    - tenant-access
+   - test
    - valkey-operator
