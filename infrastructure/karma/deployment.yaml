@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: karma
-          image: ghcr.io/prymitive/karma:v0.131
+          image: ghcr.io/prymitive/karma:v0.132
           imagePullPolicy: IfNotPresent
           args:
             - --config.file=/etc/karma/karma.yaml
