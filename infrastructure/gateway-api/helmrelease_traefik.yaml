@@ -9,11 +9,15 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 41.4.0
+      version: 41.5.0
       sourceRef:
         kind: HelmRepository
         name: traefik
         namespace: flux-system
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   values:
     providers:
       kubernetesGateway:
