@@ -7,4 +7,4 @@ spec:
   interval: 1h
   url: https://github.com/ceph/ceph-csi-operator
   ref:
-    tag: v1.0.4
+    tag: v1.0.5
