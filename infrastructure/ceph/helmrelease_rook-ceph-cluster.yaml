@@ -24,6 +24,10 @@ spec:
 
     cephClusterSpec:
       dataDirHostPath: /var/lib/rook
+      security:
+        cephx:
+          allowedCiphers:
+            - aes256k
 
       mon:
         count: 3
