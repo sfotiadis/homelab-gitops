@@ -1,0 +1,47 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: trivy-operator
+  namespace: trivy-system
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: trivy-operator
+      version: 0.38.1
+      sourceRef:
+        kind: HelmRepository
+        name: aqua
+        namespace: flux-system
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    operator:
+      # central Trivy server (StatefulSet) holds the vulnerability DB once;
+      # scan jobs run as clients instead of each downloading the DB
+      builtInTrivyServer: true
+      # keep the load on the cluster moderate while the initial scan runs
+      scanJobsConcurrentLimit: 3
+
+    trivy:
+      # PVC for the Trivy server's DB cache
+      storageClassName: local-path
+
+    # audit the control plane nodes too (CIS / infra assessment)
+    nodeCollector:
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+
+    serviceMonitor:
+      enabled: true
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 512Mi

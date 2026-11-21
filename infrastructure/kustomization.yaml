@@ -24,4 +24,5 @@ resources:
    - telegraf
    - tenant-access
    - test
+   - trivy-operator
    - valkey-operator
