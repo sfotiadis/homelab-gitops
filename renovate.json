@@ -11,5 +11,13 @@
   },
   "kubernetes": {
     "fileMatch": ["(^|/).*\\.ya?ml$"]
-  }
+  },
+  "packageRules": [
+    {
+      "description": "Cilium (CNI) must be upgraded one minor version at a time",
+      "matchDepNames": ["cilium"],
+      "separateMinorPatch": true,
+      "separateMultipleMinor": true
+    }
+  ]
 }
