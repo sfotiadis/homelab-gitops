@@ -14,10 +14,10 @@ spec:
         name: valkey
         namespace: flux-system
   values:
-    dataStorage:
+    persistence:
       enabled: true
-      requestedSize: 1Gi
-      className: local-path
+      size: 1Gi
+      storageClass: local-path
 
     auth:
       enabled: true
@@ -29,10 +29,8 @@ spec:
 
     replica:
       enabled: true
-      replicas: 2
-      persistence:
-        size: 1Gi
-        storageClass: local-path
+      # since chart 1.0 this count includes the master (was 2 replicas + master)
+      replicas: 3
 
     metrics:
       enabled: true
