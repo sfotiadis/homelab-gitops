@@ -33,7 +33,7 @@ spec:
       image:
         registry: ghcr.io
         repository: aquasecurity/trivy
-        tag: 0.76.1
+        tag: 0.76.2
       # scan jobs; the 500M default gets OOMKilled on large images (e.g. cilium)
       resources:
         requests:
