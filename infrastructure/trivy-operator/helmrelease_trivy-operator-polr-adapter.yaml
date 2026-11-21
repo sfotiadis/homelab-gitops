@@ -19,20 +19,28 @@ spec:
     adapters:
       vulnerabilityReports:
         enabled: true
+        timeout: 10
       clusterVulnerabilityReports:
         enabled: true
+        timeout: 10
       configAuditReports:
         enabled: true
+        timeout: 10
       exposedSecretReports:
         enabled: true
+        timeout: 10
       rbacAssessmentReports:
         enabled: true
+        timeout: 10
       infraAssessmentReports:
         enabled: true
+        timeout: 10
       clusterInfraAssessmentReports:
         enabled: true
+        timeout: 10
       complianceReports:
         enabled: true
+        timeout: 10
 
     resources:
       requests:
