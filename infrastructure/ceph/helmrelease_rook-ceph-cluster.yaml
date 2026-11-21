@@ -75,6 +75,12 @@ spec:
     monitoring:
       enabled: true
       createPrometheusRules: true
+      prometheusRuleOverrides:
+        # predicts from the trailing 48h fill rate without any free-space
+        # threshold, so short bursts (e.g. image pulls) fire it on half-empty
+        # disks; kube-prometheus-stack's NodeFilesystem* alerts cover node disks
+        CephNodeDiskspaceWarning:
+          disabled: true
 
     cephBlockPools: []
     cephFileSystems: []
