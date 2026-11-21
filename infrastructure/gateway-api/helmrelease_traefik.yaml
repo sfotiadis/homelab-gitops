@@ -23,12 +23,6 @@ spec:
       kubernetesGateway:
         enabled: true
 
-    service:
-      type: NodePort
-      nodePorts:
-        web: 30180
-        websecure: 30543
-
     ports:
       web:
         port: 8000
