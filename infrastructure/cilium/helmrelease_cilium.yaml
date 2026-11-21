@@ -9,6 +9,8 @@ metadata:
     kustomize.toolkit.fluxcd.io/prune: disabled
 spec:
   interval: 30m
+  # rolling the agent DaemonSet across all nodes takes close to the 5m default
+  timeout: 15m
   # adopt the existing release that was installed manually
   releaseName: cilium
   chart:
