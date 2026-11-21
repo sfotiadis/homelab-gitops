@@ -28,6 +28,14 @@ spec:
     trivy:
       # PVC for the Trivy server's DB cache
       storageClassName: local-path
+      # scan jobs; the 500M default gets OOMKilled on large images (e.g. cilium)
+      resources:
+        requests:
+          cpu: 100m
+          memory: 100M
+        limits:
+          cpu: 500m
+          memory: 1Gi
 
     # audit the control plane nodes too (CIS / infra assessment)
     nodeCollector:
@@ -39,9 +47,10 @@ spec:
     serviceMonitor:
       enabled: true
 
+    # operator caches all reports in memory; grows with the number of workloads
     resources:
       requests:
         cpu: 100m
-        memory: 256Mi
-      limits:
         memory: 512Mi
+      limits:
+        memory: 1Gi
