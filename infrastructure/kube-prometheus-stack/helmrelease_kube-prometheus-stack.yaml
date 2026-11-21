@@ -135,6 +135,18 @@ spec:
           - sourceLabels: [__meta_kubernetes_node_name]
             targetLabel: node
 
+    alertmanager:
+      config:
+        route:
+          routes:
+          - receiver: "null"
+            matchers:
+              - alertname = "Watchdog"
+          - receiver: "null"
+            matchers:
+              - alertname =~ "Trivy.*"
+            group_by: ["alertname", "vuln_id"]
+
     kubeScheduler:
       enabled: false
     kubeControllerManager:

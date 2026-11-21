@@ -31,6 +31,13 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: "1"
+  - name: trivy-dashboard
+    namespace: monitoring
+    files:
+      - trivy-vulnerabilities.json=dashboards/trivy-vulnerabilities.json
+    options:
+      labels:
+        grafana_dashboard: "1"
   - name: flux-kube-state-metrics-config
     namespace: monitoring
     files:

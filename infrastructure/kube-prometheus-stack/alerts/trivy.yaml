@@ -1,0 +1,50 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: trivy-vulnerability-alerts
+  namespace: trivy-system
+spec:
+  groups:
+  - name: trivy-vulnerabilities
+    rules:
+    # One alert per CVE and workload, firing while the workload runs an
+    # affected image. Alertmanager groups them by vuln_id, so each CVE is one
+    # group with one entry per workload. ReplicaSets are reported as their
+    # Deployment by stripping the pod-template-hash suffix. max_over_time
+    # bridges the short gaps while reports are rescanned.
+    - alert: TrivyCriticalVulnerability
+      annotations:
+        summary: CRITICAL vulnerability {{ $labels.vuln_id }} in {{ $labels.namespace }}/{{ $labels.workload }}
+        description: "{{ $labels.namespace }}/{{ $labels.workload }} runs {{ $labels.image_repository }}:{{ $labels.image_tag }}, affected by {{ $labels.vuln_id }} (CRITICAL). Fixed in: {{ or $labels.fixed_version \"no fix yet\" }}."
+      expr: |-
+        group by (vuln_id, namespace, workload, image_repository, image_tag, fixed_version) (
+          label_replace(
+            max_over_time(trivy_vulnerability_id{severity="Critical", resource_kind="ReplicaSet"}[1h]),
+            "workload", "Deployment/$1", "resource_name", "(.+)-[bcdfghjklmnpqrstvwxz2456789]{5,10}"
+          )
+          or
+          label_join(
+            max_over_time(trivy_vulnerability_id{severity="Critical", resource_kind!="ReplicaSet"}[1h]),
+            "workload", "/", "resource_kind", "resource_name"
+          )
+        )
+      labels:
+        severity: warning
+    - alert: TrivyUnfixedHighVulnerability
+      annotations:
+        summary: HIGH vulnerability without fix {{ $labels.vuln_id }} in {{ $labels.namespace }}/{{ $labels.workload }}
+        description: "{{ $labels.namespace }}/{{ $labels.workload }} runs {{ $labels.image_repository }}:{{ $labels.image_tag }}, affected by {{ $labels.vuln_id }} (HIGH). No fixed version exists yet."
+      expr: |-
+        group by (vuln_id, namespace, workload, image_repository, image_tag) (
+          label_replace(
+            max_over_time(trivy_vulnerability_id{severity="High", fixed_version="", resource_kind="ReplicaSet"}[1h]),
+            "workload", "Deployment/$1", "resource_name", "(.+)-[bcdfghjklmnpqrstvwxz2456789]{5,10}"
+          )
+          or
+          label_join(
+            max_over_time(trivy_vulnerability_id{severity="High", fixed_version="", resource_kind!="ReplicaSet"}[1h]),
+            "workload", "/", "resource_kind", "resource_name"
+          )
+        )
+      labels:
+        severity: warning

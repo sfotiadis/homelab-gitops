@@ -24,10 +24,12 @@ spec:
       builtInTrivyServer: true
       # keep the load on the cluster moderate while the initial scan runs
       scanJobsConcurrentLimit: 3
+      metricsVulnIdEnabled: true
 
     trivy:
       # PVC for the Trivy server's DB cache
       storageClassName: local-path
+      severity: HIGH,CRITICAL
       # scan jobs; the 500M default gets OOMKilled on large images (e.g. cilium)
       resources:
         requests:
