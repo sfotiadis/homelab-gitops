@@ -29,7 +29,8 @@ spec:
           )
         )
       labels:
-        severity: warning
+        severity: critical
+        source: trivy
     - alert: TrivyUnfixedHighVulnerability
       annotations:
         summary: HIGH vulnerability without fix {{ $labels.vuln_id }} in {{ $labels.namespace }}/{{ $labels.workload }}
@@ -48,3 +49,4 @@ spec:
         )
       labels:
         severity: warning
+        source: trivy
