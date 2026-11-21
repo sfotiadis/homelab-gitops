@@ -16,7 +16,7 @@ spec:
       chart: cilium
       # upgrade one minor version at a time (1.17 -> 1.18 -> 1.19 -> 1.20)
       # and read the upgrade notes + run the preflight check before each
-      version: 1.17.4
+      version: 1.17.18
       sourceRef:
         kind: HelmRepository
         name: cilium
