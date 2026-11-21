@@ -1,6 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - helmrelease_trivy-operator-polr-adapter.yaml
   - helmrelease_trivy-operator.yaml
   - helmrepository_aqua.yaml
+  - helmrepository_trivy-operator-polr-adapter.yaml
   - namespace.yaml

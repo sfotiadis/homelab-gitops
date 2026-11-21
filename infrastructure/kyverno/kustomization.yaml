@@ -5,5 +5,6 @@ resources:
   - helmrelease_policy-reporter.yaml
   - helmrepository_kyverno.yaml
   - helmrepository_policy-reporter.yaml
+  - httproute_policy-reporter.yaml
   - namespace.yaml
   - policies

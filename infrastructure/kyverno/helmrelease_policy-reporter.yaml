@@ -17,10 +17,19 @@ spec:
         namespace: flux-system
   values:
     ui:
-      enabled: false
-    
-    kyvernoPlugin:
       enabled: true
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          memory: 256Mi
+
+    plugin:
+      kyverno:
+        enabled: true
+      trivy:
+        enabled: true
     
     monitoring:
       enabled: true
