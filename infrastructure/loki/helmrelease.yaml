@@ -78,6 +78,10 @@ spec:
     gateway:
       enabled: true
       replicas: 1
+      image:
+        registry: docker.io
+        repository: nginxinc/nginx-unprivileged
+        tag: 1.29-alpine
       resources:
         requests:
           cpu: 50m
@@ -98,3 +102,9 @@ spec:
 
     test:
       enabled: false
+
+    sidecar:
+      image:
+        registry: docker.io
+        repository: kiwigrid/k8s-sidecar
+        tag: 2.5.0

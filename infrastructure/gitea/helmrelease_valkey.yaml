@@ -36,3 +36,8 @@ spec:
       enabled: true
       serviceMonitor:
         enabled: true
+      exporter:
+        image:
+          registry: ghcr.io
+          repository: oliver006/redis_exporter
+          tag: v1.88.0

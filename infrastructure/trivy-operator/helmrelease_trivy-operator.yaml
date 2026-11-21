@@ -30,6 +30,10 @@ spec:
       # PVC for the Trivy server's DB cache
       storageClassName: local-path
       severity: HIGH,CRITICAL
+      image:
+        registry: ghcr.io
+        repository: aquasecurity/trivy
+        tag: 0.76.1
       # scan jobs; the 500M default gets OOMKilled on large images (e.g. cilium)
       resources:
         requests:

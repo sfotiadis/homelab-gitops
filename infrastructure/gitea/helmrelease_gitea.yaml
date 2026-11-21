@@ -21,6 +21,12 @@ spec:
         namespace: flux-system
       interval: 24h
   values:
+    image:
+      registry: docker.gitea.com
+      repository: gitea
+      tag: 1.27.0
+      rootless: true
+
     persistence:
       enabled: true
       size: 10Gi

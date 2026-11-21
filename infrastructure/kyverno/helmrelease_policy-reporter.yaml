@@ -30,6 +30,11 @@ spec:
         enabled: true
       trivy:
         enabled: true
+        cli:
+          image:
+            registry: ghcr.io
+            repository: aquasecurity/trivy
+            tag: 0.76.1
     
     monitoring:
       enabled: true
