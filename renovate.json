@@ -25,6 +25,31 @@
   ],
   "packageRules": [
     {
+      "description": "Rook: operator and cluster charts share a version and must move together (dependsOn orders the rollout)",
+      "matchDepNames": ["rook-ceph", "rook-ceph-cluster"],
+      "groupName": "rook-ceph"
+    },
+    {
+      "description": "Keycloak: chart and pinned image in one PR so they cannot drift apart",
+      "matchDepNames": ["keycloakx", "quay.io/keycloak/keycloak"],
+      "groupName": "keycloak"
+    },
+    {
+      "description": "Gitea: chart and pinned image in one PR so they cannot drift apart",
+      "matchDepNames": ["gitea", "docker.gitea.com/gitea"],
+      "groupName": "gitea"
+    },
+    {
+      "description": "Trivy: the operator calls the trivy CLI, so operator chart and pinned trivy image (operator + policy-reporter) move together",
+      "matchDepNames": ["trivy-operator", "ghcr.io/aquasecurity/trivy"],
+      "groupName": "trivy"
+    },
+    {
+      "description": "Flagger: chart and manifests bundle (loadtester) share a version",
+      "matchDepNames": ["ghcr.io/fluxcd/charts/flagger", "ghcr.io/fluxcd/flagger-manifests"],
+      "groupName": "flagger"
+    },
+    {
       "description": "RabbitMQ cluster operator: manifests (git tag) and image override must move together",
       "matchPackageNames": ["/rabbitmq/cluster-operator/"],
       "groupName": "rabbitmq cluster-operator"
