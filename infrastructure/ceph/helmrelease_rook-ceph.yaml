@@ -17,6 +17,9 @@ spec:
   values:
     crds:
       enabled: true
+    csi:
+      # ceph is only used for object storage (RGW); no CSI volumes
+      createCsiOperatorResources: false
     monitoring:
       enabled: true
     resources:
