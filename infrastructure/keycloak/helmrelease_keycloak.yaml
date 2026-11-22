@@ -19,6 +19,11 @@ spec:
   values:
     replicas: 1
 
+    # pinned ahead of the chart's appVersion (26.8.1) for CVE-2026-114938 (openjdk)
+    image:
+      repository: quay.io/keycloak/keycloak
+      tag: 26.8.2
+
     command:
       - "/opt/keycloak/bin/kc.sh"
       - "start"
