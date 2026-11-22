@@ -14,3 +14,6 @@ spec:
     name: flagger-loadtester
   path: ./tester
   targetNamespace: flagger-system
+  images:
+    - name: ghcr.io/fluxcd/flagger-loadtester
+      newTag: "0.39.0"

@@ -12,7 +12,23 @@
   "kubernetes": {
     "fileMatch": ["(^|/).*\\.ya?ml$"]
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Image overrides in Flux Kustomizations (spec.images)",
+      "fileMatch": ["(^|/).*\\.ya?ml$"],
+      "matchStrings": [
+        "-\\s+name:\\s+(?<depName>[^\\s\"']+)\\s+newTag:\\s+[\"']?(?<currentValue>[^\\s\"']+)[\"']?"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ],
   "packageRules": [
+    {
+      "description": "RabbitMQ cluster operator: manifests (git tag) and image override must move together",
+      "matchPackageNames": ["/rabbitmq/cluster-operator/"],
+      "groupName": "rabbitmq cluster-operator"
+    },
     {
       "description": "Cilium (CNI) must be upgraded one minor version at a time",
       "matchDepNames": ["cilium"],
