@@ -7,44 +7,38 @@ spec:
   groups:
   - name: trivy-vulnerabilities
     rules:
-    # One alert per CVE and workload, firing while the workload runs an
-    # affected image. Alertmanager groups them by vuln_id, so each CVE is one
-    # group with one entry per workload. ReplicaSets are reported as their
-    # Deployment by stripping the pod-template-hash suffix. max_over_time
+    # Only actionable findings raise an alert: CRITICAL CVEs that already have
+    # a fixed version, i.e. the image can be updated. Everything else (HIGH,
+    # unfixed) stays on the Trivy dashboard.
+    #
+    # One alert per image and workload; the value is the number of distinct
+    # fixable CRITICAL CVEs. Alertmanager groups by image, so each image is one
+    # group listing the workloads that run it. ReplicaSets are reported as
+    # their Deployment by stripping the pod-template-hash suffix; old
+    # ReplicaSets scaled to 0 after a rollout are ignored. max_over_time
     # bridges the short gaps while reports are rescanned.
-    - alert: TrivyCriticalVulnerability
+    - alert: TrivyFixableCriticalVulnerabilities
       annotations:
-        summary: CRITICAL vulnerability {{ $labels.vuln_id }} in {{ $labels.namespace }}/{{ $labels.workload }}
-        description: "{{ $labels.namespace }}/{{ $labels.workload }} runs {{ $labels.image_repository }}:{{ $labels.image_tag }}, affected by {{ $labels.vuln_id }} (CRITICAL). Fixed in: {{ or $labels.fixed_version \"no fix yet\" }}."
+        summary: "{{ $labels.image_repository }}:{{ $labels.image_tag }} has {{ $value }} fixable CRITICAL CVE(s)"
+        description: |-
+          {{ $labels.namespace }}/{{ $labels.workload }} runs {{ $labels.image_registry }}/{{ $labels.image_repository }}:{{ $labels.image_tag }}. Update the image to pick up the fixes:
+          {{- range query (printf `group by (vuln_id, resource, installed_version, fixed_version) (trivy_vulnerability_id{severity="Critical", fixed_version!="", namespace="%s", image_repository="%s", image_tag="%s"})` $labels.namespace $labels.image_repository $labels.image_tag) | sortByLabel "vuln_id" }}
+          - {{ .Labels.vuln_id }}: {{ .Labels.resource }} {{ .Labels.installed_version }} -> {{ .Labels.fixed_version }}
+          {{- end }}
       expr: |-
-        group by (vuln_id, namespace, workload, image_repository, image_tag, fixed_version) (
-          label_replace(
-            max_over_time(trivy_vulnerability_id{severity="Critical", resource_kind="ReplicaSet"}[1h]),
-            "workload", "Deployment/$1", "resource_name", "(.+)-[bcdfghjklmnpqrstvwxz2456789]{5,10}"
-          )
-          or
-          label_join(
-            max_over_time(trivy_vulnerability_id{severity="Critical", resource_kind!="ReplicaSet"}[1h]),
-            "workload", "/", "resource_kind", "resource_name"
-          )
-        )
-      labels:
-        severity: critical
-        source: trivy
-    - alert: TrivyUnfixedHighVulnerability
-      annotations:
-        summary: HIGH vulnerability without fix {{ $labels.vuln_id }} in {{ $labels.namespace }}/{{ $labels.workload }}
-        description: "{{ $labels.namespace }}/{{ $labels.workload }} runs {{ $labels.image_repository }}:{{ $labels.image_tag }}, affected by {{ $labels.vuln_id }} (HIGH). No fixed version exists yet."
-      expr: |-
-        group by (vuln_id, namespace, workload, image_repository, image_tag) (
-          label_replace(
-            max_over_time(trivy_vulnerability_id{severity="High", fixed_version="", resource_kind="ReplicaSet"}[1h]),
-            "workload", "Deployment/$1", "resource_name", "(.+)-[bcdfghjklmnpqrstvwxz2456789]{5,10}"
-          )
-          or
-          label_join(
-            max_over_time(trivy_vulnerability_id{severity="High", fixed_version="", resource_kind!="ReplicaSet"}[1h]),
-            "workload", "/", "resource_kind", "resource_name"
+        count by (namespace, workload, image_registry, image_repository, image_tag) (
+          group by (namespace, workload, image_registry, image_repository, image_tag, vuln_id) (
+            label_replace(
+              max_over_time(trivy_vulnerability_id{severity="Critical", fixed_version!="", resource_kind="ReplicaSet"}[1h])
+              and on (namespace, resource_name)
+              label_replace(kube_replicaset_spec_replicas > 0, "resource_name", "$1", "replicaset", "(.+)"),
+              "workload", "Deployment/$1", "resource_name", "(.+)-[bcdfghjklmnpqrstvwxz2456789]{5,10}"
+            )
+            or
+            label_join(
+              max_over_time(trivy_vulnerability_id{severity="Critical", fixed_version!="", resource_kind!="ReplicaSet"}[1h]),
+              "workload", "/", "resource_kind", "resource_name"
+            )
           )
         )
       labels:
