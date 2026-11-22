@@ -97,6 +97,18 @@ spec:
           gateway:
             port: 80
             instances: 2
+            # Rook's default anti-affinity is only preferred. Two RGW pods on
+            # one node share the daemon name, so the node's ceph-exporter
+            # reports their metrics with identical labels (duplicate samples).
+            placement:
+              topologySpreadConstraints:
+                - maxSkew: 1
+                  topologyKey: kubernetes.io/hostname
+                  whenUnsatisfiable: DoNotSchedule
+                  labelSelector:
+                    matchLabels:
+                      app: rook-ceph-rgw
+                      rgw: objectstore
             resources:
               requests:
                 cpu: 100m
