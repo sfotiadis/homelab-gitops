@@ -19,6 +19,7 @@ resources:
    - kyverno
    - local-path-provisioner
    - loki
+   - maintenance
    - metallb
    - rabbitmq
    - telegraf

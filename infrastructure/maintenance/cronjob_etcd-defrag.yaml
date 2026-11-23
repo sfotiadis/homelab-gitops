@@ -1,0 +1,62 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: etcd-defrag
+  namespace: kube-system
+  labels:
+    app.kubernetes.io/name: etcd-defrag
+    app.kubernetes.io/instance: etcd-defrag
+spec:
+  schedule: "30 3 * * 0"
+  timeZone: Europe/Berlin
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      ttlSecondsAfterFinished: 86400
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: etcd-defrag
+            app.kubernetes.io/instance: etcd-defrag
+        spec:
+          restartPolicy: Never
+          hostNetwork: true
+          nodeSelector:
+            node-role.kubernetes.io/control-plane: ""
+          tolerations:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+              effect: NoSchedule
+          containers:
+            - name: etcdctl
+              # keep in line with the etcd version of the control plane
+              image: registry.k8s.io/etcd:3.6.8-0
+              # --cluster defragments every member one after another,
+              # so the cluster never loses quorum
+              command:
+                - etcdctl
+                - --endpoints=https://127.0.0.1:2379
+                - --cacert=/etc/kubernetes/pki/etcd/ca.crt
+                - --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt
+                - --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
+                - --command-timeout=120s
+                - defrag
+                - --cluster
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 32Mi
+                limits:
+                  memory: 128Mi
+              volumeMounts:
+                - name: etcd-pki
+                  mountPath: /etc/kubernetes/pki/etcd
+                  readOnly: true
+          volumes:
+            - name: etcd-pki
+              hostPath:
+                path: /etc/kubernetes/pki/etcd
+                type: Directory
