@@ -8,7 +8,6 @@ resources:
   - helmrepository.yaml
   - httproute.yaml
   - namespace.yaml
-  - podmonitor_etcd.yaml
   - secret_grafana.enc.yaml
 
 configMapGenerator:
