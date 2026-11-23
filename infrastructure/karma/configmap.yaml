@@ -11,5 +11,6 @@ data:
           uri: http://kube-prometheus-stack-alertmanager.monitoring.svc:9093
           timeout: 20s
           readonly: false
+          proxy: true
     ui:
       multiGridLabel: severity
