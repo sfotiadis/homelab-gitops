@@ -9,3 +9,7 @@ data:
       servers:
         - name: crulabs
           uri: http://kube-prometheus-stack-alertmanager.monitoring.svc:9093
+          timeout: 20s
+          readonly: false
+    ui:
+      multiGridLabel: severity
