@@ -1,0 +1,35 @@
+# infrastructure/gateway-api/gateway-api-crds.yaml
+# Gateway API standard channel CRDs (+ safe-upgrades ValidatingAdmissionPolicy),
+# equivalent to the release's standard-install.yaml.
+# Traefik's Gateway provider requires a minimum CRD version - check the traefik
+# migration guide before bumping either side.
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: gateway-api
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://github.com/kubernetes-sigs/gateway-api
+  ref:
+    tag: v1.7.0
+  ignore: |
+    /*
+    !/config/
+    /config/*
+    !/config/crd/
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: gateway-api-crds
+  namespace: flux-system
+spec:
+  interval: 1h
+  sourceRef:
+    kind: GitRepository
+    name: gateway-api
+  path: ./config/crd
+  # never delete these CRDs implicitly - all Gateways/HTTPRoutes would go with them
+  prune: false
+  wait: true
