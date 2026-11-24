@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - helmrepository_rook-release.yaml
+  - ceph-csi-operator-crds.yaml
   - httproute.yaml
   - helmrelease_rook-ceph.yaml
   - helmrelease_rook-ceph-cluster.yaml

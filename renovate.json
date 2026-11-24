@@ -30,6 +30,11 @@
       "groupName": "rook-ceph"
     },
     {
+      "description": "ceph-csi-operator CRDs (git tag) must match the csi-operator subchart pinned by the rook-ceph chart; bump manually with rook",
+      "matchPackageNames": ["/ceph/ceph-csi-operator/"],
+      "enabled": false
+    },
+    {
       "description": "Keycloak: chart and pinned image in one PR so they cannot drift apart",
       "matchDepNames": ["keycloakx", "quay.io/keycloak/keycloak"],
       "groupName": "keycloak"
