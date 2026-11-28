@@ -55,6 +55,11 @@
       "groupName": "rabbitmq cluster-operator"
     },
     {
+      "description": "etcd-defrag: etcdctl must stay on the control plane's etcd minor (3.6); bump together with the cluster",
+      "matchDepNames": ["registry.k8s.io/etcd"],
+      "allowedVersions": "/^3\\.6\\./"
+    },
+    {
       "description": "Cilium (CNI) must be upgraded one minor version at a time",
       "matchDepNames": ["cilium"],
       "separateMinorPatch": true,
