@@ -7,7 +7,6 @@ repositories:
   - sfotiadis/helmreboot-operator
   - sfotiadis/homelab-automation
   - sfotiadis/homelab-gitops
-  - sfotiadis/sfotiadis
   - sfotiadis/vexr
   - crulabs/charts
 
