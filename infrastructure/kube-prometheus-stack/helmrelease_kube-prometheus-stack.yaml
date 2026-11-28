@@ -142,10 +142,6 @@ spec:
           - receiver: "null"
             matchers:
               - alertname = "Watchdog"
-          - receiver: "null"
-            matchers:
-              - alertname =~ "Trivy.*"
-            group_by: ["alertname", "image_repository", "image_tag"]
 
     kubeScheduler:
       enabled: false
