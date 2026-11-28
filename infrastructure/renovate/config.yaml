@@ -1,0 +1,22 @@
+# Global config for the self-hosted Renovate (https://docs.renovatebot.com/self-hosted-configuration/).
+# Repo-specific settings stay in each repo's own renovate.json.
+platform: github
+
+# Repositories Renovate manages. Add/remove entries here.
+repositories:
+  - sfotiadis/helmreboot-operator
+  - sfotiadis/homelab-automation
+  - sfotiadis/homelab-gitops
+  - sfotiadis/sfotiadis
+  - sfotiadis/vexr
+  - crulabs/charts
+
+# Repos without a renovate.json get an onboarding PR first
+onboarding: true
+requireConfig: required
+onboardingConfig:
+  $schema: https://docs.renovatebot.com/renovate-schema.json
+  extends:
+    - config:recommended
+
+gitAuthor: "Renovate Bot <bot@renovateapp.com>"
