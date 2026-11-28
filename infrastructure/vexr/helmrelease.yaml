@@ -1,0 +1,72 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: vexr
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: oci://ghcr.io/crulabs/charts/vexr
+  layerSelector:
+    mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
+    operation: copy
+  ref:
+    tag: "0.1.0"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vexr
+  namespace: vexr
+spec:
+  interval: 10m
+  chartRef:
+    kind: OCIRepository
+    name: vexr
+    namespace: flux-system
+  values:
+    config:
+      hubble:
+        enabled: true
+      exposure:
+        gateways:
+          mode: private
+        ingresses:
+          mode: private
+        loadBalancers:
+          mode: private
+        nodePort: network
+        hostNetwork: network
+
+    ciliumNetworkPolicy:
+      enabled: true
+
+    vexDocuments:
+      loki-gateway:
+        "@context": https://openvex.dev/ns/v0.2.0
+        "@id": https://crulabs.io/vex/loki-gateway-nginx-1.31.7
+        author: Platform Team
+        timestamp: "2026-11-28T14:00:00Z"
+        version: 1
+        statements:
+          - vulnerability:
+              name: CVE-2026-125350
+            products:
+              - "@id": docker.io/nginxinc/nginx-unprivileged:1.31.7-alpine
+                subcomponents:
+                  - "@id": pkg:apk/alpine/libxslt
+            status: not_affected
+            justification: vulnerable_code_not_in_execute_path
+            impact_statement: >-
+              libxslt is only used by ngx_http_xslt_filter_module, which is not loaded
+              (no load_module in the loki-gateway nginx.conf).
+          - vulnerability:
+              name: CVE-2026-111497
+            products:
+              - "@id": docker.io/nginxinc/nginx-unprivileged:1.31.7-alpine
+                subcomponents:
+                  - "@id": pkg:apk/alpine/brotli-libs
+            status: not_affected
+            justification: vulnerable_code_not_in_execute_path
+            impact_statement: >-
+              brotli-libs is only used by freetype (image_filter module, not loaded) and libcurl
+              (curl binary, not used by nginx). nginx does not link brotli.
