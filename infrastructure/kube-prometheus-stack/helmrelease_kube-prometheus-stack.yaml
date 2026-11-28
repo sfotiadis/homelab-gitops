@@ -142,6 +142,13 @@ spec:
           - receiver: "null"
             matchers:
               - alertname = "Watchdog"
+          - receiver: "null"
+            matchers:
+            - alertname =~ "Vexr.*"
+            group_by: [namespace, workload, priority]
+            group_wait: 1m
+            group_interval: 15m
+            repeat_interval: 24h
 
     kubeScheduler:
       enabled: false
