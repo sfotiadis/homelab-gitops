@@ -33,7 +33,7 @@ spec:
           containers:
             - name: etcdctl
               # only etcdctl is used; keep on the control plane's etcd minor (3.6)
-              image: registry.k8s.io/etcd:3.6.17-0
+              image: registry.k8s.io/etcd:3.7.4-0
               # --cluster defragments every member one after another,
               # so the cluster never loses quorum
               command:
